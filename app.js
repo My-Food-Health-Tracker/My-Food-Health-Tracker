@@ -22,8 +22,32 @@ mongoose
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
+const session = require('express-session');
+const passport = require('passport');
+
+const MongoStore = require('connect-mongo')(session);
+
 const app = express();
 
+//Create user session that lasts 24 hours
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    cookie: { maxAge: 24 * 60 * 60 * 1000 },
+    saveUninitialized: false,
+    resave: true,
+    store: new MongoStore({
+      // when the session cookie has an expiration date
+      // connect-mongo will use it, otherwise it will create a new 
+      // one and use ttl - time to live - in that case one day
+      mongooseConnection: mongoose.connection,
+      ttl: 24 * 60 * 60 * 1000
+    })
+  })
+)
+
+app.use(passport.initialize());
+app.use(passport.session());
 // Middleware Setup
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -47,12 +71,18 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'My Food Tracking App';
 
 
 
 const index = require('./routes/index');
 app.use('/', index);
 
+//Example taken from example code
+// const projects = require('./routes/projects');
+// app.use('/api/projects', projects);
+
+const auth = require('./routes/auth');
+app.use('/auth', auth);
 
 module.exports = app;
