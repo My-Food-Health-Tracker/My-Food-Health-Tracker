@@ -6,6 +6,44 @@ const daySchema = new Schema({
     type: Date,
     default: Date.now
   }, 
+
+  owner: { type: Schema.Types.ObjectId, ref: 'User' },
+
+  foods: [{
+    startTime: Date,
+    name: String,
+    imgUrl: String,
+    quantity: Number,
+      // here not sure
+    ingredients: []
+  }],
+
+  drinks: [{
+    startTime: Date,
+    name: String,
+    imgUrl: String,
+    quantity: Number,
+      // here not sure
+    ingredients: []
+  }],
+
+  supplements : [{
+    startTime: Date,
+    name: String,
+    imgUrl: String,
+    quantity: Number,
+      // here not sure
+    ingredients: []
+  }],
+
+  medications : [{
+    startTime: Date,
+    name: String,
+    imgUrl: String,
+    quantity: Number,
+      // here not sure
+    ingredients: []
+  }],
   
   exercises: [{
     name: String,
@@ -19,18 +57,6 @@ const daySchema = new Schema({
     duration: Number, // minites or hours
     notes: String
   }],
-
-  consumptions: [{
-    startTime: Date,
-    name: String,
-    imgUrl: String,
-      // here not sure
-    ingredients: [{
-      name: String,
-      numberOfServings: Number,
-      servingSize: String
-  }]
-}],
   
   symptoms: [{
     name: String,
@@ -40,9 +66,7 @@ const daySchema = new Schema({
     notes: String
   }],
   
-  energy: {
-    type: Number
-  }
+  energy: Number
   
 });
 
