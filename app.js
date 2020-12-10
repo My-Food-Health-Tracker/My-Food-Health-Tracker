@@ -76,7 +76,7 @@ app.locals.title = 'My Food Tracking App';
 
 
 const index = require('./routes/index');
-app.use('/', index);
+app.use('/api', index);
 
 //Example taken from example code
 // const projects = require('./routes/projects');
