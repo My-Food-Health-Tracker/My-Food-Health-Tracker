@@ -68,6 +68,7 @@ router.delete('/logout', (req, res) => {
 
 router.get('/loggedin', (req, res) => {
   console.log(req.user)
+  console.log('Message coming from server /loggedin')
   res.json(req.user);
 })
 
