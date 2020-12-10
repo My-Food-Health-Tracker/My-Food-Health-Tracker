@@ -12,8 +12,10 @@ const daySchema = new Schema({
   foods: [{
     startTime: Date,
     name: String,
+    brand: String,
+    ServingAmount: Number,
+    ServingSize: String,
     imgUrl: String,
-    quantity: Number,
       // here not sure
     ingredients: []
   }],
@@ -22,7 +24,9 @@ const daySchema = new Schema({
     startTime: Date,
     name: String,
     imgUrl: String,
-    quantity: Number,
+    brand: String,
+    ServingAmount: Number,
+    ServingSize: String,
       // here not sure
     ingredients: []
   }],
@@ -31,7 +35,9 @@ const daySchema = new Schema({
     startTime: Date,
     name: String,
     imgUrl: String,
-    quantity: Number,
+    brand: String,
+    ServingAmount: Number,
+    ServingSize: String,
       // here not sure
     ingredients: []
   }],
@@ -40,7 +46,9 @@ const daySchema = new Schema({
     startTime: Date,
     name: String,
     imgUrl: String,
-    quantity: Number,
+    brand: String,
+    ServingAmount: Number,
+    ServingSize: String,
       // here not sure
     ingredients: []
   }],

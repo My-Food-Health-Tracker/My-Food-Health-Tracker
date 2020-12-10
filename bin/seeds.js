@@ -24,7 +24,9 @@ const users = [
         startTime: new Date(2018, 11, 24, 10, 33),
         name: "Lasagne",
         imgUrl: "",
-        quantity: 1,
+        brand: "Edeka",
+        ServingAmount: 1,
+        ServingSize: "plate",
           // here not sure
         ingredients: []
       }],
@@ -33,7 +35,9 @@ const users = [
         startTime: new Date(2018, 11, 24, 11, 33),
         name: "Orange Juice",
         imgUrl: "",
-        quantity: 2,
+        brand: "Edeka",
+        ServingAmount: 1,
+        ServingSize: "plate",
           // here not sure
         ingredients: []
       }],
@@ -42,7 +46,9 @@ const users = [
         startTime: new Date(2018, 11, 24, 11, 33),
         name: "Vitamin C",
         imgUrl: "",
-        quantity: 1,
+        brand: "Edeka",
+        ServingAmount: 1,
+        ServingSize: "plate",
           // here not sure
         ingredients: []
       }],
@@ -51,7 +57,9 @@ const users = [
         startTime: new Date(2018, 11, 24, 12, 50),
         name: "Ibuprofen",
         imgUrl: String,
-        quantity: 1,
+        brand: "Edeka",
+        ServingAmount: 1,
+        ServingSize: "pill",
           // here not sure
         ingredients: []
       }],
@@ -103,7 +111,9 @@ const users = [
         startTime: new Date(2018, 11, 25, 08, 20),
         name: "Lasagne",
         imgUrl: "",
-        quantity: 1,
+        brand: "Edeka",
+        ServingAmount: 1,
+        ServingSize: "plate",
           // here not sure
         ingredients: []
       },
@@ -112,7 +122,9 @@ const users = [
         startTime: new Date(2018, 11, 25, 10, 20),
         name: "Apple",
         imgUrl: "",
-        quantity: 2,
+        brand: "Edeka",
+        ServingAmount: 1,
+        ServingSize: "plate",
           // here not sure
         ingredients: []
       }
@@ -122,7 +134,9 @@ const users = [
         startTime: new Date(2018, 11, 25, 11, 33),
         name: "Orange Juice",
         imgUrl: "",
-        quantity: 2,
+        brand: "Edeka",
+        ServingAmount: 5,
+        ServingSize: "bottle",
           // here not sure
         ingredients: []
       }],
@@ -131,7 +145,9 @@ const users = [
         startTime: new Date(2018, 11, 25, 20, 23),
         name: "Vitamin C",
         imgUrl: "",
-        quantity: 1,
+        brand: "Edeka",
+        ServingAmount: 1,
+        ServingSize: "pill",
           // here not sure
         ingredients: []
       }],
@@ -140,7 +156,9 @@ const users = [
         startTime: new Date(2018, 11, 24, 12, 50),
         name: "Ibuprofen",
         imgUrl: String,
-        quantity: 1,
+        brand: "Edeka",
+        ServingAmount: 1,
+        ServingSize: "pill",
           // here not sure
         ingredients: []
       }],
@@ -192,7 +210,9 @@ const users = [
         startTime: new Date(2018, 11, 28, 12, 33),
         name: "Pommes",
         imgUrl: "",
-        quantity: 2,
+        brand: "Edeka",
+        ServingAmount: 1,
+        ServingSize: "plate",
           // here not sure
         ingredients: []
       }],
@@ -201,7 +221,9 @@ const users = [
         startTime: new Date(2018, 11, 28, 09, 33),
         name: "Apple Juice",
         imgUrl: "",
-        quantity: 2,
+        brand: "Edeka",
+        ServingAmount: 1,
+        ServingSize: "plate",
           // here not sure
         ingredients: []
       }],
@@ -210,7 +232,9 @@ const users = [
         startTime: new Date(2018, 11, 29, 11, 33),
         name: "Vitamin D",
         imgUrl: "",
-        quantity: 1,
+        brand: "Edeka",
+        ServingAmount: 1,
+        ServingSize: "plate",
           // here not sure
         ingredients: []
       }],
@@ -219,7 +243,9 @@ const users = [
         startTime: new Date(2018, 11, 24, 12, 50),
         name: "Ibuprofen",
         imgUrl: String,
-        quantity: 1,
+        brand: "Edeka",
+        ServingAmount: 1,
+        ServingSize: "plate",
           // here not sure
         ingredients: []
       }],
@@ -271,7 +297,9 @@ const users = [
         startTime: new Date(2018, 09, 26, 10, 33),
         name: "Salat",
         imgUrl: "",
-        quantity: 1,
+        brand: "Edeka",
+        ServingAmount: 1,
+        ServingSize: "plate",
           // here not sure
         ingredients: []
       }],
@@ -280,7 +308,9 @@ const users = [
         startTime: new Date(2018, 09, 26, 11, 33),
         name: "Gin Tonic",
         imgUrl: "",
-        quantity: 2,
+        brand: "Edeka",
+        ServingAmount: 1,
+        ServingSize: "glas",
           // here not sure
         ingredients: []
       }],
@@ -289,7 +319,9 @@ const users = [
         startTime: new Date(2018, 09, 26, 12, 33),
         name: "Vitamin E",
         imgUrl: "",
-        quantity: 1,
+        brand: "Edeka",
+        ServingAmount: 1,
+        ServingSize: "pill",
           // here not sure
         ingredients: []
       }],
@@ -298,7 +330,9 @@ const users = [
         startTime: new Date(2018, 09, 26, 12, 50),
         name: "Ibuprofen",
         imgUrl: String,
-        quantity: 1,
+        brand: "Edeka",
+        ServingAmount: 1,
+        ServingSize: "pill",
           // here not sure
         ingredients: []
       }],
