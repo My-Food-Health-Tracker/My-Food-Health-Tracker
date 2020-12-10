@@ -4,7 +4,8 @@ import React from 'react';
 import Welcome from './components/Welcome'
 import {Route} from 'react-router-dom';
 import Navbar from './components/Navbar';
-import TestView from './components/TestView';
+import TestView from './components/testviews/TestView';
+import TestHistorical from './components/testviews/TestHistorical';
 
 class App extends React.Component {
 
@@ -25,8 +26,13 @@ class App extends React.Component {
           <Navbar />
           <Route
           exact
-          path='/test'
+          path='/usertest'
           render={props => <TestView {...props} /> }
+          ></Route>
+          <Route
+          exact
+          path='/historicaltest'
+          render={props => <TestHistorical {...props} /> }
           ></Route>
         </header>
       </div>

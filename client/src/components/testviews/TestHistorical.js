@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 
-export default class TestView extends Component {
-
+export default class TestHistorical extends Component {
   state = {
     users: [],
+    user: null,
+    days: [],
     error: null
   }
 
   getData = () => {
-    // const id = this.props.match.params.id;
-    // get the project that was clicked from the server
-    axios.get(`/api`)
+// get all the users 
+    axios.get(`/api/users`)
       .then(response => {
         console.log(response);
         this.setState({
@@ -28,6 +28,28 @@ export default class TestView extends Component {
       })
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault()
+    console.log(this.state.user)
+    axios.get(`/api/${this.state.user}`)
+      .then((res) => {
+        console.log(res.data)
+// this.setState({
+
+// })
+      })
+      .catch(err => console.log(err))
+
+  }
+  
+
+  handleChange = (event) => {
+    const id = event.target.value;
+    this.setState({
+      user: id
+    })
+  }
+
   componentDidMount = () => {
     this.getData();
   }
@@ -35,11 +57,19 @@ export default class TestView extends Component {
   
   render() {
     let count = 0
-    if (this.state.error) return <h1>Error{this.state.error}</h1>
+    if (this.state.error) return <h1>{this.state.error}</h1>
     if (!this.state.users) return <h1>Loading...</h1>
     return (
       <div>
-      Table of current users and information
+      {/* User: {this.state.user.username} */}
+      <form onSubmit={this.handleSubmit}>
+        <select name="user" id="user" onChange={this.handleChange}>
+        <option key='0'>Select a user...</option>
+        {this.state.users.map(user => 
+        <option key={user._id} value={user._id}>{user.username}</option>)}
+        </select>
+        <button type="submit">See details</button>
+      </form>
       <table>
         <thead>
         <tr>
@@ -49,14 +79,13 @@ export default class TestView extends Component {
         </tr>
         </thead>
         <tbody>
-        {this.state.users.map((user) => 
+        {/* {this.state.users.map((user) => 
         <tr key={user._id}> 
         <td> {user.username}</td>
         <td> {user.email}</td>
         <td> {user.days.map(day => <p key={day._id}>1</p>)}</td>
         </tr>
-  
-      )}
+      )} */}
         </tbody>
       </table>
 
@@ -65,3 +94,4 @@ export default class TestView extends Component {
     )
   }
 }
+

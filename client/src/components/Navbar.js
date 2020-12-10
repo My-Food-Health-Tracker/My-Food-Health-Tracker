@@ -5,7 +5,11 @@ export default class Navbar extends Component {
   render() {
     return (
       <nav>
-        <Link to="/test" style={{'color': 'white'}}>Test view</Link>
+      <ul>
+        <li><a href="/" style={{'color': 'white'}}>Back to main</a></li>
+        <li><Link to="/usertest" style={{'color': 'white'}}>All users</Link></li>
+        <li><Link to="/historicaltest" style={{'color': 'white'}}>Historical data</Link></li>
+      </ul>
       </nav>
     )
   }
