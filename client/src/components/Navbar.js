@@ -39,6 +39,7 @@ export default function Navbar(props) {
         <li><Link to="/historicaltest" style={{'color': 'white'}}>Historical data</Link></li>
         <li><Link to="/testinput" style={{'color': 'white'}}>Test input</Link></li>
         <li><Link to="/adddays" style={{'color': 'white'}}>Add a day</Link></li>
+        <li><Link to="/usertest" style={{'color': 'white'}}>View current user's data</Link></li>
       </ul>
       </nav>
     )

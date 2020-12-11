@@ -31,10 +31,7 @@ class App extends React.Component {
        
         <header className="App-header">
          <Navbar user={this.state.user} setUser={this.setUser} />
-          <Route
-          exact
-          path='/usertest'
-          render={props => <TestView {...props} /> }
+          {/* <Route exact path='/usertest' render={props => <TestView {...props} /> }
           ></Route>
           <Route
           exact
@@ -45,7 +42,7 @@ class App extends React.Component {
           exact
           path='/testinput'
           render={props => <TestInput {...props} /> }
-          ></Route>
+          ></Route> */}
 
         <Route
           exact

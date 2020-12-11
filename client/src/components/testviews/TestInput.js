@@ -66,34 +66,41 @@ export default class TestInput extends Component {
       startTime: this.state.currentSymptomTime,
       intensity: this.state.currentSymptomIntensity
     }
-    this.setState({
-        foods: [...this.state.foods, foodObj],
-        symptoms: [...this.state.symptoms, symptomObj]
-    })
-    
-  
-    //COMMENTED OUT TO DEBUG - UNCOMMENT WHEN READY
-    // axios.post('/api/days', {
-    //   date: this.state.date,
-    //   foods: this.state.foods,
-    //   symptoms: this.state.symptoms
+    // this.setState({
+    //     foods: [...this.state.foods, foodObj],
+    //     symptoms: [...this.state.symptoms, symptomObj]
     // })
-    //   .then(() => {
-    //     // set the form to it's initial state (empty input fields)
-    //     this.setState({
-    //       title: '',
-    //       description: ''
-    //     })
-    //     // update the parent components state (in Projects) by calling getData()
-    //     // this.props.getData(); // currently not needed
-    //   })
-    //   .catch(err => console.log(err))
+    // console.log(this.state.foods, this.state.symptoms)
+    axios.post('/api/days', {
+      date: this.state.date,
+      foods: [...this.state.foods, foodObj],
+      symptoms: [...this.state.symptoms, symptomObj]
+    })
+      .then(() => {
+        // set the form to it's initial state (empty input fields)
+        this.setState({
+          date: '',
+          currentFoodTime: '',
+          currentFoodName: '',
+          currentSymptomTime: '',
+          currentSymptom: '',
+          currentSymptomIntensity: 0
+        })
+        // update the parent components state (in Projects) by calling getData()
+        // this.props.getData(); // currently not needed
+      })
+      .catch(err => console.log(err))
 
   }
   render() {
     
     return (
       <div>
+      <p>Description: This view does the following</p>
+      <p> Upon submission a new "Day" is created which includes everything in the form  </p> 
+      <p>It considers the logged in user and the owner of the day (in the backend rout)</p>
+      <p>It only allows one entry per day per item </p>
+      <p>In order to allow multiple entries, use the state as an intermediate state, using a "save" button to call a function to update the state</p>
       <h2>Please create a daily entry</h2>
       <Form onSubmit={this.handleSubmit}>
         <Form.Group>
