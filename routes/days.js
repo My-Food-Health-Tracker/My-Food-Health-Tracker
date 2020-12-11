@@ -57,8 +57,13 @@ router.post('/', (req, res) => {
     energy,
     owner
   })
-    .then(day => {
-      res.status(201).json(day);
+    .then((dbDay) => {
+      return User.findByIdAndUpdate(req.user._id, {
+        $push: { days: dbDay._id },
+      });
+    })
+    .then(dbDay => {
+      res.status(201).json(dbDay);
     })
     .catch(err => {
       res.json(err);

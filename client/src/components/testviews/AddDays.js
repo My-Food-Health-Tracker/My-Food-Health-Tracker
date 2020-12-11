@@ -6,7 +6,6 @@ export default class AddDay extends Component {
 
   state = {
     date: '',
-    owner: this.props.user,
     foods: [],
     drinks: [],
     supplements: [],
@@ -27,8 +26,6 @@ export default class AddDay extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    // console.log(this.state);
-    console.log(this.state);
 
     axios.post('/api/days', {
       date: this.state.date,
