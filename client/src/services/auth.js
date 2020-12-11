@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const signup = (username, password) => {
+const signup = (email, password) => {
   return axios
-    .post('/auth/signup', { username, password })
+    .post('/api/auth/signup', { email, password })
     .then(response => {
       return response.data
     })
@@ -11,10 +11,12 @@ const signup = (username, password) => {
     });
 }
 
-const login = (username, password) => {
+const login = (email, password) => {
+  console.log(email, password)
   return axios
-    .post('/auth/login', { username, password })
+    .post('/api/auth/login', { email, password })
     .then(response => {
+      console.log(response)
       return response.data
     })
     .catch(err => {
@@ -24,7 +26,7 @@ const login = (username, password) => {
 
 const logout = () => {
   return axios
-  .delete('/auth/logout')
+  .delete('/api/auth/logout')
   .then(response => {
     return response.data
   })

@@ -1,5 +1,7 @@
 const express = require('express');
+const mongoose = require('mongoose')
 const router = express.Router();
+
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
@@ -25,7 +27,7 @@ router.post('/signup', (req, res, next) => {
 
         User.create({
           email: email,
-          password: hash
+          password: hash,
         })
           .then(dbUser => {
             // login with passport:
@@ -46,11 +48,12 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/login', (req, res) => {
   passport.authenticate('local', (err, user) => {
+    console.log(user)
     if (err) {
       return res.status(500).json({ message: 'Error while authenticating' });
     }
     if (!user) {
-      return res.status(400).json({ message: 'Wrong credentials' });
+      return res.status(400).json({ message: '???Wrong credentials' });
     }
     req.login(user, err => {
       if (err) {
