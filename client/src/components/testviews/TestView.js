@@ -15,7 +15,7 @@ export default class TestView extends Component {
       .then(response => {
         console.log(response);
         this.setState({
-          users: response.data
+          users: response
         })
       })
       .catch(err => {

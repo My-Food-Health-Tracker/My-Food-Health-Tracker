@@ -1,5 +1,7 @@
 const express = require('express');
+const mongoose = require('mongoose')
 const router = express.Router();
+
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
@@ -25,7 +27,7 @@ router.post('/signup', (req, res, next) => {
 
         User.create({
           email: email,
-          password: hash
+          password: hash,
         })
           .then(dbUser => {
             // login with passport:
