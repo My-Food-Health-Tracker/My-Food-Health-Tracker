@@ -2,18 +2,18 @@ import './App.css';
 import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
 
-
-
-import Navbar from './components/Navbar';
+//test views
 import TestView from './components/testviews/TestView';
 import TestHistorical from './components/testviews/TestHistorical';
 import TestInput from './components/testviews/TestInput';
+import AddDays from './components/testviews/AddDays'
 
 //final views component
+import Navbar from './components/Navbar';
 import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
 import Home from './components/Home';
-import AddDays from './components/testviews/AddDays'
+import Dashboard from './components/Dashboard'
 import InitialDiary from './components/InitialDiary'
 
 class App extends React.Component {
@@ -33,8 +33,6 @@ class App extends React.Component {
     console.log(this.state.user)
     return (
       <div className="App">
-       
-        <header className="App-header">
          <Navbar user={this.state.user} setUser={this.setUser} />
           {/* <Route exact path='/usertest' render={props => <TestView {...props} /> }
           ></Route>
@@ -53,11 +51,11 @@ class App extends React.Component {
           exact path='/adddays'
           render={props => <AddDays setUser={this.setUser} {...props} />}
         />
-        
-        <Route
-          exact path='/' component={Main}
+          <Route
+          exact path='/dashboard'
+          render={props => <Dashboard setUser={this.setUser} {...props} />}
         />
-        </header>
+
       <Route exact path='/' component={Home}/>
       <Route 
       exact 
