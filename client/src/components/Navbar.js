@@ -9,6 +9,7 @@ export default class Navbar extends Component {
         <li><a href="/" style={{'color': 'white'}}>Back to main</a></li>
         <li><Link to="/usertest" style={{'color': 'white'}}>All users</Link></li>
         <li><Link to="/historicaltest" style={{'color': 'white'}}>Historical data</Link></li>
+        <li><Link to="/testinput" style={{'color': 'white'}}>Test input</Link></li>
       </ul>
       </nav>
     )

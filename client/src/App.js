@@ -6,6 +6,7 @@ import {Route} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import TestView from './components/testviews/TestView';
 import TestHistorical from './components/testviews/TestHistorical';
+import TestInput from './components/testviews/TestInput';
 
 class App extends React.Component {
 
@@ -33,6 +34,11 @@ class App extends React.Component {
           exact
           path='/historicaltest'
           render={props => <TestHistorical {...props} /> }
+          ></Route>
+                    <Route
+          exact
+          path='/testinput'
+          render={props => <TestInput {...props} /> }
           ></Route>
         </header>
       </div>
