@@ -41,13 +41,11 @@ class App extends React.Component {
           path='/historicaltest'
           render={props => <TestHistorical {...props} /> }
           ></Route>
-<<<<<<< HEAD
-                    <Route
+          <Route
           exact
           path='/testinput'
           render={props => <TestInput {...props} /> }
           ></Route>
-=======
 
         <Route
           exact
@@ -68,7 +66,6 @@ class App extends React.Component {
         <Route
           exact path='/' component={Main}
         />
->>>>>>> 75564a8a980559296e650f69fc0b18d3d676d8e7
         </header>
       </div>
     );
