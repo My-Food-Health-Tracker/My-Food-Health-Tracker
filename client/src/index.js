@@ -6,14 +6,14 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 
-axios.get('/auth/loggedin')
+axios.get('/api/auth/loggedin')
   .then(response => {
     console.log(response);
-    
     const user = response.data
+    
     ReactDOM.render(
       <BrowserRouter>
-        <App user={user} />
+        <App user={user}/>
       </BrowserRouter>,
       document.getElementById('root')
     );

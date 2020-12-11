@@ -1,31 +1,33 @@
 const express = require('express');
+const mongoose = require('mongoose')
 const router = express.Router();
+
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 
 router.post('/signup', (req, res, next) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   if (password.length < 8) {
     return res.status(400).json({ message: 'Your password must be 8 chars minimum' });
   }
-  if (username === '') {
-    return res.status(400).json({ message: 'Your username cannot be empty' });
+  if (email === '') {
+    return res.status(400).json({ message: 'Your email cannot be empty' });
   }
-  // check if username exists in database -> show message
-  User.findOne({ username: username })
+  // check if email exists in database -> show message
+  User.findOne({ email: email })
     .then(found => {
       if (found !== null) {
-        return res.status(400).json({ message: 'Your username is already taken' });
+        return res.status(400).json({ message: 'Your email is already taken' });
       } else {
         // hash the password, create the user and send the user to the client
         const salt = bcrypt.genSaltSync();
         const hash = bcrypt.hashSync(password, salt);
 
         User.create({
-          username: username,
-          password: hash
+          email: email,
+          password: hash,
         })
           .then(dbUser => {
             // login with passport:
@@ -46,11 +48,12 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/login', (req, res) => {
   passport.authenticate('local', (err, user) => {
+    console.log(user)
     if (err) {
       return res.status(500).json({ message: 'Error while authenticating' });
     }
     if (!user) {
-      return res.status(400).json({ message: 'Wrong credentials' });
+      return res.status(400).json({ message: '???Wrong credentials' });
     }
     req.login(user, err => {
       if (err) {
@@ -68,6 +71,7 @@ router.delete('/logout', (req, res) => {
 
 router.get('/loggedin', (req, res) => {
   console.log(req.user)
+  console.log('Message coming from server /loggedin')
   res.json(req.user);
 })
 
