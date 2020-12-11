@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 const daySchema = new Schema({
   date: {
     type: Date,
-    default: Date.now
-  }, 
+    default: new Date()
+  },
 
   owner: { type: Schema.Types.ObjectId, ref: 'User' },
 

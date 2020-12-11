@@ -9,9 +9,10 @@ export default class TestInput extends Component {
     owner: '',     // specific user we are going to use for the information creation
     signedInUser: '',     // currently logged in user (once the sign up function works)  
     date: '',
-    foods: [{
-      startTime: ''
-    }],
+    foods: [],
+    currentFoodTime: '',
+    currentFoodName: '',
+
     error: null
   }
 
@@ -94,20 +95,22 @@ export default class TestInput extends Component {
         </Form.Group>
         <h3>Please add below what you have consumed (BETA: only foods)</h3>
         <Form.Group>
-          <Form.Label htmlFor='startTime'>Consumption time: </Form.Label>
+          <Form.Label htmlFor='currentFoodTime'>Consumption time: </Form.Label>
           <Form.Control
             type='date'
-            id='startTime'
-            name='foods.startTime'
-            value={this.state.foods[0].startTime}
+            id='currentFoodTime'
+            name='currentFoodTime'
+            value={this.state.currentFoodTime}
             onChange={this.handleChange}
           />
-          <Form.Label htmlFor='foods.name'>Name of the food:</Form.Label>
+          </Form.Group>
+          <Form.Group>
+          <Form.Label htmlFor='currentFoodName'>Name of the food:</Form.Label>
           <Form.Control
             type='text'
-            id='startTime'
-            name='foods.name'
-            value={this.state.foods[0].name}
+            id='currentFoodName'
+            name='currentFoodName'
+            value={this.state.currentFoodName}
             onChange={this.handleChange}
           />
         </Form.Group>
