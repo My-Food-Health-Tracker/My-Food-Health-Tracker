@@ -6,6 +6,7 @@ import {Route} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import TestView from './components/testviews/TestView';
 import TestHistorical from './components/testviews/TestHistorical';
+import TestInput from './components/testviews/TestInput';
 
 import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
@@ -40,6 +41,13 @@ class App extends React.Component {
           path='/historicaltest'
           render={props => <TestHistorical {...props} /> }
           ></Route>
+<<<<<<< HEAD
+                    <Route
+          exact
+          path='/testinput'
+          render={props => <TestInput {...props} /> }
+          ></Route>
+=======
 
         <Route
           exact
@@ -60,6 +68,7 @@ class App extends React.Component {
         <Route
           exact path='/' component={Main}
         />
+>>>>>>> 75564a8a980559296e650f69fc0b18d3d676d8e7
         </header>
       </div>
     );
