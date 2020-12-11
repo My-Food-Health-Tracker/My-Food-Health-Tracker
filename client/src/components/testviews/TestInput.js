@@ -10,9 +10,12 @@ export default class TestInput extends Component {
     signedInUser: '',     // currently logged in user (once the sign up function works)  
     date: '',
     foods: [],
+    symptoms: [],
     currentFoodTime: '',
     currentFoodName: '',
-
+    currentSymptomTime: '',
+    currentSymptom: '',
+    currentSymptomIntensity: 0,
     error: null
   }
 
@@ -54,25 +57,50 @@ export default class TestInput extends Component {
     event.preventDefault();
     // console.log(this.state);
     console.log(this.state);
-    // axios.post('/api/projects', {
-    //   title: this.state.title,
-    //   description: this.state.description
+    let foodObj = {
+      startTime: this.state.currentFoodTime,
+      name: this.state.currentFoodName
+    } 
+    let symptomObj = {
+      name: this.state.currentSymptom,
+      startTime: this.state.currentSymptomTime,
+      intensity: this.state.currentSymptomIntensity
+    }
+    // this.setState({
+    //     foods: [...this.state.foods, foodObj],
+    //     symptoms: [...this.state.symptoms, symptomObj]
     // })
-    //   .then(() => {
-    //     // set the form to it's initial state (empty input fields)
-    //     this.setState({
-    //       title: '',
-    //       description: ''
-    //     })
-    //     // update the parent components state (in Projects) by calling getData()
-    //     this.props.getData();
-    //   })
-    //   .catch(err => console.log(err))
+    // console.log(this.state.foods, this.state.symptoms)
+    axios.post('/api/days', {
+      date: this.state.date,
+      foods: [...this.state.foods, foodObj],
+      symptoms: [...this.state.symptoms, symptomObj]
+    })
+      .then(() => {
+        // set the form to it's initial state (empty input fields)
+        this.setState({
+          date: '',
+          currentFoodTime: '',
+          currentFoodName: '',
+          currentSymptomTime: '',
+          currentSymptom: '',
+          currentSymptomIntensity: 0
+        })
+        // update the parent components state (in Projects) by calling getData()
+        // this.props.getData(); // currently not needed
+      })
+      .catch(err => console.log(err))
 
   }
   render() {
+    
     return (
       <div>
+      <p>Description: This view does the following</p>
+      <p> Upon submission a new "Day" is created which includes everything in the form  </p> 
+      <p>It considers the logged in user and the owner of the day (in the backend rout)</p>
+      <p>It only allows one entry per day per item </p>
+      <p>In order to allow multiple entries, use the state as an intermediate state, using a "save" button to call a function to update the state</p>
       <h2>Please create a daily entry</h2>
       <Form onSubmit={this.handleSubmit}>
         <Form.Group>
@@ -93,7 +121,7 @@ export default class TestInput extends Component {
         <option key={user._id} value={user._id}>{user.username}</option>)}
         </select>
         </Form.Group>
-        <h3>Please add below what you have consumed (BETA: only foods)</h3>
+        <h3>Please add below what you have consumed</h3>
         <Form.Group>
           <Form.Label htmlFor='currentFoodTime'>Consumption time: </Form.Label>
           <Form.Control
@@ -114,6 +142,37 @@ export default class TestInput extends Component {
             onChange={this.handleChange}
           />
         </Form.Group>
+        <h3>Please add below any symptoms you may be having</h3>
+        <Form.Group>
+          <Form.Label htmlFor='currentSymptomTime'>Symptom time: </Form.Label>
+          <Form.Control
+            type='date'
+            id='currentSymptomTime'
+            name='currentSymptomTime'
+            value={this.state.currentSymptomTime}
+            onChange={this.handleChange}
+          />
+          </Form.Group>
+          <Form.Group>
+          <Form.Label htmlFor='currentSymptom'>Symptom:</Form.Label>
+          <Form.Control
+            type='text'
+            id='currentSymptom'
+            name='currentSymptom'
+            value={this.state.currentSymptom}
+            onChange={this.handleChange}
+          />
+          </Form.Group>
+          <Form.Group>
+          <Form.Label htmlFor='currentSymptomIntensity'>Symptom intensity:</Form.Label>
+          <Form.Control
+            type='number'
+            id='currentSymptomIntensity'
+            name='currentSymptomIntensity'
+            value={this.state.currentSymptomIntensity}
+            onChange={this.handleChange}
+          /> On a scale from (0-10)
+          </Form.Group>
         <Button type='submit'>Add an entry</Button>
       </Form>
       </div>

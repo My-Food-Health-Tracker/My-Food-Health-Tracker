@@ -33,6 +33,31 @@ class App extends React.Component {
     console.log(this.state.user)
     return (
       <div className="App">
+       
+        <header className="App-header">
+         <Navbar user={this.state.user} setUser={this.setUser} />
+          {/* <Route exact path='/usertest' render={props => <TestView {...props} /> }
+          ></Route>
+          <Route
+          exact
+          path='/historicaltest'
+          render={props => <TestHistorical {...props} /> }
+          ></Route>
+          <Route
+          exact
+          path='/testinput'
+          render={props => <TestInput {...props} /> }
+          ></Route> */}
+
+        <Route
+          exact path='/adddays'
+          render={props => <AddDays setUser={this.setUser} {...props} />}
+        />
+        
+        <Route
+          exact path='/' component={Main}
+        />
+        </header>
       <Route exact path='/' component={Home}/>
       <Route 
       exact 
