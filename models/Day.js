@@ -76,7 +76,15 @@ const daySchema = new Schema({
   
   energy: Number
   
-});
+},
+
+{
+  timestamps: {
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+  },
+}
+);
 
 
 const Day = mongoose.model('Day', daySchema);

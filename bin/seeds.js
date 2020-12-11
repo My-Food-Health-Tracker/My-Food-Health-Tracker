@@ -19,7 +19,7 @@ const users = [
     days: [
       {
       date: new Date(2018, 11, 24),
-
+     
       foods: [{
         startTime: new Date(2018, 11, 24, 10, 33),
         name: "Lasagne",

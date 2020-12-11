@@ -3,15 +3,12 @@ import axios from 'axios';
 
 export default class TestHistorical extends Component {
   state = {
-    users: [],
-    user: null,
-    days: [],
-    error: null
+    users: []
   }
 
   getData = () => {
 // get all the users 
-    axios.get(`/api/users`)
+    axios.get('/api/users')
       .then(response => {
         console.log(response);
         this.setState({
@@ -79,13 +76,13 @@ export default class TestHistorical extends Component {
         </tr>
         </thead>
         <tbody>
-        {/* {this.state.users.map((user) => 
+        {this.state.users.map((user) => 
         <tr key={user._id}> 
         <td> {user.username}</td>
         <td> {user.email}</td>
         <td> {user.days.map(day => <p key={day._id}>1</p>)}</td>
         </tr>
-      )} */}
+      )}
         </tbody>
       </table>
 

@@ -8,10 +8,20 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
+const cors = require('cors');
 
+const session = require('express-session');
+const passport = require('passport');
+
+require('./configs/passport');
 
 mongoose
-  .connect('mongodb://localhost/food-health', {useNewUrlParser: true})
+  .connect('mongodb://localhost/food-health', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+  })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -22,8 +32,6 @@ mongoose
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
-const session = require('express-session');
-const passport = require('passport');
 
 const MongoStore = require('connect-mongo')(session);
 
@@ -74,15 +82,29 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.locals.title = 'My Food Tracking App';
 
 
+// ADD CORS SETTINGS HERE TO ALLOW CROSS-ORIGIN INTERACTION:
+ 
+app.use(
+  cors({
+    credentials: true,
+    origin: ['http://localhost:3000'] // <== this will be the URL of our React app (it will be running on port 3000)
+  })
+);
 
-const index = require('./routes/index');
-app.use('/api', index);
+// const index = require('./routes/index');
+// app.use('/api', index);
 
 //Example taken from example code
 // const projects = require('./routes/projects');
 // app.use('/api/projects', projects);
 
 const auth = require('./routes/auth');
-app.use('/auth', auth);
+app.use('/api/auth', auth);
+
+const users = require('./routes/users');
+app.use('/api/users', users)
+
+const days = require('./routes/days');
+app.use('/api/days', days)
 
 module.exports = app;
