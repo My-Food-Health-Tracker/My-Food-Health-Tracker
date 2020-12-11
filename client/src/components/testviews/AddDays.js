@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import axios from 'axios';
 
-export default class AddProject extends Component {
+export default class AddDay extends Component {
 
   state = {
-    date,
+    date: '',
+    owner: this.props.user,
     foods: [],
     drinks: [],
     supplements: [],
@@ -13,8 +14,7 @@ export default class AddProject extends Component {
     exercises: [],
     sleep: [],
     symptoms: [],
-    energy,
-    owner
+    energy: 0
   }
 
   handleChange = event => {
@@ -29,18 +29,19 @@ export default class AddProject extends Component {
     event.preventDefault();
     // console.log(this.state);
     console.log(this.state);
-    axios.post('/api/projects', {
-      title: this.state.title,
-      description: this.state.description
+
+    axios.post('/api/days', {
+      date: this.state.date,
+      energy: this.state.energy,
     })
       .then(() => {
         // set the form to it's initial state (empty input fields)
         this.setState({
-          title: '',
-          description: ''
+          date: '',
+          energy: 0
         })
         // update the parent components state (in Projects) by calling getData()
-        this.props.getData();
+        // this.props.getData();
       })
       .catch(err => console.log(err))
 
@@ -49,26 +50,26 @@ export default class AddProject extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Group>
-          <Form.Label htmlFor='title'>Title: </Form.Label>
+          <Form.Label htmlFor='title'>Date: </Form.Label>
           <Form.Control
             type='text'
-            id='title'
-            name='title'
-            value={this.state.title}
+            id='date'
+            name='date'
+            value={this.state.date}
             onChange={this.handleChange}
           />
         </Form.Group>
         <Form.Group>
-          <Form.Label htmlFor='description'>Description: </Form.Label>
+          <Form.Label htmlFor='energy'>Energy: </Form.Label>
           <Form.Control
             type='text'
-            id='description'
-            name='description'
-            value={this.state.description}
+            id='energy'
+            name='energy'
+            value={this.state.energy}
             onChange={this.handleChange}
           />
         </Form.Group>
-        <Button type='submit'>Add a Project</Button>
+        <Button type='submit'>Add a Day</Button>
       </Form>
     )
   }
