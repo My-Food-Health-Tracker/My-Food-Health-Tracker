@@ -48,7 +48,7 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/login', (req, res) => {
   passport.authenticate('local', (err, user) => {
-    console.log(user)
+    console.log('from authenticate', user)
     if (err) {
       return res.status(500).json({ message: 'Error while authenticating' });
     }
@@ -56,6 +56,7 @@ router.post('/login', (req, res) => {
       return res.status(400).json({ message: '???Wrong credentials' });
     }
     req.login(user, err => {
+      console.log('from authenticate', user)
       if (err) {
         return res.status(500).json({ message: 'Error while attempting to login' })
       }
