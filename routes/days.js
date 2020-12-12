@@ -7,6 +7,7 @@ const User = require('../models/User')
 
 // get all the Days
 router.get('/', (req, res, next) => {
+  console.log('Requesting data from server')
   Day.find()
     .populate('owner')
     .then(days => {
@@ -15,7 +16,6 @@ router.get('/', (req, res, next) => {
     .catch(err => {
       res.json(err);
     })
-
 });
 
 // get a specfic Day
@@ -43,17 +43,18 @@ router.get('/:id', (req, res, next) => {
 
 // create a Day
 router.post('/', (req, res) => {
-  const { date, energy } = req.body;
+  const { date, energy , foods, symptoms } = req.body;
   const owner = req.user._id;
+  console.log(req.body)
   Day.create({
     date,
-    foods: [],
+    foods,
     drinks: [],
     supplements: [],
     medications: [],
     exercises: [],
     sleep: [],
-    symptoms: [],
+    symptoms,
     energy,
     owner
   })

@@ -80,7 +80,6 @@ export default class TestHistorical extends Component {
         <tr key={user._id}> 
         <td> {user.username}</td>
         <td> {user.email}</td>
-        <td> {user.days.map(day => <p key={day._id}>1</p>)}</td>
         </tr>
       )}
         </tbody>
