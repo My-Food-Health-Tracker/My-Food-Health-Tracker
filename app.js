@@ -56,6 +56,8 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 // Middleware Setup
 app.use(logger('dev'));
 app.use(bodyParser.json());

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
 import { login } from '../../services/auth';
+import { GoogleLogin } from 'react-google-login';
 
 export default class Login extends Component {
   state = {
@@ -33,41 +33,55 @@ export default class Login extends Component {
         // successfully logged in
         // update the state for the parent component
         this.props.setUser(data);
-        this.props.history.push('/main');
+        this.props.history.push('/initial-diary');
       }
     });
   };
+
+
+  responseSuccessGoogle = (response) => {
+    console.log(response)
+  };
+  responseFailureGoogle = (response) => {
+    console.log(response)
+  }
 
   render() {
     return (
       <>
         <h2>Login</h2>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group>
-            <Form.Label htmlFor='email'>Email: </Form.Label>
-            <Form.Control
+        <form onSubmit={this.handleSubmit}>
+            <label htmlFor='email'>Email: </label>
+            <input
               type='text'
               name='email'
               value={this.state.email}
               onChange={this.handleChange}
               id='email'
             />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label htmlFor='password'>Password: </Form.Label>
-            <Form.Control
+          
+         
+            <label htmlFor='password'>Password: </label>
+            <input
               type='password'
               name='password'
               value={this.state.password}
               onChange={this.handleChange}
               id='password'
             />
-          </Form.Group>
-          {this.state.message && (
-            <Alert variant='danger'>{this.state.message}</Alert>
-          )}
-          <Button className="f6 link dim br-pill ph3 pv2 mb2 dib white bg-light-purple" type='submit'>Login</Button>
-        </Form>
+          
+          <button className="f6 link dim br-pill ph3 pv2 mb2 dib white bg-light-purple" type='submit'>Login</button>
+        </form>
+
+        <div>
+        <GoogleLogin
+            clientId="1030428239425-h5l4joog9bknfmisj0it01l8thqh0lln.apps.googleusercontent.com"
+            buttonText="Login with Google"
+            onSuccess={this.responseSuccessGoogle}
+            onFailure={this.responseFailureGoogle}
+            cookiePolicy={'single_host_origin'}
+          />
+        </div>
       </>
     );
   }

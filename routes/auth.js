@@ -6,6 +6,7 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 
+
 router.post('/signup', (req, res, next) => {
   const { email, password } = req.body;
 
@@ -75,5 +76,24 @@ router.get('/loggedin', (req, res) => {
   console.log('Message coming from server /loggedin')
   res.json(req.user);
 })
+
+// Google-login
+
+router.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email",
+    ],
+  })
+);
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/",
+    failureRedirect: "/login", // here you would redirect to the login page using traditional login approach
+  })
+);
 
 module.exports = router;
