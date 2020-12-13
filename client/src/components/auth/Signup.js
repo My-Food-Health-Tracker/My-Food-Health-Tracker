@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { signup } from '../../services/auth';
-import {Link} from 'react-router-dom'
 import {GoogleLogin} from 'react-google-login'
 import axios from 'axios';
 

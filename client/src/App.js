@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
 import InitialDiary from './components/InitialDiary'
+import FoodEntry from './components/view5-food-entry/FoodEntry';
 
 class App extends React.Component {
 
@@ -26,7 +27,10 @@ class App extends React.Component {
     return (
       <div className="App">
        
-      <Route exact path='/' component={Home}/>
+      <Route exact path='/'
+       render = {props => <Home setUser={this.setUser} {...props}/>}
+       />
+
       <Route 
       exact 
       path='/signup' 
@@ -42,10 +46,14 @@ class App extends React.Component {
       exact 
       path='/initial-diary' 
       render={props => {
-        if (this.state.user) return <InitialDiary {...props}/>
+        if (this.state.user) return <InitialDiary setUser={this.setUser} {...props}/>
         else { return <Redirect to='/'/> }
         }}
       />
+
+      <Route exact path='/food-entry'
+       render = {props => <FoodEntry setUser={this.setUser} {...props}/>}
+       />
       </div>
 )
   }

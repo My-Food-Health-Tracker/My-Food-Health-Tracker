@@ -80,7 +80,7 @@ router.get('/loggedin', (req, res) => {
 // Google-login
 
 router.get(
-  "/auth/google",
+  "/google",
   passport.authenticate("google", {
     scope: [
       "https://www.googleapis.com/auth/userinfo.profile",
@@ -88,10 +88,11 @@ router.get(
     ],
   })
 );
+
 router.get(
-  "/auth/google/callback",
+  "/google/callback",
   passport.authenticate("google", {
-    successRedirect: "/",
+    successRedirect: "/initial-diary",
     failureRedirect: "/login", // here you would redirect to the login page using traditional login approach
   })
 );

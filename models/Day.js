@@ -2,26 +2,21 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const daySchema = new Schema({
-  date: {
-    type: Date,
-    default: new Date()
-  },
-
+  date: new Date(),
+    
   owner: { type: Schema.Types.ObjectId, ref: 'User' },
 
   foods: [{
-    startTime: Date,
-    name: String,
-    brand: String,
+    startTime: new Date(),
+    imgUrl: String,
     ServingAmount: Number,
     ServingSize: String,
-    imgUrl: String,
-      // here not sure
-    ingredients: []
+      // ingredients are obejcts
+    ingredients: [{ type: Schema.Types.ObjectId, ref: 'Ingredient' }]
   }],
 
   drinks: [{
-    startTime: Date,
+    startTime: new Date(),
     name: String,
     imgUrl: String,
     brand: String,
@@ -32,7 +27,7 @@ const daySchema = new Schema({
   }],
 
   supplements : [{
-    startTime: Date,
+    startTime: new Date(),
     name: String,
     imgUrl: String,
     brand: String,
@@ -43,7 +38,7 @@ const daySchema = new Schema({
   }],
 
   medications : [{
-    startTime: Date,
+    startTime: new Date(),
     name: String,
     imgUrl: String,
     brand: String,
@@ -55,20 +50,20 @@ const daySchema = new Schema({
   
   exercises: [{
     name: String,
-    startTime: Date, // need to check it 
+    startTime: new Date(), // need to check it 
     duration: Number, // minites or hours
     intensity: Number
   }],
 
   sleep: [{
-    starTime: Date, // need to check it 
+    starTime: new Date(), // need to check it 
     duration: Number, // minites or hours
     notes: String
   }],
   
   symptoms: [{
     name: String,
-    startTime: Date,
+    startTime: new Date(),
     duration: Number,
     intensity: Number,
     notes: String
