@@ -5,7 +5,7 @@ const userSchema = new Schema({
   username: String,
   email: String,
   password: String,
-  days: [{ type: Schema.Types.ObjectId, ref: 'Day' }],
+  days: [{ type: Schema.Types.ObjectId, ref: 'Day', default:null}],
 },
 
 {
