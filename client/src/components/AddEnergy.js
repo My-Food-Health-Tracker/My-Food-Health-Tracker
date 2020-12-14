@@ -41,6 +41,8 @@ export default class AddEnergy extends Component {
 
 
   render() {
+
+  console.log(this.state.startDate)
     return (
       <div className='flex flex-column'>
         <TopBar title='Energy' icon='Energy'/>

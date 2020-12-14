@@ -18,6 +18,20 @@ router.get('/', (req, res, next) => {
     })
 });
 
+//View all the entries of a specific day of a user
+router.get('/user/:id/day/:date/',(req,res,next)=>{
+  console.log('this is the user id', req.params.id)
+  console.log('this is the req',req.body)
+  Day.findOne({$and:[{owner: req.params.id},{date: req.params.date}]})
+    .then(day=>{
+      console.log('this is the day',day)
+      res.json(day)
+      }
+    )
+    .catch(err => console.log(err))
+})
+
+
 //add energy level to a day (create day if that day doesn't exists)
 router.post('/user/:id/day/:date/energy',(req,res,next)=>{
   console.log('this is the user id', req.params.id)

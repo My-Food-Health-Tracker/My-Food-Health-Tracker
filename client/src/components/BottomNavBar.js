@@ -6,7 +6,7 @@ export default function BottomNavBar() {
   return (
       <nav className='ba blue pv2 w-100 fixed bottom-0'>
 
-        <Link to='/initial-diary' className="link blue hover-silver dib mh3 tc">
+        <Link to='/dashboard' className="link blue hover-silver dib mh3 tc">
           <Icons icon="diary"/>
           <span class="f6 db">Diary</span>
         </Link>

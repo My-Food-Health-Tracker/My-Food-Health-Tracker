@@ -6,7 +6,6 @@ import {Route, Redirect} from 'react-router-dom';
 import TestView from './components/testviews/TestView';
 import TestHistorical from './components/testviews/TestHistorical';
 import TestInput from './components/testviews/TestInput';
-import AddDays from './components/testviews/AddDays'
 
 //final views component
 import Navbar from './components/Navbar';
@@ -43,7 +42,7 @@ class App extends React.Component {
 
   render() {
 
-    console.log(this.state.user)
+    // console.log(this.state.user)
     return (
       <div className="App">
          {/* <Navbar user={this.state.user} setUser={this.setUser} /> */}
@@ -66,7 +65,7 @@ class App extends React.Component {
         />
           <Route
           exact path='/dashboard'
-          render={props => <Dashboard setUser={this.setUser} {...props} />}
+          render={props => <Dashboard setUser={this.setUser} user={this.state.user}{...props} />}
         />
 
       <Route exact path='/' component={Home}/>
