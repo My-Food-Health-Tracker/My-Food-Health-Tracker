@@ -32,7 +32,7 @@ export default class AddIngredient extends Component {
     console.log(payload);
     console.log(this.state.date)
     
-    axios.post(`/api/ingredients/user/${this.props.user._id}/day/${this.state.date}`, payload)
+    axios.post(`/user/${this.props.user._id}/day/${this.state.date}`, payload)
       .then(() => {
         // set the form to it's initial state (empty input fields)
         this.setState({
@@ -75,7 +75,7 @@ export default class AddIngredient extends Component {
             />
           </div>
 
-          {/* <div className="portion"> 
+          <div className="portion"> 
             <label htmlFor='portion'>Portion: </label>
                 <input
                   type='number'
@@ -93,7 +93,7 @@ export default class AddIngredient extends Component {
                   value={this.state.eatenPortion}
                   onChange={this.handleChange}
                 />
-          </div> */}
+          </div>
 
           <div className="details">
             <label htmlFor='name'>Name: </label>
