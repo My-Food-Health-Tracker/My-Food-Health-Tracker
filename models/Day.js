@@ -7,15 +7,13 @@ const daySchema = new Schema({
   owner: { type: Schema.Types.ObjectId, ref: 'User' },
 
   foods: [{
-    name: String,
+    // name: String,
     startTime: String,
     imgUrl: String,
-    yieldsPortion: Number, // 8
-    eatenPortion: Number, // 2
-    
-      // ingredients are obejcts
+    servingAmount: Number, 
+    servingSize: String, 
     ingredients: [{ type: Schema.Types.ObjectId, ref: 'Ingredient' }]
-    // 500g chicken, 60g bean, 79g rice
+    
   }],
 
   drinks: [{

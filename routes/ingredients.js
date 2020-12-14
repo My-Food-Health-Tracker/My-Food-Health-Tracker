@@ -65,8 +65,13 @@ router.post('/user/:id/day/:date', (req, res) => {
             imgUrl: "",
             servingAmount: servingAmount,
             servingSize: servingSize,
-            "$[ingredients]": dbIngredient
-        }}}, {new: true})
+            ingredients: dbIngredient
+        }}}, {new: true}).then(dbIngredient => {
+          res.status(201).json(dbIngredient);
+        })
+        .catch(err => {
+          res.json(err);
+        })
       })
     } else {
       Ingredient.create({
@@ -82,8 +87,8 @@ router.post('/user/:id/day/:date', (req, res) => {
             foods: [{
               startTime: startTime,
               imgUrl: "",
-              ServingAmount: servingAmount,
-              ServingSize: servingSize,
+              servingAmount: servingAmount,
+              servingSize: servingSize,
                 // ingredients are obejcts
               ingredients: [dbIngredient]
             }],
