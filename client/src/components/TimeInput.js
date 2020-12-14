@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class InitialDiary extends Component {
+export default class TimeInput extends Component {
   render() {
     return (
       <div>
-        diary view
+        this is the time input component
       </div>
     )
   }
