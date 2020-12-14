@@ -1,23 +1,54 @@
 import React, { Component } from 'react'
 import Calendar from './Calendar.js'
 import axios from 'axios';
+import BottomNavBar from './BottomNavBar'
 
 
 export default class Dashboard extends Component {
 
   state = {
-    day: new Date(),
-    entries: []
+    day: new Date().toISOString().split('T')[0],
+    data: null,
+    entries: [],
+    user: this.props.user._id
   }
-  // information from apu -> for logged in user get all data with date today
-  // on click for the left and right buttons get the data from that day
-  // fo the calendar selector
-  /* From Calendar get the paramters of the date in order to update the data*/
+
+  setDate = (date) => {
+      this.setState({
+        day: date
+      })
+        this.getData()   
+  }
+  getData = () => {
+
+    axios.get(`/api/days/user/${this.props.user._id}/day/${this.state.day}`)
+    .then(res => {
+      console.log(this.state.data)
+      this.setState({
+        data: res.data,
+      })
+    })
+    .catch(err => console.log(err))
+  }
+
+
+  componentDidMount = () => {
+    // this.setState({
+    //   user: this.props.user._id
+    // })
+    
+    this.getData()
+  }
+  // information from api -> for logged in user get all data with date today
+
   render() {
+    console.log(this.state.data)
     return (
       <div>
-          <Calendar />
+          <Calendar setDate={this.setDate}/>
         <div>
+          {!this.state.data ? (<p>No entries today</p>) : (<p>There are some entries today</p>)}
+          {/* {!this.state.data.drinks ? (<p> Register a drink</p>) : (<p>Some drinks</p>)} */}
           <h1 className="fw4 blue mt0 mb0">Daily entries</h1>
           <section className="ph4 ph4-ns pv3">
           <article className="mw6 center br3 ba b--light-blue bg-white">
@@ -43,7 +74,7 @@ export default class Dashboard extends Component {
           </article>         
         </section>
         </div>
-        <div> At the bottom I would call the footer</div>
+        <BottomNavBar />
       </div>
     )
   }

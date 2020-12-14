@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class Calendar extends Component {
 
   state = {
-    day: new Date ()
+    day: new Date ().toISOString().split('T')[0]
   }
   handleChange = (event) => {
 
@@ -11,27 +11,29 @@ export default class Calendar extends Component {
     this.setState({
       day: event.target.value
     })
+    this.props.setDate(event.target.value)
   }
 
-  handleLeftClick = (event) => {
-  console.log(this.state.day)
-  let d = this.state.day
-  console.log(d)
-  d.setDate(d.getDate() - 1 )
-  this.setState({
-    day: d
-  })
-  }
-  handleRightClick = (event) => {
-    console.log(this.state.day)
-    let d = this.state.day
-    console.log(d)
-    d.setDate(d.getDate() + 1 )
-    console.log(d.getDate())
-    this.setState({
-      day: d
-    })
-    }
+  // handleLeftClick = (event) => {
+  // console.log(this.state.day)
+  // let d = this.state.day
+  // console.log(d)
+  // d.setDate(d.getDate() - 1 )
+  // this.setState({
+  //   day: d
+  // })
+  // }
+  // handleRightClick = (event) => {
+  //   console.log(this.state.day)
+  //   let d = this.state.day
+  //   console.log(d)
+  //   d.setDate(d.getDate() + 1 )
+  //   console.log(d.getDate())
+  //   this.setState({
+  //     day: d
+  //   })
+  //   }
+
   render() {
     return (
       <div>
@@ -39,7 +41,7 @@ export default class Calendar extends Component {
           <div className="tc pb3">
           <a className="link dim gray f6 f5-ns dib mr3" onClick={this.handleLeftClick}> {"<"} </a>
           <form className="link dim gray f6 f5-ns dib mr3">
-            <input type="date" name="date" id="date" value={this.state.day.toISOString().split('T')[0]} placeholder={this.state.day} onChange={this.handleChange}/>
+            <input type="date" name="date" id="date" value={this.state.day} placeholder={this.state.day} onChange={this.handleChange}/>
           </form>
           <a className="link dim gray f6 f5-ns dib mr3" onClick={this.handleRightClick}> {">"} </a>
           </div>
