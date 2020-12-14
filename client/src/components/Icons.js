@@ -271,6 +271,7 @@ export default function Icons(props) {
               </g>
               </svg>
         </div>)
+    
     default:
       // code block
   }

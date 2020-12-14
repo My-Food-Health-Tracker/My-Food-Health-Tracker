@@ -17,6 +17,7 @@ import AddItem from './components/AddItem'
 
 //Hortencia:Components for the view nº11
 import AddEnergy from './components/AddEnergy'
+import AddDays from './components/testviews/AddDays'
 
 
 
@@ -32,9 +33,6 @@ class App extends React.Component {
     })
   }
 
-  setEnergy=()=>{
-    
-  }
 
   render() {
 
@@ -76,10 +74,14 @@ class App extends React.Component {
       <Route 
       exact 
       path='/add/Energy' 
-      render={props => <AddEnergy setEnergy={this.setEnergy} {...props}/>}
+      render={() => <AddEnergy user={this.state.user}/>}
       />
 
-
+<Route 
+      exact 
+      path='/add-a-day' 
+      render={() => <AddDays user={this.state.user}/>}
+      />
       </div>
 )
   }

@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const daySchema = new Schema({
   date: {
-    type: Date,
-    default: new Date()
+    type: String
+    //default: (new Date()).toISOString().split('T')[0]
   },
 
   owner: { type: Schema.Types.ObjectId, ref: 'User' },
@@ -74,16 +74,19 @@ const daySchema = new Schema({
     notes: String
   }],
   
-  energy: Number
-  
+  energy: {
+    startTime: String,
+    energyLevel:Number
+  }
 },
 
 {
   timestamps: {
     createdAt: "created_at",
-    updatedAt: "updated_at",
+    updatedAt: "updated_at"
   },
 }
+
 );
 
 
