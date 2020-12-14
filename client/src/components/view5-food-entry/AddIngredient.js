@@ -11,6 +11,8 @@ export default class AddIngredient extends Component {
     name : '',
     brand: '',
     category: '',
+    portion: '',
+    eatenPortion: ''
   }
 
   handleChange = event => {
@@ -37,10 +39,12 @@ export default class AddIngredient extends Component {
           date: '',
           startTime: '',
           servingAmount: 0,
-          servingSize: 0,
+          servingSize: '',
           name : '',
           brand: '',
           category: '',
+          portion: '',
+          eatenPortion: ''
         })
         // update the parent components state (in Projects) by calling getData()
         // this.props.getData();
@@ -71,24 +75,24 @@ export default class AddIngredient extends Component {
             />
           </div>
 
-          <div className="serving"> 
-            <label htmlFor='servingAmount'>Serving Amount: </label>
-              <input
-                type='number'
-                id='servingAmount'
-                name='servingAmount'
-                value={this.state.servingAmount}
-                onChange={this.handleChange}
-              />
-          
-              <label htmlFor='servingSize'>Serving Size: </label>
-              <input
-                type='text'
-                id='servingSize'
-                name='servingSize'
-                value={this.state.servingSize}
-                onChange={this.handleChange}
-              />
+          <div className="portion"> 
+            <label htmlFor='portion'>Portion: </label>
+                <input
+                  type='number'
+                  id='portion'
+                  name='portion'
+                  value={this.state.portion}
+                  onChange={this.handleChange}
+                />
+            
+                <label htmlFor='eatenPortion'>How much did you eat? </label>
+                <input
+                  type='number'
+                  id='eatenPortion'
+                  name='eatenPortion'
+                  value={this.state.eatenPortion}
+                  onChange={this.handleChange}
+                />
           </div>
 
           <div className="details">
@@ -118,6 +122,24 @@ export default class AddIngredient extends Component {
               value={this.state.category}
               onChange={this.handleChange}
             /> 
+
+        <label htmlFor='servingAmount'>Serving Amount: </label>
+              <input
+                type='number'
+                id='servingAmount'
+                name='servingAmount'
+                value={this.state.servingAmount}
+                onChange={this.handleChange}
+              />
+          
+              <label htmlFor='servingSize'>Serving Size: </label>
+              <input
+                type='text'
+                id='servingSize'
+                name='servingSize'
+                value={this.state.servingSize}
+                onChange={this.handleChange}
+              />
           </div>
         
         <button type='submit'>Save</button>

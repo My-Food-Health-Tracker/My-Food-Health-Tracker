@@ -5,6 +5,8 @@ const ingredientSchema = new Schema({
   name: String,
   brand: String,
   category: String,
+  servingAmount: Number,
+  servingSize: String,
   owner: { type: Schema.Types.ObjectId, ref: 'User' }
 },
 

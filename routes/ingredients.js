@@ -43,10 +43,11 @@ router.get('/:id', (req, res, next) => {
 
 // LoggedIn user want to create a Ingredient
 router.post('/user/:id/day/:date', (req, res) => {
-  const { date, startTime, name, brand, category, servingAmount, servingSize } = req.body;
+  const { date, startTime, name, brand, category, servingAmount, servingSize, portion, eatenPortion } = req.body;
   // const owner = req.user._id;
   // Check if the user already has a day
-  console.log('this is req.params.id', req.params)
+  
+console.log('this is req.params.id', req.params)
  Day.findOne({$and: [{owner: req.params.id}, {date: req.params.date}]})
   .then (day => {
     console.log('this is the day', day)
@@ -55,16 +56,19 @@ router.post('/user/:id/day/:date', (req, res) => {
         name,
         brand,
         category,
+        servingAmount,
+        servingSize,
         owner: req.params.id
       })
       .then(dbIngredient => {
         console.log('this is the dbingredient', dbIngredient)
         Day.findByIdAndUpdate(day._id,
           { $push: {"foods": 
-            {startTime: startTime,
+            {startTime,
+            name,
+            portion,
+            eatenPortion,
             imgUrl: "",
-            servingAmount: servingAmount,
-            servingSize: servingSize,
             ingredients: dbIngredient
         }}}, {new: true}).then(dbIngredient => {
           res.status(201).json(dbIngredient);
@@ -78,6 +82,8 @@ router.post('/user/:id/day/:date', (req, res) => {
         name,
         brand,
         category,
+        servingAmount,
+        servingSize,
         owner: req.params.id
       })
         .then((dbIngredient) => {
@@ -87,8 +93,9 @@ router.post('/user/:id/day/:date', (req, res) => {
             foods: [{
               startTime: startTime,
               imgUrl: "",
-              servingAmount: servingAmount,
-              servingSize: servingSize,
+              name,
+              portion,
+              eatenPortion,
                 // ingredients are obejcts
               ingredients: [dbIngredient]
             }],
