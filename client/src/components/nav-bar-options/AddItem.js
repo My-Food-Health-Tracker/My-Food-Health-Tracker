@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import BottomNavBar from './BottomNavBar'
-import EntryList from './EntryList'
+import BottomNavBar from '../shared/BottomNavBar'
+import EntryList from '../shared/EntryList'
 
 export default class AddItem extends Component {
   render() {

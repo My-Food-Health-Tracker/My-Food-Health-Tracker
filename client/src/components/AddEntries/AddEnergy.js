@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import TopBar from './TopBar'
-import BottomNavBar from './BottomNavBar'
-import TimeInput from './TimeInput'
-import IntensityBar from './IntensityBar'
+import TopBar from '../shared/TopBar'
+import BottomNavBar from '../BottomNavBar'
 import axios from 'axios'
 
 export default class AddEnergy extends Component {
