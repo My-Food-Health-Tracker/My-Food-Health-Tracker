@@ -33,7 +33,7 @@ class App extends React.Component {
     console.log(this.state.user)
     return (
       <div className="App">
-         <Navbar user={this.state.user} setUser={this.setUser} />
+         {/* <Navbar user={this.state.user} setUser={this.setUser} /> */}
           {/* <Route exact path='/usertest' render={props => <TestView {...props} /> }
           ></Route>
           <Route
