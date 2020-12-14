@@ -2,11 +2,26 @@ import './App.css';
 import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
 
+<<<<<<< HEAD
+//test views
+import TestView from './components/testviews/TestView';
+import TestHistorical from './components/testviews/TestHistorical';
+import TestInput from './components/testviews/TestInput';
+import AddDays from './components/testviews/AddDays'
+
+//final views component
+import Navbar from './components/Navbar';
+import Signup from './components/auth/Signup';
+import Login from './components/auth/Login';
+import Home from './components/Home';
+import Dashboard from './components/Dashboard'
+=======
 
 //final views component
 import Home from './components/Home';
 import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
+>>>>>>> master
 import InitialDiary from './components/InitialDiary'
 
 //Hortencia:components for the BottomNavBar
@@ -39,8 +54,33 @@ class App extends React.Component {
     console.log(this.state.user)
     return (
       <div className="App">
+<<<<<<< HEAD
+         {/* <Navbar user={this.state.user} setUser={this.setUser} /> */}
+          {/* <Route exact path='/usertest' render={props => <TestView {...props} /> }
+          ></Route>
+          <Route
+          exact
+          path='/historicaltest'
+          render={props => <TestHistorical {...props} /> }
+          ></Route>
+          <Route
+          exact
+          path='/testinput'
+          render={props => <TestInput {...props} /> }
+          ></Route> */}
+
+        <Route
+          exact path='/adddays'
+          render={props => <AddDays setUser={this.setUser} {...props} />}
+        />
+          <Route
+          exact path='/dashboard'
+          render={props => <Dashboard setUser={this.setUser} {...props} />}
+        />
+=======
        
 
+>>>>>>> master
 
       <Route exact path='/' component={Home}/>
 
