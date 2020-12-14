@@ -109,4 +109,7 @@ app.use('/api/users', users)
 const days = require('./routes/days');
 app.use('/api/days', days)
 
+const ingredients = require('./routes/ingredients');
+app.use('/api/ingredients', ingredients)
+
 module.exports = app;

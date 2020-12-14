@@ -2,75 +2,80 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const daySchema = new Schema({
-  date: new Date(),
+  date: String,
     
   owner: { type: Schema.Types.ObjectId, ref: 'User' },
 
   foods: [{
-    startTime: new Date(),
+    name: String,
+    startTime: String,
     imgUrl: String,
-    ServingAmount: Number,
-    ServingSize: String,
+    yieldsPortion: Number, // 8
+    eatenPortion: Number, // 2
+    
       // ingredients are obejcts
     ingredients: [{ type: Schema.Types.ObjectId, ref: 'Ingredient' }]
+    // 500g chicken, 60g bean, 79g rice
   }],
 
   drinks: [{
-    startTime: new Date(),
+    startTime: String,
     name: String,
     imgUrl: String,
     brand: String,
-    ServingAmount: Number,
-    ServingSize: String,
+    servingAmount: Number,
+    servingSize: String,
       // here not sure
     ingredients: []
   }],
 
   supplements : [{
-    startTime: new Date(),
+    startTime: String,
     name: String,
     imgUrl: String,
     brand: String,
-    ServingAmount: Number,
-    ServingSize: String,
+    servingAmount: Number,
+    servingSize: String,
       // here not sure
     ingredients: []
   }],
 
   medications : [{
-    startTime: new Date(),
+    startTime: String,
     name: String,
     imgUrl: String,
     brand: String,
-    ServingAmount: Number,
-    ServingSize: String,
+    servingAmount: Number,
+    servingSize: String,
       // here not sure
     ingredients: []
   }],
   
   exercises: [{
     name: String,
-    startTime: new Date(), // need to check it 
+    startTime: String,
     duration: Number, // minites or hours
     intensity: Number
   }],
 
   sleep: [{
-    starTime: new Date(), // need to check it 
+    starTime: String,
     duration: Number, // minites or hours
     notes: String
   }],
   
   symptoms: [{
     name: String,
-    startTime: new Date(),
+    startTime: String,
     duration: Number,
     intensity: Number,
     notes: String
   }],
   
-  energy: Number
-  
+  energy: {
+    startTime: String,
+    energyLevel: Number
+  }
 },
 
 {

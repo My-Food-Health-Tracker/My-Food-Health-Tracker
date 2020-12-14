@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
     })
 });
 
-// get a specfic Day
+// get a specific Day
 // to check if id is a valid mongo object id: mongoose.Types.ObjectId.isValid(_id)
 router.get('/:id', (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
@@ -43,18 +43,15 @@ router.get('/:id', (req, res, next) => {
 
 // create a Day
 router.post('/', (req, res) => {
-  const { date, energy , foods, symptoms } = req.body;
+
   const owner = req.user._id;
+  const {date, energy} = req.body
   console.log(req.body)
   Day.create({
     date,
-    foods,
-    drinks: [],
-    supplements: [],
-    medications: [],
+    foods: [],
     exercises: [],
-    sleep: [],
-    symptoms,
+    symptoms: [],
     energy,
     owner
   })
@@ -77,19 +74,13 @@ router.put('/:id', (req, res, next) => {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;
   }
-
-  const { date, energy } = req.body;
+  // const date = req.body.date.setHours(0,0,0,0)
   const owner = req.user._id;
   Day.findByIdAndUpdate(req.params.id,{ 
     date,
     foods: [],
-    drinks: [],
-    supplements: [],
-    medications: [],
     exercises: [],
-    sleep: [],
     symptoms: [],
-    energy,
     owner 
   },
     { new: true }
@@ -117,8 +108,6 @@ router.delete('/:id', (req, res, next) => {
       res.json(err);
     })
 });
-
-
 
 
 module.exports = router;

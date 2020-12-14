@@ -52,7 +52,7 @@ class App extends React.Component {
       />
 
       <Route exact path='/food-entry'
-       render = {props => <FoodEntry setUser={this.setUser} {...props}/>}
+       render = {props => <FoodEntry user={this.state.user} {...props}/>}
        />
       </div>
 )
