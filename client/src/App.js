@@ -17,6 +17,8 @@ import Dashboard from './components/nav-bar-options/Dashboard'
 // Xiaomei: components for Add Food Entry
 import InitialDiary from './components/InitialDiary'
 import FoodEntry from './components/view5-food-entry/FoodEntry';
+import AddDrinks from './components/add-entries/AddDrinks'
+import AddSupplements from './components/add-entries/AddDrinks'
 
 //Hortencia:components for the BottomNavBar Links
 import Analysis from './components/nav-bar-options/Analysis'
@@ -30,7 +32,7 @@ import AddExercise from './components/add-entries/AddExercise'
 import AddSleep from './components/add-entries/AddSleep'
 import AddSymptoms from './components/add-entries/AddSymptoms'
 
-import AddDrinks from './components/add-entries/AddDrinks'
+
 
 // import AddDays from './components/testviews/AddDays'
 
@@ -139,6 +141,9 @@ class App extends React.Component {
       />
       <Route exact path='/add/Drinks' 
       render={(props) => <AddDrinks user={this.state.user} {...props}/>}
+      />
+      <Route exact path='/add/Supplements' 
+      render={(props) => <AddSupplements user={this.state.user} {...props}/>}
       />
       </div>
 )

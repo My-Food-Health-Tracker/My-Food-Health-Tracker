@@ -15,6 +15,7 @@ export default class AddIngredient extends Component {
     eatenPortion: ''
   }
 
+  
   handleChange = event => {
     const name = event.target.name;
     const value = event.target.value;
