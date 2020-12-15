@@ -8,6 +8,7 @@ export default class Analysis extends Component {
     return (
       <div>
       <TopBar icon='analysis' title='Analysis'/>
+      
       <BottomNavBar/>
       </div>
     )

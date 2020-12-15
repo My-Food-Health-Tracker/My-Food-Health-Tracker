@@ -9,7 +9,7 @@ import 'tachyons'
 
 axios.get('/api/auth/loggedin')
   .then(response => {
-    // console.log(response);
+    console.log('response from loggedin',response);
     const user = response.data
     
     ReactDOM.render(
