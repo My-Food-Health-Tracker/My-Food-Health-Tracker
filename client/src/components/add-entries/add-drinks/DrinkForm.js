@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Icons from '../shared/Icons'
+import Icons from '../../shared/Icons'
 
 
-export default class AddIngredient extends Component {
+export default class DrinkForm extends Component {
   state = {
     date: '',
     startTime: '',
@@ -13,8 +13,6 @@ export default class AddIngredient extends Component {
     name : '',
     brand: '',
     category: '',
-    portion: '',
-    eatenPortion: '',
     ingredientCount: 0
   }
 
@@ -35,7 +33,7 @@ export default class AddIngredient extends Component {
     console.log(payload);
     console.log(this.state.date)
     
-    axios.post(`/api/ingredients/user/${this.props.user._id}/day/${this.state.date}`, payload)
+    axios.post(`/api/ingredients/drinks/user/${this.props.user._id}/day/${this.state.date}`, payload)
       .then(() => {
         // set the form to it's initial state (empty input fields)
         this.setState({
@@ -46,8 +44,6 @@ export default class AddIngredient extends Component {
           name : '',
           brand: '',
           category: '',
-          portion: '',
-          eatenPortion: '',
           ingredientCount: ++this.state.ingredientCount
         })
         // update the parent components state (in Projects) by calling getData()
@@ -55,6 +51,8 @@ export default class AddIngredient extends Component {
       })
       .catch(err => console.log(err))
   }
+   
+ 
   
   render() {
     return (
@@ -108,6 +106,7 @@ export default class AddIngredient extends Component {
               type='text'
               id='name'
               name='name'
+              value={this.props.name}
               onChange={this.handleChange}
             />
           </div>
@@ -117,7 +116,7 @@ export default class AddIngredient extends Component {
               type='text'
               id='brand'
               name='brand'
-              value={this.state.brand}
+              value={this.props.brand}
               onChange={this.handleChange}
             />
           </div>
@@ -127,7 +126,7 @@ export default class AddIngredient extends Component {
               type='text'
               id='category'
               name='category'
-              value={this.state.category}
+              value={this.props.category}
               onChange={this.handleChange}
             /> 
             </div>

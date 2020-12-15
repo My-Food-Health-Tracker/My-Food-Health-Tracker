@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {logout} from '../services/auth'
-import Icons from './Icons';
+import Icons from '../components/shared/Icons';
 
 
 const handleLogout = props => {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { signup } from '../../services/auth';
 import {GoogleLogin} from 'react-google-login'
 import axios from 'axios';
-import Icons from '../Icons'
+import Icons from '../shared/Icons'
 
 export default class Signup extends Component {
 

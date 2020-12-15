@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Icons from '../Icons'
+import Icons from '../shared/Icons'
 
 export default class TopNav extends Component {
   render() {

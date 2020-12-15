@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import Icons from './Icons'
+import Icons from './shared/Icons'
 export default function BottomNavBar() {
   return (
       <nav className='ba blue pv2 w-100 fixed bottom-0'>

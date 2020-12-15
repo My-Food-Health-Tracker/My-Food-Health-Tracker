@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { login } from '../../services/auth';
 import { GoogleLogin } from 'react-google-login';
-import Icons from '../Icons'
+import Icons from '../shared/Icons'
 
 export default class Login extends Component {
   state = {
