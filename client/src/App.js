@@ -3,9 +3,9 @@ import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
 
 //test views
-import TestView from './components/testviews/TestView';
-import TestHistorical from './components/testviews/TestHistorical';
-import TestInput from './components/testviews/TestInput';
+// import TestView from './components/testviews/TestView';
+// import TestHistorical from './components/testviews/TestHistorical';
+// import TestInput from './components/testviews/TestInput';
 
 //final views component
 import Navbar from './components/Navbar';
@@ -30,7 +30,7 @@ import AddExercise from './components/add-entries/AddExercise'
 import AddSleep from './components/add-entries/AddSleep'
 import AddSymptoms from './components/add-entries/AddSymptoms'
 
-import AddDays from './components/testviews/AddDays'
+// import AddDays from './components/testviews/AddDays'
 
 
 
@@ -72,7 +72,7 @@ class App extends React.Component {
           ></Route> */}
 
         {/* Test routes for add days */}
-        <Route
+        {/* <Route
           exact path='/adddays'
           render={props => <AddDays setUser={this.setUser} {...props} />}
         />
@@ -80,7 +80,7 @@ class App extends React.Component {
           exact 
           path='/add-a-day' 
           render={() => <AddDays user={this.state.user}/>}
-          />
+          /> */}
 
         {/* Routes for Dashboard */}
           <Route
