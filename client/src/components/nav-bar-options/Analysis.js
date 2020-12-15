@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TopBar from '../shared/TopBar'
-import BottomNavBar from '../shared/BottomNavBar'
+import BottomNavbar from '../shared/BottomNavbar'
 import DemoData from '../Entries/DemoData'
 import RealData from '../Entries/RealData'
 
@@ -13,7 +13,7 @@ export default class Analysis extends Component {
       <TopBar icon='analysis' title='Analysis'/>
       {/* <RealData user={this.props.user._id}/> */}
       <DemoData />
-      <BottomNavBar/>
+      <BottomNavbar/>
       </div>
     )
   }

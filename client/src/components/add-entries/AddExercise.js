@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TopBar from '../shared/TopBar'
-import BottomNavBar from '../shared/BottomNavBar'
+import BottomNavbar from '../shared/BottomNavbar'
 import axios from 'axios'
 
 export default class AddExercise extends Component {
@@ -97,7 +97,7 @@ export default class AddExercise extends Component {
 
             <button onClick={()=>this.handleDelete()} className="f6 w4 dim ph3 pv2 mt3 dib white bg-dark-red br-pill b--dark-red">Delete</button>
 
-          <BottomNavBar/>
+          <BottomNavbar/>
 
         </div>
       </div>

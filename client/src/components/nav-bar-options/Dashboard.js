@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Calendar from '../shared/Calendar'
 import axios from 'axios';
-import BottomNavBar from '../shared/BottomNavBar'
+import BottomNavbar from '../shared/BottomNavbar'
 import Energy from '../Entries/Energy';
 import Foods from '../Entries/Foods';
 
@@ -74,7 +74,7 @@ export default class Dashboard extends Component {
             </div>)}
           </section>
         </div>
-        <BottomNavBar />
+        <BottomNavbar />
       </div>
     )
   }
