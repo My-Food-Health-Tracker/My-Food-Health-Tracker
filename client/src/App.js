@@ -138,6 +138,11 @@ class App extends React.Component {
       <Route exact path='/add/Symptoms' 
       render={() => <AddSymptoms user={this.state.user}/>}
       />
+<Route 
+      exact 
+      path='/add-a-day' 
+      render={() => <AddDays user={this.state.user}/>}
+      />
       </div>
 )
   }
