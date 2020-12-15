@@ -96,7 +96,7 @@ class App extends React.Component {
         }}
       />
       <Route exact path='/add-item' component={AddItem}/>
-      <Route exact path='/analysis' component={Analysis}/>
+      <Route exact path='/analysis' render={(props) => <Analysis user={this.state.user} {...props}/>}/>
       <Route exact path='/add-frequent' component={AddFrequent}/>
       <Route exact path='/more' component={More}/>
 
@@ -113,13 +113,6 @@ class App extends React.Component {
       <Route exact path='/add/Symptoms' 
       render={() => <AddSymptoms user={this.state.user}/>}
       />
-
-
-
-
-
-
-
 
 <Route 
       exact 
