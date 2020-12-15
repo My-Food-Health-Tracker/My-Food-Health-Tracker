@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import TopBar from '../shared/TopBar';
-import BottomNavbar from '../BottomNavbar';
+import BottomNavbar from '../shared/BottomNavbar';
 import Icons from '../shared/Icons';
 import { Link } from 'react-router-dom';
 
@@ -109,7 +109,7 @@ export default class AddDrinks extends Component {
       // </div>
       <div>
       {/* Top Navbar */}
-        <TopBar icon="Drinks" /> 
+      <TopBar title='Drinks' icon='Drinks'/>
 
       {/* Two buttons for single ingredient and recipe */}
         <button className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 

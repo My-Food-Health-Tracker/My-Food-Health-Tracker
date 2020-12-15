@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import IngredientsDetails from './IngredientsDetails';
 
 
-export default class AddIngredient extends Component {
+export default class AddRecipe extends Component {
   state = {
     date: '',
     startTime: '',
@@ -12,7 +13,7 @@ export default class AddIngredient extends Component {
     brand: '',
     category: '',
     portion: '',
-    eatenPortion: ''
+    eatenPortion: '',
   }
 
   
@@ -33,19 +34,21 @@ export default class AddIngredient extends Component {
     console.log(payload);
     console.log(this.state.date)
     
-    axios.post(`/user/${this.props.user._id}/day/${this.state.date}`, payload)
+    axios.post(`api/recipe/user/${this.props.user._id}/day/${this.state.date}`, payload)
       .then(() => {
         // set the form to it's initial state (empty input fields)
         this.setState({
           date: '',
           startTime: '',
-          servingAmount: 0,
-          servingSize: '',
-          name : '',
+          foodsname : '',
+          portion: '',
+          eatenPortion: '',
+          ingredientsName: '',
           brand: '',
           category: '',
-          portion: '',
-          eatenPortion: ''
+          servingAmount: 0,
+          servingSize: '',
+          ingredients: []
         })
         // update the parent components state (in Projects) by calling getData()
         // this.props.getData();
@@ -76,7 +79,17 @@ export default class AddIngredient extends Component {
             />
           </div>
 
-          <div className="portion"> 
+          <div className="recipe-infos"> 
+
+          <label htmlFor='name'>Recipename: </label>
+            <input
+              type='text'
+              id='name'
+              name='name'
+              value={this.state.name}
+              onChange={this.handleChange}
+            />
+        
             <label htmlFor='portion'>Portion: </label>
                 <input
                   type='number'
@@ -86,36 +99,16 @@ export default class AddIngredient extends Component {
                   onChange={this.handleChange}
                 />
             
-                <label htmlFor='eatenPortion'>How much did you eat? </label>
-                <input
-                  type='number'
-                  id='eatenPortion'
-                  name='eatenPortion'
-                  value={this.state.eatenPortion}
-                  onChange={this.handleChange}
-                />
-          </div>
-
-          <div className="details">
-            <label htmlFor='name'>Name: </label>
+            <label htmlFor='eatenPortion'>How much did you eat? </label>
             <input
-              type='text'
-              id='name'
-              name='name'
-              value={this.state.name}
+              type='number'
+              id='eatenPortion'
+              name='eatenPortion'
+              value={this.state.eatenPortion}
               onChange={this.handleChange}
             />
-        
-            <label htmlFor='brand'>Brand: </label>
-            <input
-              type='text'
-              id='brand'
-              name='brand'
-              value={this.state.brand}
-              onChange={this.handleChange}
-            />
-
-          <label htmlFor='category'>Category: </label>
+            
+            <label htmlFor='category'>Category: </label>
             <input
               type='text'
               id='category'
@@ -123,25 +116,9 @@ export default class AddIngredient extends Component {
               value={this.state.category}
               onChange={this.handleChange}
             /> 
-
-        <label htmlFor='servingAmount'>Serving Amount: </label>
-              <input
-                type='number'
-                id='servingAmount'
-                name='servingAmount'
-                value={this.state.servingAmount}
-                onChange={this.handleChange}
-              />
-          
-              <label htmlFor='servingSize'>Serving Size: </label>
-              <input
-                type='text'
-                id='servingSize'
-                name='servingSize'
-                value={this.state.servingSize}
-                onChange={this.handleChange}
-              />
           </div>
+
+          <IngredientsDetails />
         
         <button type='submit'>Save</button>
       </form>

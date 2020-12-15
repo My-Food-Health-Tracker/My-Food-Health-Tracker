@@ -38,7 +38,7 @@ export default class Calendar extends Component {
   render() {
     return (
       <div>
-          <nav className="pa3 pa4-ns center">
+          {/* <nav className="pa3 pa4-ns center">
           <div className="tc pb3">
           <a className="link dim gray f6 f5-ns dib mr3" onClick={this.handleLeftClick}> {"<"} </a>
           <form className="link dim gray f6 f5-ns dib mr3">
@@ -46,7 +46,7 @@ export default class Calendar extends Component {
           </form>
           <a className="link dim gray f6 f5-ns dib mr3" onClick={this.handleRightClick}> {">"} </a>
           </div>
-        </nav>
+        </nav> */}
       </div>
     )
   }

@@ -1,9 +1,8 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import TopBar from '../shared/TopBar';
-import AddIngredient from '../view5-food-entry/AddIngredient';
 import BottomNavbar from '../shared/BottomNavbar';
-import Icons from '../Icons';
+import Icons from '../shared/Icons';
 import { Link } from 'react-router-dom';
 
 export default class AddDrinks extends Component {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import TopBar from '../shared/TopBar';
-import BottomNavbar from '../BottomNavbar';
+import BottomNavbar from '../shared/BottomNavbar';
 import Icons from '../shared/Icons';
 import { Link } from 'react-router-dom';
 

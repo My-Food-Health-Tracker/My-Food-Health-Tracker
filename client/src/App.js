@@ -8,16 +8,17 @@ import {Route, Redirect} from 'react-router-dom';
 // import TestInput from './components/testviews/TestInput';
 
 //final views component
-import Navbar from './components/Navbar';
 import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
 import Home from './components/Home';
 import Dashboard from './components/nav-bar-options/Dashboard'
 
 // Xiaomei: components for Add Food Entry
-import InitialDiary from './components/InitialDiary'
+import InitialDiary from './components/InitialDiary';
 import FoodEntry from './components/add-entries/FoodEntry';
-import DrinkEntry from './components/add-entries/DrinkEntry';
+import AddDrinks from './components/add-entries/AddDrinks';
+import AddSupplements from './components/add-entries/AddSupplements';
+
 //Hortencia:components for the BottomNavBar Links
 import Analysis from './components/nav-bar-options/Analysis'
 import AddFrequent from './components/nav-bar-options/AddFrequent'
@@ -30,9 +31,6 @@ import AddExercise from './components/add-entries/AddExercise'
 import AddSleep from './components/add-entries/AddSleep'
 import AddSymptoms from './components/add-entries/AddSymptoms'
 
-
-
-// import AddDays from './components/testviews/AddDays'
 
 
 
@@ -117,12 +115,6 @@ class App extends React.Component {
         else { return <Redirect to='/'/> }
         }}
       />
-      <Route exact path='/add/Foods'
-       render = {props => <FoodEntry user={this.state.user} {...props}/>}
-       />
-        <Route exact path='/add/Drinks'
-       render = {props => <DrinkEntry user={this.state.user} {...props}/>}
-       />
 
       {/* Routes in BottomNavBar  */}
       <Route exact path='/add-item' component={AddItem}/>

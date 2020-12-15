@@ -1,10 +1,11 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import TopNav from '../view5-food-entry/TopNav';
-import AddIngredient from '../view5-food-entry/AddIngredient';
 import BottomNavbar from '../shared/BottomNavbar';
-import Icons from '../Icons';
+import Icons from '../shared/Icons';
 import { Link } from 'react-router-dom';
+import TopBar from '../shared/TopBar';
+import AddRep from './AddRep';
+import AddIgt from './AddIgt';
 
 export default class FoodEntry extends Component {
   state = {
@@ -12,16 +13,18 @@ export default class FoodEntry extends Component {
     user: this.props.user,
     days: [],
     ingredients: [],
+    date: '',
+    startTime: '',
     name: '',
     brand: '',
-    category: '',
+    category: '', servingAmout: '', servingSize: '', portion: '', eatenPortion: '',
     selectedIngredient: false,
-    showCustomIngredient: false,
-    showExistIngredient: false,
+    handleShowRecipe: false,
+    handleShowSingle: false,
+    ingredientCount: 0
   }
 
   // show all the ingredients in database
-
   
   getAllIngredients = () => {
     axios.get('/api/ingredients')
@@ -53,32 +56,80 @@ export default class FoodEntry extends Component {
       brand: clickedIngredient[0].brand,
       category: clickedIngredient[0].category
     })
-
   }
 
-  handleCustomIngredient = () => {
+  // handleCustomIngredient = () => {
+  //   this.setState({
+  //     showCustomIngredient: !this.state.showCustomIngredient,
+  //     // showCustomIngredient: true,
+  //   })
+  // }
+
+  handleShowRecipe = () => {
     this.setState({
-      showCustomIngredient: !this.state.showCustomIngredient,
-      // showCustomIngredient: true,
+      handleShowRecipe: !this.state.handleShowRecipe
     })
   }
 
-  render() {
+  handleShowSingle = () => {
+    this.setState({
+      handleShowSingle: !this.state.handleShowSingle
+    })
+  }
+
+  handleChange = event => {
+    const name = event.target.name;
+    const value = event.target.value;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  handleSingleSubmit = event => {
+    event.preventDefault();
     
+    // current Date as object
+    
+    const payload = this.state;
+    console.log(payload);
+    console.log(this.state.date)
+    
+    axios.post(`/api/ingredients/user/${this.props.user._id}/day/${this.state.date}`, payload)
+      .then(() => {
+        // set the form to it's initial state (empty input fields)
+        this.setState({
+          date: '',
+          startTime: '',
+          servingAmount: '',
+          servingSize: '',
+          name : '',
+          brand: '',
+          category: '',
+          portion: '',
+          eatenPortion: '',
+          ingredientCount: ++this.state.ingredientCount
+        })
+        // update the parent components state (in Projects) by calling getData()
+        // this.props.getData();
+      })
+      .catch(err => console.log(err))
+  }
+
+  render() {
     if (!this.state.days) return <h1>Loading...</h1>
     console.log('this is the user in foodentry', this.state.user)
     return (
       <div>
       {/* Top Navbar */}
-        <TopNav /> 
+        <TopBar title="Foods" icon="Foods" /> 
 
       {/* Two buttons for single ingredient and recipe */}
-        <button className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
+        <button onClick={()=>this.handleShowSingle()} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
         style={{"marginRight": "5px"}}>Single Ingredient</button>
-        <button className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
+        <button onClick={()=>this.handleShowRecipe()} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
         style={{"marginLeft": "5px"}}>Recipe</button>
-      
-      {/* Search bar */}
+
+        {/* Search bar */}
         <form>
           <input 
             type="search"
@@ -96,9 +147,8 @@ export default class FoodEntry extends Component {
           {
             this.state.ingredients.map(ingredient => {
               return (
-                
-                <li onClick={this.handleClick} key={ingredient._id} data-key={ingredient._id} className="ph3 pv2 bb b--light-silver f6 db">
-                  {ingredient.name}, {ingredient.brand} <button>+</button>
+                <li className="ph3 pv2 bb b--light-silver f6 db">
+                  {ingredient.name}, {ingredient.brand} <button onClick={this.handleClick} key={ingredient._id} data-key={ingredient._id}>+</button>
                   {/* <Icons icon="AddButton-database"/> */}
                 </li>
               )
@@ -106,27 +156,17 @@ export default class FoodEntry extends Component {
           }
           </ul>
         </div>
-        
-        {/* clickable button for "Didn't find your ingredient?" should show a form*/}
-        
-        <div onClick={this.handleCustomIngredient} className="link blue hover-silver dib mh3 tc" style={{
+
+      {/* need help */}
+      {
+        this.state.handleShowRecipe && <AddRep {...this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/> ||
+        this.state.handleShowSingle && <AddIgt {...this.state} handleChange={this.handleChange} handleSingleSubmit={this.handleSingleSubmit}/>
+      }
+          <Link className="link blue hover-silver dib mh3 tc" style={{
             "display": "flex", "flexDirection":"row", "justifyContent": "center", "alignItems":"center"}}>
-          <Icons icon="AddButton"/>
-          <span className="f6 db" style={{"marginLeft": "10px"}}>Didn't find your ingredient? </span>
-        </div>
-
-          <div>
-          {
-          this.state.showCustomIngredient &&
-           
-              <div>
-              <h3 className="f6 db">Custom Ingredient:</h3>
-
-              <AddIngredient user={this.state.user} {...this.state} handleClick={this.handleClick}/>
-          </div>
-          }
-          </div>
-
+          <Icons icon="FoodsDetails"/>
+          <span className="f6 db" style={{"marginLeft": "10px"}}>{this.state.ingredientCount} ingredients added</span>
+          </Link>
         {/* Bottom navbar */}
         <BottomNavbar />
       </div>
