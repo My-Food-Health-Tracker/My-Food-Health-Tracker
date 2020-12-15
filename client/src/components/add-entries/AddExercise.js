@@ -8,16 +8,15 @@ export default class AddExercise extends Component {
   state={
     startDate: this.props.startDate,//this should be the present day in the string format: "yyyy-mm-dd"
     startTime: this.props.startTime,//this should bte the present time in the string format:"hh:mm"
-    description:this.props.description,
+    name:this.props.name,
     intensityLevel:this.props.intensityLevel,
     duration:this.props.duration,
-    saveToFrequent:false
+    // saveToFrequent:false
   }
 
   handleChange=event=>{
+
     const { name, value }= event.target;
-    // const name=event.target.name;
-    // const value=event.target.value;
 
     this.setState({
     [name]:value
@@ -35,9 +34,9 @@ export default class AddExercise extends Component {
       .then(res=>console.log('the exercise was added to the day',res))
       .catch(err=>console.log('the exercise was not added to the day',err))
 
-    if(this.state.saveToFrequent){
-      //add logic to save to frequent entries
-    }
+    // if(this.state.saveToFrequent){
+    //   //add logic to save to frequent entries
+    // }
 
   }
 
@@ -52,7 +51,7 @@ export default class AddExercise extends Component {
 
   render() {
 
-    const descriptionOptions=['Choose an option','Aerobics','Baseball','Boxing','Climbing','Cycling','Dancing','Diving','Football',
+    const nameOptions=['Choose an option','Aerobics','Baseball','Boxing','Climbing','Cycling','Dancing','Diving','Football',
                                 'Golf','Hiking','Hockey','Martial Arts','Rowing','Rugby','Running','Skiing','Softball',
                                 'Swimming', 'Tennis','Volleyball','Walking','Weights','Yoga','Other'];
 
@@ -70,9 +69,9 @@ export default class AddExercise extends Component {
             <label htmlFor="start-time" className="f6 mt3">Time:</label>
             <input onChange={this.handleChange} value={this.state.startTime} type="time" id="start-date" name="startTime" className="mb2"/>
 
-            <label htmlFor="description" className="f6 mt3">Description:</label>
-            <select name="description" id="description" className="f6 mt1" >
-            {descriptionOptions.map(option=>{
+            <label htmlFor="name" className="f6 mt3">Name:</label>
+            <select name="name" id="name" onChange={this.handleChange} className="f6 mt1" >
+            {nameOptions.map(option=>{
               return(
                 <option value={option} className="f6">{option}</option>
               )
@@ -87,10 +86,10 @@ export default class AddExercise extends Component {
               <input onChange={this.handleChange} value={this.state.duration} type="number" id="duration" name="duration" min="0" max="24" className="mb2 w3"/><span> hrs</span>
             </div>
 
-            <div className="f6 mt2">
+            {/* <div className="f6 mt2">
               <input onChange={this.handleChange} value={this.state.saveToFrequent} type="checkbox" id="saveToFrequent" name="saveToFrequent" className="mb2"/>
               <label htmlFor="saveToFrequent" className="f6 mt3"> Save to frequent entries</label>
-            </div>
+            </div> */}
 
             <button type="submit" className="f6 w4 dim ph3 pv2 mt3 dib white bg-dark-blue br-pill b--dark-blue">Save</button>
 

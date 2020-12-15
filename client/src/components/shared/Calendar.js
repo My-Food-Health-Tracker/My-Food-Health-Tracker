@@ -8,10 +8,11 @@ export default class Calendar extends Component {
   handleChange = (event) => {
 
     console.log(event.target.value)
+    this.props.setDate(event.target.value)
     this.setState({
       day: event.target.value
     })
-    this.props.setDate(event.target.value)
+    
   }
 
   // handleLeftClick = (event) => {
