@@ -5,7 +5,7 @@ import axios from 'axios';
 export default class AddDay extends Component {
 
   state = {
-    date: '',
+   
     foods: [],
     drinks: [],
     supplements: [],
@@ -45,29 +45,20 @@ export default class AddDay extends Component {
   }
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <Form.Group>
-          <Form.Label htmlFor='title'>Date: </Form.Label>
-          <Form.Control
-            type='text'
-            id='date'
-            name='date'
-            value={this.state.date}
-            onChange={this.handleChange}
-          />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label htmlFor='energy'>Energy: </Form.Label>
-          <Form.Control
+      <form onSubmit={this.handleSubmit}>
+        
+        
+          <label htmlFor='energy'>Energy: </label>
+          <input
             type='text'
             id='energy'
             name='energy'
             value={this.state.energy}
             onChange={this.handleChange}
           />
-        </Form.Group>
-        <Button type='submit'>Add a Day</Button>
-      </Form>
+       
+        <button type='submit'>Add a Day</button>
+      </form>
     )
   }
 }

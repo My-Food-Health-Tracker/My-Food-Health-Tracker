@@ -2,8 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const daySchema = new Schema({
-  date: String,
-    
+  date: {
+    type: String
+    //default: (new Date()).toISOString().split('T')[0]
+  },
+
   owner: { type: Schema.Types.ObjectId, ref: 'User' },
 
   foods: [{
@@ -50,14 +53,14 @@ const daySchema = new Schema({
   
   exercises: [{
     name: String,
-    startTime: String,
-    duration: Number, // minites or hours
+    startTime: Date, // need to check it 
+    duration: Number, // minutes or hours
     intensity: Number
   }],
 
   sleep: [{
-    starTime: String,
-    duration: Number, // minites or hours
+    starTime: Date, // need to check it 
+    duration: Number, // minutes or hours
     notes: String
   }],
   
@@ -71,16 +74,17 @@ const daySchema = new Schema({
   
   energy: {
     startTime: String,
-    energyLevel: Number
+    energyLevel:Number
   }
 },
 
 {
   timestamps: {
     createdAt: "created_at",
-    updatedAt: "updated_at",
+    updatedAt: "updated_at"
   },
 }
+
 );
 
 

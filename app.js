@@ -112,4 +112,16 @@ app.use('/api/days', days)
 const ingredients = require('./routes/ingredients');
 app.use('/api/ingredients', ingredients)
 
+const energy = require('./routes/energy');
+app.use('/api/energy', energy)
+
+const exercise = require('./routes/exercise');
+app.use('/api/exercise', exercise)
+
+const sleep = require('./routes/sleep');
+app.use('/api/sleep', sleep)
+
+const symptoms = require('./routes/symptoms');
+app.use('/api/symptoms', symptoms)
+
 module.exports = app;

@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
     })
 });
 
-// get a specfic Ingredient
+// Xiaomei: for add a ingredient
 // to check if id is a valid mongo object id: mongoose.Types.ObjectId.isValid(_id)
 router.get('/:id', (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
