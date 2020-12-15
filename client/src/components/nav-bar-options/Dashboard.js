@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Calendar from '../shared/Calendar'
 import axios from 'axios';
-import BottomNavBar from '../shared/BottomNavBar'
+import BottomNavbar from '../shared/BottomNavbar'
 
 
 export default class Dashboard extends Component {
@@ -74,7 +74,7 @@ export default class Dashboard extends Component {
           </article>         
         </section>
         </div>
-        <BottomNavBar />
+        <BottomNavbar />
       </div>
     )
   }

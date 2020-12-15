@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import Icons from './shared/Icons'
-export default function BottomNavBar() {
+export default function BottomNavbar() {
   return (
       <nav className='ba blue pv2 w-100 fixed bottom-0'>
         <Link to='/initial-diary' className="link blue hover-silver dib mh3 tc">

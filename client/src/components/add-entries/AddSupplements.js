@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import TopBar from '../shared/TopBar';
-import BottomNavBar from '../BottomNavbar';
+import BottomNavbar from '../BottomNavbar';
 import Icons from '../shared/Icons';
 import { Link } from 'react-router-dom';
 
@@ -246,7 +246,7 @@ export default class AddSupplements extends Component {
        
 
         {/* Bottom navbar */}
-        <BottomNavBar />
+        <BottomNavbar />
       </div>
     )
   }

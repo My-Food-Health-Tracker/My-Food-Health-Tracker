@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import BottomNavBar from '../shared/BottomNavBar'
+import BottomNavbar from '../shared/BottomNavbar'
 import EntryList from '../shared/EntryList'
 
 export default class AddItem extends Component {
   render() {
-    const eventArr=['Drinks','Foods', 'Supplements', 'Medications', 'Sleep','Exercise']
+    const eventArr=['Drinks','Foods', 'Sleep','Exercise']
     const outcomeArr=['Symptoms','Energy']
 
     return (
@@ -14,7 +14,7 @@ export default class AddItem extends Component {
           <EntryList title="Events" entries={eventArr}/>
           <EntryList title="Outcomes" entries={outcomeArr}/>
         </div>
-        <BottomNavBar/>
+        <BottomNavbar/>
       </div>
     )
   }
