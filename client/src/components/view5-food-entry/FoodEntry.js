@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import TopNav from './TopNav';
-// import AddIngredient from './AddIngredient';
+import AddIngredient from './AddIngredient';
 import BottomNavBar from '../BottomNavbar';
 import Icons from '../Icons';
 import { Link } from 'react-router-dom';
@@ -11,12 +11,13 @@ export default class FoodEntry extends Component {
     // this is the loggedin user from App.js
     user: this.props.user,
     days: [],
-    showIngredients: false,
     ingredients: [],
     name: '',
     brand: '',
     category: '',
-    selectedIngredient: false
+    selectedIngredient: false,
+    showCustomIngredient: false,
+    showExistIngredient: false,
   }
 
   // show all the ingredients in database
@@ -55,17 +56,29 @@ export default class FoodEntry extends Component {
 
   }
 
+  handleCustomIngredient = () => {
+    this.setState({
+      showCustomIngredient: !this.state.showCustomIngredient,
+      // showCustomIngredient: true,
+    })
+  }
+
   render() {
     
     if (!this.state.days) return <h1>Loading...</h1>
     console.log('this is the user in foodentry', this.state.user)
     return (
       <div>
+      {/* Top Navbar */}
         <TopNav /> 
-        {/* <TimeForm /> */}
-        <button className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" style={{"marginRight": "5px"}}>Single Ingredient</button>
-        <button className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" style={{"marginLeft": "5px"}}>Recipe</button>
 
+      {/* Two buttons for single ingredient and recipe */}
+        <button className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
+        style={{"marginRight": "5px"}}>Single Ingredient</button>
+        <button className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
+        style={{"marginLeft": "5px"}}>Recipe</button>
+      
+      {/* Search bar */}
         <form>
           <input 
             type="search"
@@ -77,14 +90,15 @@ export default class FoodEntry extends Component {
           />
         </form>
 
+        {/* show the ingredients in database */}
         <div classname="f4 bold center mw5" >
           <ul className="list pl0 ml0 center mw5 ba b--light-silver br3" style={{"height":"200px", "width": "60%", "overflow": "hidden", "overflowY": "scroll"}} >
           {
             this.state.ingredients.map(ingredient => {
               return (
                 
-                <li onClick={this.handleClick} key={ingredient._id} data-key={ingredient._id} className="ph3 pv2 bb b--light-silver">
-                  {ingredient.name}, {ingredient.brand} 
+                <li onClick={this.handleClick} key={ingredient._id} data-key={ingredient._id} className="ph3 pv2 bb b--light-silver f6 db">
+                  {ingredient.name}, {ingredient.brand} <button>+</button>
                   {/* <Icons icon="AddButton-database"/> */}
                 </li>
               )
@@ -92,49 +106,28 @@ export default class FoodEntry extends Component {
           }
           </ul>
         </div>
-          
-        <Link className="link blue hover-silver dib mh3 tc" style={{
-            "display": "flex", "flexDirection":"row", "justifyContent": "center", "alignItems":"center"}}>
-          <Icons icon="FoodsDetails"/>
-          <span class="f6 db" style={{"marginLeft": "10px"}}>0 ingredients added</span>
-          </Link>
-
-        <Link className="link blue hover-silver dib mh3 tc" style={{
+        
+        {/* clickable button for "Didn't find your ingredient?" should show a form*/}
+        
+        <div onClick={this.handleCustomIngredient} className="link blue hover-silver dib mh3 tc" style={{
             "display": "flex", "flexDirection":"row", "justifyContent": "center", "alignItems":"center"}}>
           <Icons icon="AddButton"/>
-          <span class="f6 db" style={{"marginLeft": "10px"}}>Didn't find your ingredient? </span>
-        </Link>
-        
-        <h3>Details:</h3>
-        <div>
-          <label htmlFor='name'>Name: </label>
-              <input
-                type='text'
-                id='name'
-                name='name'
-                value={this.state.name}
-                onChange={this.handleChange}
-              />
-          
-              <label htmlFor='brand'>Brand: </label>
-              <input
-                type='text'
-                id='brand'
-                name='brand'
-                value={this.state.brand}
-                onChange={this.handleChange}
-              />
-
-            <label htmlFor='category'>Category: </label>
-              <input
-                type='text'
-                id='category'
-                name='category'
-                value={this.state.category}
-                onChange={this.handleChange}
-              /> 
+          <span className="f6 db" style={{"marginLeft": "10px"}}>Didn't find your ingredient? </span>
         </div>
-        {/* <AddIngredient user={this.state.user}/> */}
+
+          <div>
+          {
+          this.state.showCustomIngredient &&
+           
+              <div>
+              <h3 className="f6 db">Custom Ingredient:</h3>
+
+              <AddIngredient user={this.state.user} {...this.state} handleClick={this.handleClick}/>
+          </div>
+          }
+          </div>
+
+        {/* Bottom navbar */}
         <BottomNavBar />
       </div>
     )
