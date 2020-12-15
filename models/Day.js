@@ -55,21 +55,20 @@ const daySchema = new Schema({
   
   exercises: [{
     name: String,
-    startTime: Date, // need to check it 
+    startTime: String, // need to check it 
     duration: Number, // minutes or hours
-    intensity: Number
+    intensityLevel: Number
   }],
 
   sleep: [{
-    starTime: Date, // need to check it 
+    startTime: String, // need to check it 
     duration: Number, // minutes or hours
     notes: String
   }],
   
   symptoms: [{
     name: String,
-    startTime: Date,
-    duration: Number,
+    startTime: String,
     intensity: Number,
     notes: String
   }],
