@@ -6,20 +6,21 @@ const Day = require('../models/Day');
 
 //add exercise to a day (create day if that day doesn't exists)
 router.post('/user/:id/day/:date',(req,res,next)=>{
+
   Day.findOne({$and:[{owner: req.params.id},{date: req.params.date}]})
     .then(day=>{
       const newExercise={
         startTime:req.body.startTime,
-        description:req.body.description,
+        name:req.body.name,
         intensityLevel:req.body.intensityLevel,
         duration:req.body.duration
       };
       if(day!==null){
-        Day.findByIdAndUpdate(day._id,{exercise:newExercise},{new:true})
+        Day.findByIdAndUpdate(day._id, {$push:{exercises:newExercise}},{new:true})
           .then(updatedDay=>{
             console.log('day updated with:',{
               startTime:req.body.startTime,
-              description:req.body.description,
+              name:req.body.name,
               intensityLevel:req.body.intensityLevel,
               duration:req.body.duration});
             res.status(204).json(updatedDay);
@@ -44,7 +45,7 @@ router.post('/user/:id/day/:date',(req,res,next)=>{
         }
         Day.create(newDay)
           .then(dbDay=>{
-            console.log('day created:',newDay)
+            console.log('day created:',dbDay)
             res.status(201).json(dbDay)
           })
           .catch(err=>{
@@ -58,18 +59,21 @@ router.post('/user/:id/day/:date',(req,res,next)=>{
     })
 })
 
-//delete energy level to a day
+//delete exercise from a day
 router.delete('/user/:id/day/:date',(req,res,next)=>{
+
   Day.findOne({$and:[{owner: req.params.id},{date: req.params.date}]})
     .then(day=>{
-
-      console.log(req.data)
-      const deleteIndex=day.exercises.indexOf(req.data);
-      const newExerciseArr=day.exercises.splice(deleteIndex,1);
       
-      Day.findByIdAndUpdate(day._id,{exercise:newExerciseArr},{new:true})
+      Day.findByIdAndUpdate(day._id,{$pull:
+        {exercises:
+          { 
+            name: req.body.name, 
+            startTime: req.body.startTime,
+            intensityLevel:req.body.intensityLevel,
+            duration: req.body.duration
+          }}},{new:true})
         .then(updatedDay=>{
-          console.log(req.params, updatedDay);
           res.status(204).json(updatedDay);
         })
         .catch(err=>{
