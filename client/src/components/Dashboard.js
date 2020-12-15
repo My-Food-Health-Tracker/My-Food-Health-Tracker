@@ -48,7 +48,7 @@ export default class Dashboard extends Component {
           <Calendar setDate={this.setDate}/>
         <div>
           {!this.state.data ? (<p>No entries today</p>) : (<p>There are some entries today</p>)}
-          {/* {!this.state.data.drinks ? (<p> Register a drink</p>) : (<p>Some drinks</p>)} */}
+          {/* {this.state.data.drinks == null ? (<p> Register a drink</p>) : (<p>Some drinks</p>)} */}
           <h1 className="fw4 blue mt0 mb0">Daily entries</h1>
           <section className="ph4 ph4-ns pv3">
           <article className="mw6 center br3 ba b--light-blue bg-white">
