@@ -5,7 +5,10 @@ const userSchema = new Schema({
   username: String,
   email: String,
   password: String,
-  days: [{ type: Schema.Types.ObjectId, ref: 'Day', default:null}],
+  days: [{ type: Schema.Types.ObjectId, ref: 'Day' }],
+  googleID: String,
+  // days: [{ type: Schema.Types.ObjectId, ref: 'Day', default:null}],
+  // need to check with Hortencia
 },
 
 {
