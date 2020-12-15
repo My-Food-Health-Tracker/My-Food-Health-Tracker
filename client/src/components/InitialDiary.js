@@ -1,25 +1,22 @@
-import React, { Component } from 'react'
-import {logout} from '../services/auth'
-import {Link} from 'react-router-dom'
-import AddDays from './testviews/AddDays'
+import React from 'react'
+import { logout } from '../services/auth';
+import { Link } from 'react-router-dom';
 
-
-
-export default class InitialDiary extends Component {
-
-  handleLogOut=()=>{
-    logout().then(()=>{
-      this.props.user(null)
-    })
-  }
-
-  render() {
-    return (
-      <div>
-        diary view
-        <Link to="/" onClick={this.handleLogOut}>LogOut</Link>
-        <Link to="/add-a-day" component={AddDays} ></Link>
-      </div>
-    )
-  }
+const handleLogout = props => {
+  console.log(props);
+  logout().then(() => {
+    props.setUser(null);
+  })
 }
+
+export default function InitialDiary(props) {
+  
+  return (
+    <div>
+      <h1>Initial Diary Page</h1>
+      <Link to='/' onClick={() => handleLogout(props)}>Logout</Link>
+      <Link to='/food-entry'>Add a Food</Link>
+    </div>
+  )
+}
+
