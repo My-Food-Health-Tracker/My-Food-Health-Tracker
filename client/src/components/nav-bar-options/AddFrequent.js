@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import BottomNavBar from './BottomNavBar'
-import EntryList from './EntryList'
-import TopBar from './TopBar'
+import BottomNavBar from '../shared/BottomNavBar'
+import EntryList from '../shared/EntryList'
+import TopBar from '../shared/TopBar'
 
 export default class AddFrequent extends Component {
   render() {
