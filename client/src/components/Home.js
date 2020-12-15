@@ -17,8 +17,6 @@ export default function Home() {
         </h1>
         <Link className="f6 link dim br-pill ph3 pv2 mb2 dib white bg-lightest-blue" to="/signup">Signup</Link>
         <Link className="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-pink" to="/login">Login</Link>
-
-         
       </div>
       
     </div>

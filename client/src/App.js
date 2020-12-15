@@ -2,11 +2,17 @@ import './App.css';
 import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
 
+//test views
+import TestView from './components/testviews/TestView';
+import TestHistorical from './components/testviews/TestHistorical';
+import TestInput from './components/testviews/TestInput';
 
 //final views component
-import Home from './components/Home';
+import Navbar from './components/Navbar';
 import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
+import Home from './components/Home';
+import Dashboard from './components/nav-bar-options/Dashboard'
 import InitialDiary from './components/InitialDiary'
 
 //Hortencia:components for the BottomNavBar Links
@@ -40,11 +46,31 @@ class App extends React.Component {
 
   render() {
 
-    console.log(this.state.user)
+    // console.log(this.state.user)
     return (
       <div className="App">
-       
+         {/* <Navbar user={this.state.user} setUser={this.setUser} /> */}
+          {/* <Route exact path='/usertest' render={props => <TestView {...props} /> }
+          ></Route>
+          <Route
+          exact
+          path='/historicaltest'
+          render={props => <TestHistorical {...props} /> }
+          ></Route>
+          <Route
+          exact
+          path='/testinput'
+          render={props => <TestInput {...props} /> }
+          ></Route> */}
 
+        <Route
+          exact path='/adddays'
+          render={props => <AddDays setUser={this.setUser} {...props} />}
+        />
+          <Route
+          exact path='/dashboard'
+          render={props => <Dashboard setUser={this.setUser} user={this.state.user}{...props} />}
+        />
 
       <Route exact path='/' component={Home}/>
 
