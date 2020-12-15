@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import BottomNavBar from '../shared/BottomNavBar'
+import BottomNavbar from '../shared/BottomNavbar'
 import EntryList from '../shared/EntryList'
 import TopBar from '../shared/TopBar'
 
@@ -13,7 +13,7 @@ export default class AddFrequent extends Component {
         <div className='flex justify-center'>
           <EntryList title="" entries={frequentArr}/>
         </div>
-        <BottomNavBar/>
+        <BottomNavbar/>
       </div>
     )
   }
