@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { login } from '../../services/auth';
 import { GoogleLogin } from 'react-google-login';
+import Icons from '../Icons'
 
 export default class Login extends Component {
   state = {
@@ -48,9 +49,18 @@ export default class Login extends Component {
 
   render() {
     return (
-      <>
-        <h2>Login</h2>
+      <div style={{"height": "700px","display": "flex", "flexDirection": "column", "justifyContent": 'center', "alignItems": "center"}}>
+        <nav className='ba blue pv2 w-100 fixed top-2' style={{"marginBottom": "10px"}}>
+          <div className="link blue hover-silver dib mh3 tc" style={{
+            "display": "flex", "flexDirection":"row", "justifyContent": "center", "alignItems":"center"}}>
+            
+            <Icons icon='health-icon'/>
+            <span class="f6 db">My Health Diary</span>
+          </div>
+      </nav>
+        <h2 className="f10 dark-blue">Login</h2>
         <form onSubmit={this.handleSubmit}>
+        <div>
             <label htmlFor='email'>Email: </label>
             <input
               type='text'
@@ -59,8 +69,8 @@ export default class Login extends Component {
               onChange={this.handleChange}
               id='email'
             />
-          
-         
+          </div>
+         <div>
             <label htmlFor='password'>Password: </label>
             <input
               type='password'
@@ -69,8 +79,11 @@ export default class Login extends Component {
               onChange={this.handleChange}
               id='password'
             />
-          
-          <button className="f6 link dim br-pill ph3 pv2 mb2 dib white bg-light-purple" type='submit'>Login</button>
+          </div>
+
+          <div className="w-100 pa3 mr2">
+          <button className="f6 link dim br-pill ba bw1 ph3 pv2 mb2 dib dark-blue" type='submit'>Login</button>
+          </div>
         </form>
 
         <div>
@@ -82,7 +95,7 @@ export default class Login extends Component {
             cookiePolicy={'single_host_origin'}
           />
         </div>
-      </>
+      </div>
     );
   }
 }

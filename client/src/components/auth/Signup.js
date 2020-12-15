@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { signup } from '../../services/auth';
 import {GoogleLogin} from 'react-google-login'
 import axios from 'axios';
+import Icons from '../Icons'
 
 export default class Signup extends Component {
 
@@ -54,8 +55,16 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <>
-        <h2>Signup</h2>
+      <div style={{"height": "700px","display": "flex", "flexDirection": "column", "justifyContent": 'center', "alignItems": "center"}}>
+      <nav className='ba blue pv2 w-100 fixed top-2' style={{"marginBottom": "10px"}}>
+          <div className="link blue hover-silver dib mh3 tc" style={{
+            "display": "flex", "flexDirection":"row", "justifyContent": "center", "alignItems":"center"}}>
+            
+            <Icons icon='health-icon'/>
+            <span className="f6 db">My Health Diary</span>
+          </div>
+      </nav>
+        <h2 className="f10 dark-blue">Signup</h2>
         <form onSubmit={this.handleSubmit}>
             <div className="">
             <label htmlFor='email'>Email: </label>
@@ -80,7 +89,7 @@ export default class Signup extends Component {
           </div>
           
           <div className="w-100 pa3 mr2">
-          <button className="f6 link dim br-pill ph3 pv2 mb2 dib white bg-black" type='submit'>Signup</button>
+          <button className="f6 link dim br-pill ba bw1 ph3 pv2 mb2 dib dark-blue" type='submit'>Signup</button>
           </div>
         </form>
 
@@ -93,7 +102,7 @@ export default class Signup extends Component {
             cookiePolicy={'single_host_origin'}
           />
         </div>
-      </>
+      </div>
     )
   }
 }
