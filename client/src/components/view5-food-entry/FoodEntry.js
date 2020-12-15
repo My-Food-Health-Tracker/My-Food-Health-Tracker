@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import TopNav from './TopNav';
-import AddIngredient from './AddIngredient';
+// import AddIngredient from './AddIngredient';
 import BottomNavBar from '../BottomNavbar';
 import Icons from '../Icons';
 import { Link } from 'react-router-dom';
@@ -12,7 +12,11 @@ export default class FoodEntry extends Component {
     user: this.props.user,
     days: [],
     showIngredients: false,
-    ingredients: []
+    ingredients: [],
+    name: '',
+    brand: '',
+    category: '',
+    selectedIngredient: false
   }
 
   // show all the ingredients in database
@@ -33,6 +37,22 @@ export default class FoodEntry extends Component {
 
   componentDidMount = () => {
     this.getAllIngredients()
+  }
+
+  handleClick = event => {
+    const key = event.target.getAttribute('data-key')
+    console.log(key);
+    console.log('this.state.ingredients is:', this.state.ingredients)
+    const clickedIngredient = this.state.ingredients.filter(ingredient => {
+      return ingredient._id === key;
+    });
+    console.log(clickedIngredient[0])
+    this.setState ({
+      name: clickedIngredient[0].name,
+      brand: clickedIngredient[0].brand,
+      category: clickedIngredient[0].category
+    })
+
   }
 
   render() {
@@ -63,8 +83,8 @@ export default class FoodEntry extends Component {
             this.state.ingredients.map(ingredient => {
               return (
                 
-                <li key={ingredient._id} className="ph3 pv2 bb b--light-silver">
-                  {ingredient.name}, {ingredient.brand} <button>+</button>
+                <li onClick={this.handleClick} key={ingredient._id} data-key={ingredient._id} className="ph3 pv2 bb b--light-silver">
+                  {ingredient.name}, {ingredient.brand} 
                   {/* <Icons icon="AddButton-database"/> */}
                 </li>
               )
@@ -85,8 +105,36 @@ export default class FoodEntry extends Component {
           <span class="f6 db" style={{"marginLeft": "10px"}}>Didn't find your ingredient? </span>
         </Link>
         
-        <h3>Ingredient:</h3>
-        <AddIngredient user={this.state.user}/>
+        <h3>Details:</h3>
+        <div>
+          <label htmlFor='name'>Name: </label>
+              <input
+                type='text'
+                id='name'
+                name='name'
+                value={this.state.name}
+                onChange={this.handleChange}
+              />
+          
+              <label htmlFor='brand'>Brand: </label>
+              <input
+                type='text'
+                id='brand'
+                name='brand'
+                value={this.state.brand}
+                onChange={this.handleChange}
+              />
+
+            <label htmlFor='category'>Category: </label>
+              <input
+                type='text'
+                id='category'
+                name='category'
+                value={this.state.category}
+                onChange={this.handleChange}
+              /> 
+        </div>
+        {/* <AddIngredient user={this.state.user}/> */}
         <BottomNavBar />
       </div>
     )
