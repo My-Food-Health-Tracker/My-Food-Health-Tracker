@@ -29,6 +29,7 @@ import AddEnergy from './components/add-entries/AddEnergy'
 import AddExercise from './components/add-entries/AddExercise'
 import AddSleep from './components/add-entries/AddSleep'
 import AddSymptoms from './components/add-entries/AddSymptoms'
+import AddDrinks from './components/add-entries/AddDrinks'
 
 // import AddDays from './components/testviews/AddDays'
 
@@ -131,6 +132,12 @@ class App extends React.Component {
       />
       <Route exact path='/add/Symptoms' 
       render={() => <AddSymptoms user={this.state.user}/>}
+      />
+      <Route exact path='/add/Foods' 
+      render={() => <FoodEntry user={this.state.user}/>}
+      />
+      <Route exact path='/add/Drinks' 
+      render={() => <AddDrinks user={this.state.user}/>}
       />
       </div>
 )
