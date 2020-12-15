@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Calendar from './Calendar.js'
+import Calendar from '../shared/Calendar'
 import axios from 'axios';
-import BottomNavBar from './BottomNavBar'
+import BottomNavBar from '../shared/BottomNavBar'
 
 
 export default class Dashboard extends Component {
