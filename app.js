@@ -56,6 +56,8 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 // Middleware Setup
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -106,6 +108,9 @@ app.use('/api/users', users)
 
 const days = require('./routes/days');
 app.use('/api/days', days)
+
+const ingredients = require('./routes/ingredients');
+app.use('/api/ingredients', ingredients)
 
 const energy = require('./routes/energy');
 app.use('/api/energy', energy)
