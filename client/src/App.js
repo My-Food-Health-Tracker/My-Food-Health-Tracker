@@ -30,7 +30,7 @@ import AddExercise from './components/add-entries/AddExercise'
 import AddSleep from './components/add-entries/AddSleep'
 import AddSymptoms from './components/add-entries/AddSymptoms'
 
-import AddDrinks from './components/add-entries/add-drinks/AddDrinks'
+import AddDrinks from './components/add-entries/AddDrinks'
 
 // import AddDays from './components/testviews/AddDays'
 
