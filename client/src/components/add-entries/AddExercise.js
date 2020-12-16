@@ -6,13 +6,13 @@ import axios from 'axios'
 export default class AddExercise extends Component {
 
   state={
-    startDate: this.props.startDate,//this should be the present day in the string format: "yyyy-mm-dd"
-    startTime: this.props.startTime,//this should bte the present time in the string format:"hh:mm"
-    name:this.props.name,
-    intensityLevel:this.props.intensityLevel,
-    duration:this.props.duration,
-    id:this.props.id,//normally undefined. Just defined when this component is used in the dashboard
-    editing:this.props.editing //true when this component is used in the dashboard
+    startDate: this.props.location.state?.day ||new Date().toISOString().split('T')[0],//this should be the present day in the string format: "yyyy-mm-dd"
+    startTime: this.props.location.state?.exercises.startTime,//this should bte the present time in the string format:"hh:mm"
+    name:this.props.location.state?.exercises.name,
+    intensityLevel:this.props.location.state?.exercises.intensityLevel,
+    duration:this.props.location.state?.exercises.duration,
+    id:this.props.location.state?.exercises._id,//normally undefined. Just defined when this component is used in the dashboard
+    editing:this.props.location.state?.editing //true when this component is used in the dashboard
     // saveToFrequent:false
   }
 
@@ -35,35 +35,43 @@ export default class AddExercise extends Component {
     axios.post(`/api/exercise/user/${this.props.user._id}/day/${this.state.startDate}`,exerciseEntry)
       .then(res=>{
         console.log(res);
-        // this.props.history.push("/dashboard")
+        this.props.history.push("/dashboard")
       })
       .catch(err=>console.log(err))
-
+    
+    console.log(exerciseEntry)
     // if(this.state.saveToFrequent){
     //   //add logic to save to frequent entries
     // }
 
   }
 
-  handleDelete=()=>{
+  handleDelete=event=>{
+
+    event.preventDefault();
 
     const exerciseToDelete=this.state;
 
     axios.delete(`/api/exercise/user/${this.props.user._id}/day/${this.state.startDate}`,{data:exerciseToDelete})
       .then(res=>{
         console.log(res);
-        // this.props.history.push("/dashboard")
+        this.props.history.push("/dashboard")
         })
       .catch(err=>console.log(err))
   }
 
 
-  handleEditing=()=>{
-    //
+  handleEditing=event=>{
+
+    event.preventDefault();
+    
     const updatedExercise=this.state;
 
     axios.put(`/api/exercise/user/${this.props.user._id}/day/${this.state.startDate}`,{data:[this.state.id,updatedExercise]})
-    .then(res=>console.log(res))
+    .then(res=>{
+      // console.log('handling editing');
+      this.props.history.push("/dashboard")
+      })
     .catch(err=>console.log(err))
   }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import Icons from '../shared/Icons'
 
 export default class Excercise extends Component {
   state = {
@@ -14,20 +15,24 @@ export default class Excercise extends Component {
 
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
-      <article className="mw6 center br3 ba b--light-blue bg-white mb2" style={{height: 'auto'}}>
+      <article className="m0" style={{height: 'auto'}}>
         {this.props.exercises.map(exercise => (
-          <div key={exercise._id}className="dt-ns dt--fixed-ns w-100">
-          <div className="pa1 pa3-ns dtc-ns v-mid">
-                  <h2 className="fw4 blue mt0 mb0">You've done:</h2> 
-                  <ul>
-                  {exercise.name} with intensity {exercise.intensityLevel}
-                  </ul>
-                  <span className="pa3 pa4-ns dtc-ns v-mid">
-                <Link to={{pathname: '/add/Exercise', state:{ exercises: exercise, editing: true, day:this.props.day}}} className="center no-underline f6 tc db w-20 pv3 bg-animate bg-blue hover-bg-dark-blue white br2" >Edit</Link>
-              </span>
+          <div key={exercise._id} className="flex justify-around items-center mw6 center br3 ba b--light-blue bg-white blue mb2">
+            <div className="flex justify-around items-center mv2">
+              <div className='ba br-100 pa2 items-center mv2 gray'>
+                <Icons icon="Exercise3"/>
               </div>
+              <div className="tl ml2 w4">
+                <p className="pv0 f4 b gray mb1 mt0">Exercise</p> 
+                <p className="f6 gray mv0">{exercise.name}</p>
+                <p className=" f6 gray mv0">Intensity: {exercise.intensityLevel}</p>
+              </div>
+            </div>
+                <Link to={{pathname: '/add/Exercise', state:{ exercises: exercise, editing: true, day:this.props.day}}} className="link blue hover-silver dib mh3 tc" >
+                  <Icons icon="Edit"/>
+                </Link>
           </div>
         ))}
       </article>

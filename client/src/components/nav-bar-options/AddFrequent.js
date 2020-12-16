@@ -10,7 +10,7 @@ export default class AddFrequent extends Component {
     return (
       <div className='flex flex-column justify-center items-center'>
         <TopBar className='ba pa3 w-100' title='Frequent Entries' icon='frequent'/>
-        <div className='flex justify-center'>
+        <div className='flex justify-center pv5'>
           <EntryList title="" entries={frequentArr}/>
         </div>
         <BottomNavbar/>

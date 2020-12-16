@@ -6,11 +6,11 @@ import axios from 'axios'
 export default class AddEnergy extends Component {
 
   state={
-    startDate: this.props.startDate,//this should be the present day in the string format: "yyyy-mm-dd"
-    startTime: this.props.startTime,//this should bte the present time in the string format:"hh:mm"
-    energyLevel:this.props.energyLevel,
+    startDate: this.props.location.state?.day ||new Date().toISOString().split('T')[0],//this should be the present day in the string format: "yyyy-mm-dd"
+    startTime: this.props.location.state?.energy.startTime,//this should bte the present time in the string format:"hh:mm"
+    energyLevel:this.props.location.state?.energy.name,
     // id:this.props.id,
-    editing:this.props.editing
+    editing:this.props.location.state?.editing
   }
 
   handleChange=event=>{
@@ -30,27 +30,39 @@ export default class AddEnergy extends Component {
     const energyEntry=this.state;
 
     axios.post(`/api/energy/user/${this.props.user._id}/day/${this.state.startDate}`,energyEntry)
-      .then(res=>console.log('the energy was added to the day',res))
-      .catch(err=>console.log('the energy was not added to the day',err))
+      .then(res=>{
+        console.log(res);
+        this.props.history.push("/dashboard")
+      })
+      .catch(err=>console.log(err))
 
   }
 
-  handleDelete=()=>{
+  handleDelete=event=>{
+
+    event.preventDefault();
 
     axios.delete(`/api/energy/user/${this.props.user._id}/day/${this.state.startDate}`)
-      .then(res=>console.log('the energy was deleted from the day',res))
-      .catch(err=>console.log('the energy was not deleted from the day',err))
+      .then(res=>{
+        console.log(res);
+        this.props.history.push("/dashboard")
+      })
+      .catch(err=>console.log(err))
   }
 
-  handleEditing=()=>{
-    //
+  handleEditing=event=>{
+
+    event.preventDefault();
+
     const updatedEnergy=this.state;
 
     axios.put(`/api/energy/user/${this.props.user._id}/day/${this.state.startDate}`,{data:updatedEnergy})
-    .then(res=>console.log(res))
+    .then(res=>{
+      console.log(res);
+      this.props.history.push("/dashboard")
+    })
     .catch(err=>console.log(err))
   }
-
 
   render() {
     return (
