@@ -1,13 +1,13 @@
-import axios from 'axios';
 import React, { Component } from 'react';
+import axios from 'axios';
 import TopBar from '../shared/TopBar';
 import BottomNavbar from '../shared/BottomNavbar';
 import Icons from '../shared/Icons';
 import { Link } from 'react-router-dom';
 
 export default class AddDrinks extends Component {
-
   state = {
+    // this is the loggedin user from App.js
     user: this.props.user,
     days: [],
     ingredients: [],
@@ -109,8 +109,8 @@ export default class AddDrinks extends Component {
       // </div>
       <div>
       {/* Top Navbar */}
-        <TopBar icon="Drinks" /> 
-​
+      <TopBar title='Drinks' icon='Drinks'/>
+
       {/* Two buttons for single ingredient and recipe */}
         <button className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
         style={{"marginRight": "5px"}}>Add a Drink</button>
@@ -126,7 +126,7 @@ export default class AddDrinks extends Component {
             // onChange={}
           />
         </form>
-​
+
         {/* show the drinks ingredients in database */}
         <div classname="f4 bold center mw5" >
           <ul className="list pl0 ml0 center mw5 ba b--light-silver br3" style={{"height":"200px", "width": "60%", "overflow": "hidden", "overflowY": "scroll"}} >
@@ -153,13 +153,13 @@ export default class AddDrinks extends Component {
         </div> */}
           <div>
           <h3 className="f6 db">Custom Your Drink:</h3>
-​
+
           <div>
        
         <form onSubmit={this.handleSubmit}>
-​
+
           <div className="date-time">
-​
+
             <label htmlFor="date">Date:</label>
             <input type="date" id="date"
                   name="date" 
@@ -167,14 +167,14 @@ export default class AddDrinks extends Component {
                   // min="2010-01-01" max="2030-01-01"
             />
             <label htmlFor="startTime">Time:</label>
-​
+
             <input type="time" id="startTime"
                 name="startTime" 
               onChange={this.handleChange}
                 // min="2010-01-01T00:00" max="2030-01-01T00:00"
             />
           </div>
-​
+
           {/* <div className="portion"> 
             <label htmlFor='portion'>Portion: </label>
                 <input
@@ -194,7 +194,7 @@ export default class AddDrinks extends Component {
                   onChange={this.handleChange}
                 />
           </div> */}
-​
+
           <div className="custom-ingredient"
           style={{"display": "flex", "flexDirection": "row", "justifyContent": "center", "alignItems": "center"}}>
           <div>
@@ -255,7 +255,7 @@ export default class AddDrinks extends Component {
         
         <button type='submit' className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Save</button>
       </form>
-​
+
       <Link className="link blue hover-silver dib mh3 tc" style={{
             "display": "flex", "flexDirection":"row", "justifyContent": "center", "alignItems":"center"}}>
           <Icons icon="FoodsDetails"/>
@@ -263,10 +263,12 @@ export default class AddDrinks extends Component {
           </Link>
       </div>
           </div>
+       
+          
+
         {/* Bottom navbar */}
         <BottomNavbar />
       </div>
     )
   }
 }
-

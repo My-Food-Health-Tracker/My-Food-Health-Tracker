@@ -16,7 +16,7 @@ export default function More(props) {
   
   return (
     <div>
-      <TopBar icon="More" />
+      <TopBar icon="more" />
       <Link to='/' onClick={() => handleLogout(props)}>Logout</Link>
       <BottomNavbar />
     </div>

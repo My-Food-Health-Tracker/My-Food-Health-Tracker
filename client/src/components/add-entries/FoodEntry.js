@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 import TopBar from '../shared/TopBar';
 import AddRep from './AddRep';
 import AddIgt from './AddIgt';
+import ShowIngredientsOfDay from './ShowIngredientsOfDay';
+import SearchField from './SearchField';
+import IngredientList from './IngredientList';
 
 export default class FoodEntry extends Component {
   state = {
@@ -14,6 +17,7 @@ export default class FoodEntry extends Component {
     days: [],
     ingredients: [],
     addedIngredientsFromRecipe: [],
+    ingredientsOfDay: [],
     date: '',
     startTime: '',
     name: '',
@@ -21,11 +25,11 @@ export default class FoodEntry extends Component {
     category: '', servingAmout: '', servingSize: '', portion: '', eatenPortion: '',
     selectedIngredient: false,
     handleShowSingle: true,
-    ingredientCount: 0
+    ingredientCount: 0,
+    query: '',
   }
 
   // show all the ingredients in database
-  
   getAllIngredients = () => {
     axios.get('/api/ingredients')
      .then(response => {
@@ -41,6 +45,22 @@ export default class FoodEntry extends Component {
 
   componentDidMount = () => {
     this.getAllIngredients()
+  }
+
+  setQuery = query => {
+    this.setState({
+      query: query
+    })
+  }
+
+  handleSearch = event => {
+    const filteredIngredients = this.state.ingredients.filter(ingredient => 
+      ingredient.name.toLowerCase().includes(event.target.value.toLowerCase())
+    );
+    this.setState({
+      query: event.target.value,
+      ingredients: filteredIngredients
+    })
   }
 
   handleClick = event => {
@@ -78,15 +98,16 @@ export default class FoodEntry extends Component {
     });
   };
 
+
+  handleSubmit = event => {
+    event.preventDefault();
+  }
+
   handleSingleSubmit = event => {
     event.preventDefault();
-    
-    // current Date as object
-    
     const payload = this.state;
     console.log(payload);
     console.log(this.state.date)
-    
     axios.post(`/api/ingredients/user/${this.props.user._id}/day/${this.state.date}`, payload)
       .then(() => {
         // set the form to it's initial state (empty input fields)
@@ -110,14 +131,10 @@ export default class FoodEntry extends Component {
 
   handleRecipeSubmit = event => {
     event.preventDefault();
-    
-    // current Date as object
-    
     const payload = this.state;
     console.log(payload);
     console.log(this.state.date)
-    
-    axios.post(`/api/ingredients/user/${this.props.user._id}/day/${this.state.date}`, payload)
+    axios.post(`/api/ingredients/recipe/user/${this.props.user._id}/day/${this.state.date}`, payload)
       .then(() => {
         // set the form to it's initial state (empty input fields)
         this.setState({
@@ -139,19 +156,20 @@ export default class FoodEntry extends Component {
   }
 
   addIngredient2Recipe = () => {
-    // this.setState({
-    //   addedIngredientsFromRecipe: this.state.addedIngredientsFromRecipe.push({
-    //     name: this.state.name,
-    //     brand: this.state.brand,
-    //     category: this.state.category,
-    //     startTime: this.state.startTime,
-    //     servingAmount: this.state.servingAmount,
-    //     servingSize: this.state.servingSize
-    //   })
-    // })
+    this.setState({
+      addedIngredientsFromRecipe: this.state.addedIngredientsFromRecipe.push({
+        name: this.state.name,
+        brand: this.state.brand,
+        category: this.state.category,
+        startTime: this.state.startTime,
+        servingAmount: this.state.servingAmount,
+        servingSize: this.state.servingSize
+      })
+    })
     console.log('this is the ingredients after addIngredients2Recipe', this.state.addedIngredientsFromRecipe)
   }
 
+  
   render() {
     if (!this.state.days) return <h1>Loading...</h1>
     // console.log('this is the user in foodentry', this.state.user)
@@ -175,37 +193,19 @@ export default class FoodEntry extends Component {
         style={{"marginLeft": "5px"}}>Recipe</button>
 
         {/* Search bar */}
-        <form>
-          <input 
-            type="search"
-            name="search"
-            placeholder="Search for..."
-            // value={}
-            // onClick={}
-            // onChange={}
-          />
-        </form>
+        <SearchField {...this.state} query={this.state.query} setQuery={this.setQuery} />
+        
 
         {/* show the ingredients in database */}
-        <div classname="f4 bold center mw5" >
-          <ul className="list pl0 ml0 center mw5 ba b--light-silver br3" style={{"height":"200px", "width": "60%", "overflow": "hidden", "overflowY": "scroll"}} >
-          {
-            this.state.ingredients.map(ingredient => {
-              return (
-                <li className="ph3 pv2 bb b--light-silver f6 db">
-                  {ingredient.name}, {ingredient.brand} <button onClick={this.handleClick} key={ingredient._id} data-key={ingredient._id}>+</button>
-                  {/* <Icons icon="AddButton-database"/> */}
-                </li>
-              )
-            })
-          }
-          </ul>
-        </div>
+        <IngredientList {...this.state} query={this.state.query} setQuery={this.setQuery} handleClick={this.handleClick}/>
+        
+        {/* show the ingredients */}
+        <div><ShowIngredientsOfDay {...this.state}/></div>
 
           <div>
             {inputComponent}
           </div>
-          <Link className="link blue hover-silver dib mh3 tc" style={{
+          <Link to='/ingredients-of-day' className="link blue hover-silver dib mh3 tc" style={{
             "display": "flex", "flexDirection":"row", "justifyContent": "center", "alignItems":"center"}}>
           <Icons icon="FoodsDetails"/>
           <span className="f6 db" style={{"marginLeft": "10px"}}>{this.state.ingredientCount} ingredients added</span>

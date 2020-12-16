@@ -120,7 +120,7 @@ class App extends React.Component {
       <Route exact path='/add-item' component={AddItem}/>
       <Route exact path='/analysis' render={(props) => <Analysis user={this.state.user} {...props}/>}/>
       <Route exact path='/add-frequent' component={AddFrequent}/>
-      <Route exact path='/more' component={More}/>
+      <Route exact path='/more' render={(props) => <More setUser={this.setUser} {...props}/>}/>
 
       {/* Routes to add entries */}
       <Route exact path='/add/Energy' 

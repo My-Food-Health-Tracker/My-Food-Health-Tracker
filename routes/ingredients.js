@@ -41,6 +41,18 @@ router.get('/:id', (req, res, next) => {
     })
 });
 
+
+router.get(`/user/:id/day/:date/ingredients`, (req, res) => {
+    Day.findOne({$and: [{owner: req.params.id}, {date: req.params.date}]})
+    .populate('ingredients') 
+    .then(day => {
+      res.status(200).json(day.ingredients)
+    }).catch(err => {
+      res.json(err);
+    })
+})
+
+
 // LoggedIn user want to create a food Ingredient
 router.post('/user/:id/day/:date', (req, res) => {
   const { date, startTime, name, brand, category, servingAmount, servingSize, portion, eatenPortion } = req.body;
@@ -198,6 +210,90 @@ console.log('this is req.params.id', req.params)
         })
         .then(dbIngredient => {
           res.status(201).json(dbIngredient);
+        })
+        .catch(err => {
+          res.json(err);
+        })
+    }
+  })
+})
+
+// add a recipe
+router.post('/recipe/user/:id/day/:date', (req, res) => {
+  const { date, startTime, name, brand, category, servingAmount, servingSize, portion, eatenPortion } = req.body;
+  // const owner = req.user._id;
+  // Check if the user already has a day
+  
+console.log('this is req.params.id', req.params)
+ Day.findOne({$and: [{owner: req.params.id}, {date: req.params.date}]})
+  .then (day => {
+    console.log('this is the day', day)
+    if(day !== null) {
+      Ingredient.create({
+        name,
+        brand,
+        category,
+        servingAmount,
+        servingSize,
+        owner: req.params.id
+      })
+      .then(dbIngredient => {
+        console.log('this is the dbingredient', dbIngredient)
+        Day.findByIdAndUpdate(day._id,
+          { $push: {"foods": 
+            {startTime,
+            name,
+            portion,
+            eatenPortion,
+            imgUrl: "",
+            ingredients: dbIngredient
+        }}}, {new: true}).then(dbIngredient => {
+          res.status(201).json(dbIngredient);
+          // res.redirect('/add/Foods')
+        })
+        .catch(err => {
+          res.json(err);
+        })
+      })
+    } else {
+      Ingredient.create({
+        name,
+        brand,
+        category,
+        servingAmount,
+        servingSize,
+        owner: req.params.id
+      })
+        .then((dbIngredient) => {
+          Day.create({
+            date: date,
+            owner: req.params.id,
+            foods: [{
+              startTime: startTime,
+              imgUrl: "",
+              name,
+              portion,
+              eatenPortion,
+                // ingredients are obejcts
+              ingredients: [dbIngredient]
+            }],
+            drinks:[],
+            supplements: [],
+            medications: [],
+            exercises: [],
+            sleep:[],
+            symptoms: [],
+            energy: ""
+          })
+          .then((dbDay) => {
+            User.findByIdAndUpdate(req.params.id, {
+              $push: { days: dbDay._id },
+            })
+          })
+        })
+        .then(dbIngredient => {
+          res.status(201).json(dbIngredient);
+          // res.redirect('/add/Foods')
         })
         .catch(err => {
           res.json(err);

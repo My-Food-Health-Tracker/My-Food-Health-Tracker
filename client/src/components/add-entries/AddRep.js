@@ -29,7 +29,7 @@ export default class AddIgt extends Component {
                           <input
                             type='text'
                             id='name'
-                            name='name' value={this.props.name}
+                            name='name' 
                             onChange={this.props.handleChange}
                           />
                         </div>
@@ -73,7 +73,7 @@ export default class AddIgt extends Component {
                           onChange={this.props.handleChange}
                         />
                   </div>
-
+                
                   {/* Single Ingredients form */}
                  <input
                     type='text'
@@ -99,7 +99,7 @@ export default class AddIgt extends Component {
                     value={this.props.servingSize}
                     onChange={this.props.handleChange}
                   /> 
-                <button onclick={this.props.addIngredient2Recipe} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green">Add another one</button>
+                <button onSubmit={this.props.addIngredient2Recipe} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green">Add a Ingredient</button>
                 <button type='submit' className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Save</button>
               </form>
         </div>

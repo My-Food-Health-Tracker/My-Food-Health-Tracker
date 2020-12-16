@@ -238,7 +238,7 @@ export default class AddSupplements extends Component {
 
       <Link className="link blue hover-silver dib mh3 tc" style={{
             "display": "flex", "flexDirection":"row", "justifyContent": "center", "alignItems":"center"}}>
-          <Icons icon="Supplements"/>
+          {/* <Icons icon="Supplements"/> */}
           <span className="f6 db" style={{"marginLeft": "10px"}}>{this.state.ingredientCount} drinks added</span>
           </Link>
       </div>
