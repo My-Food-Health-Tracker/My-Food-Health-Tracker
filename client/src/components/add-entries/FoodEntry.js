@@ -29,7 +29,7 @@ export default class FoodEntry extends Component {
     query: '',
   }
 
-  // show all the ingredients in database
+  // Get initial ingredients data
   getAllIngredients = () => {
     axios.get('/api/ingredients')
      .then(response => {
@@ -42,17 +42,16 @@ export default class FoodEntry extends Component {
        console.log(err.response)
      })
   }
-
   componentDidMount = () => {
     this.getAllIngredients()
   }
 
+  // Functions for search bar
   setQuery = query => {
     this.setState({
       query: query
     })
   }
-
   handleSearch = event => {
     const filteredIngredients = this.state.ingredients.filter(ingredient => 
       ingredient.name.toLowerCase().includes(event.target.value.toLowerCase())
@@ -63,6 +62,7 @@ export default class FoodEntry extends Component {
     })
   }
 
+  // Function for fill out the ingredient form
   handleClick = event => {
     const key = event.target.getAttribute('data-key')
     console.log(key);
@@ -78,18 +78,19 @@ export default class FoodEntry extends Component {
     })
   }
 
+// Functions for toggle Recipe
   toggleRecipe = () => {
     this.setState({
       handleShowSingle: false,
     })
   }
-
   toggleSingle = () => {
     this.setState({
       handleShowSingle: true,
     })
   }
 
+  // Functions for submit form
   handleChange = event => {
     const name = event.target.name;
     const value = event.target.value;
@@ -97,7 +98,6 @@ export default class FoodEntry extends Component {
       [name]: value
     });
   };
-
 
   handleSubmit = event => {
     event.preventDefault();
@@ -155,6 +155,7 @@ export default class FoodEntry extends Component {
       .catch(err => console.log(err))
   }
 
+// Function for get an array of object and then send it back to server
   addIngredient2Recipe = () => {
     this.setState({
       addedIngredientsFromRecipe: this.state.addedIngredientsFromRecipe.push({
@@ -192,25 +193,24 @@ export default class FoodEntry extends Component {
         <button onClick={()=>this.toggleRecipe()} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
         style={{"marginLeft": "5px"}}>Recipe</button>
 
-        {/* Search bar */}
-        <SearchField {...this.state} query={this.state.query} setQuery={this.setQuery} />
-        
+      {/* Search bar */}
+      <SearchField {...this.state} query={this.state.query} setQuery={this.setQuery} />
+      {/* show the ingredients in database */}
+      <IngredientList {...this.state} query={this.state.query} setQuery={this.setQuery} handleClick={this.handleClick}/>
 
-        {/* show the ingredients in database */}
-        <IngredientList {...this.state} query={this.state.query} setQuery={this.setQuery} handleClick={this.handleClick}/>
-        
-        {/* show the ingredients */}
-        <div><ShowIngredientsOfDay {...this.state}/></div>
+      {/* show the ingredients */}
+      <ShowIngredientsOfDay {...this.state}/>
 
-          <div>
-            {inputComponent}
-          </div>
-          <Link to='/ingredients-of-day' className="link blue hover-silver dib mh3 tc" style={{
-            "display": "flex", "flexDirection":"row", "justifyContent": "center", "alignItems":"center"}}>
-          <Icons icon="FoodsDetails"/>
-          <span className="f6 db" style={{"marginLeft": "10px"}}>{this.state.ingredientCount} ingredients added</span>
-          </Link>
-        {/* Bottom navbar */}
+      {/* Show a SingleIngredient or Recipe */}
+        <div>{inputComponent}</div>
+        
+      {/* Show the added ingredients */}
+        <Link to='/ingredients-of-day' className="link blue hover-silver dib mh3 tc" style={{
+          "display": "flex", "flexDirection":"row", "justifyContent": "center", "alignItems":"center"}}>
+        <Icons icon="FoodsDetails"/>
+        <span className="f6 db" style={{"marginLeft": "10px"}}>{this.state.ingredientCount} ingredients added</span>
+        </Link>
+      {/* Bottom navbar */}
         <BottomNavbar />
       </div>
     )
