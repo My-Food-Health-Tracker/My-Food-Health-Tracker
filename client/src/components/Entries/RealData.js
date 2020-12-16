@@ -14,6 +14,7 @@ export default function RealData(props) {
         const result = await axios(`/api/users/${user}`,
         );
         setUserData(result.data);
+        console.log(result)
       };
       fetchData();
     }, []);
@@ -21,7 +22,7 @@ export default function RealData(props) {
   let pieData = []
   let lineData = {}
   let colors={}
-  // console.log(userData)
+  console.log(userData)
 
   return (
     <div className="charts">

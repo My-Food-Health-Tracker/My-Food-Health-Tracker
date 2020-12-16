@@ -11,8 +11,8 @@ export default class Analysis extends Component {
     return (
       <div>
       <TopBar icon='analysis' title='Analysis'/>
-      {/* <RealData user={this.props.user._id}/> */}
-      <DemoData />
+      <RealData user={this.props.user._id}/>
+      {/* <DemoData /> */}
       <BottomNavbar/>
       </div>
     )

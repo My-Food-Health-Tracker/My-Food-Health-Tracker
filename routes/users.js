@@ -8,8 +8,8 @@ const Day = require('../models/Day')
 // get all the Users
 router.get('/', (req, res, next) => {
   User.find()
-    .populate('days')
     .then(users => {
+      console.log(users)
       res.status(200).json(users);
     })
     .catch(err => {
@@ -27,8 +27,8 @@ router.get('/:id', (req, res, next) => {
   }
 
   User.findById(req.params.id)
-    .populate('days')
     .then(user => {
+      console.log('this is the response', user)
       if (!user) {
         console.log('no User');
         res.status(404).json(user);
