@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import TopBar from '../shared/TopBar'
-import BottomNavBar from '../shared/BottomNavBar'
+import BottomNavbar from '../shared/BottomNavbar'
 import axios from 'axios'
 
 export default class AddEnergy extends Component {
@@ -8,11 +8,13 @@ export default class AddEnergy extends Component {
   state={
     startDate: this.props.startDate,//this should be the present day in the string format: "yyyy-mm-dd"
     startTime: this.props.startTime,//this should bte the present time in the string format:"hh:mm"
-    energyLevel:this.props.energyLevel
+    energyLevel:this.props.energyLevel,
+    // id:this.props.id,
+    editing:this.props.editing
   }
 
   handleChange=event=>{
-    
+
     const { name, value }= event.target;
 
     this.setState({
@@ -40,23 +42,46 @@ export default class AddEnergy extends Component {
       .catch(err=>console.log('the energy was not deleted from the day',err))
   }
 
+  handleEditing=()=>{
+    //
+    const updatedEnergy=this.state;
+
+    axios.put(`/api/energy/user/${this.props.user._id}/day/${this.state.startDate}`,{data:updatedEnergy})
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err))
+  }
+
+
   render() {
     return (
       <div className='flex flex-column'>
+
         <TopBar title='Energy' icon='Energy'/>
+
         <div className='flex flex-column items-center'>
-          <form onSubmit={this.handleSubmit} className='flex flex-column items-center' action="POST">
+
+          <form onSubmit={this.state.editing? this.handleEditing : this.handleSubmit} className='flex flex-column items-center' action="POST">
+
             <label htmlFor="start-date" className="f6 mt3">Date:</label>
-            <input onChange={this.handleChange} type="date" id="start-date" name="startDate" className="mb2"/>
+            <input onChange={this.handleChange} value={this.state.startDate} type="date" id="start-date" name="startDate" className="mb2"/>
+
             <label htmlFor="start-time" className="f6 mt3">Time:</label>
-            <input onChange={this.handleChange} type="time" id="start-date" name="startTime" className="mb2"/>
+            <input onChange={this.handleChange} value={this.state.startTime} type="time" id="start-date" name="startTime" className="mb2"/>
+
             <label htmlFor="energyLevel" className=" f6 mt3">Energy Level:</label>
             <input onChange={this.handleChange} value={this.state.energyLevel} type="range" name="energyLevel" min="1" max="10" className="mt1 mb3"/>
+            
             <button type="submit" className="f6 w4 dim ph3 pv2 mt3 dib white bg-dark-blue br-pill b--dark-blue">Save</button>
+          
           </form>
+
             <button onClick={()=>this.handleDelete()} className="f6 w4 dim ph3 pv2 mt3 dib white bg-dark-red br-pill b--dark-red">Delete</button>
-          <BottomNavBar/>
+          
+
+          <BottomNavbar/>
+
         </div>
+
       </div>
     )
   }

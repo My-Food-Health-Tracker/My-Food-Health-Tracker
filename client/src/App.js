@@ -28,6 +28,7 @@ import AddSleep from './components/add-entries/AddSleep'
 import AddSymptoms from './components/add-entries/AddSymptoms'
 
 import AddDays from './components/testviews/AddDays'
+import EditEntryTest from './components/testviews/EditEntryTest'
 
 
 
@@ -92,7 +93,7 @@ class App extends React.Component {
       render = {props => <Login setUser={this.setUser} {...props}/>}
       />
 
-      {/* Routes in BottomNavBar  */}
+      {/* Routes in BottomNavbar  */}
       <Route 
       exact 
       path='/initial-diary' 
@@ -119,6 +120,14 @@ class App extends React.Component {
       <Route exact path='/add/Symptoms' 
       render={() => <AddSymptoms user={this.state.user}/>}
       />
+
+
+
+
+
+      {/* Route to test editing of entries. Erase later*/}
+      <Route exact path='/edit-entry-test' 
+      render={() => <EditEntryTest user={this.state.user}/>}/>
 
 
 

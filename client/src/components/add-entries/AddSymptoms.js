@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import TopBar from '../shared/TopBar'
-import BottomNavBar from '../shared/BottomNavBar'
+import BottomNavbar from '../shared/BottomNavbar'
 
 export default class AddSymptoms extends Component {
   state={
@@ -10,7 +10,9 @@ export default class AddSymptoms extends Component {
     startTime: this.props.startTime,//this should bte the present time in the string format:"hh:mm"
     name:this.props.name,
     intensity:this.props.intensity,
-    notes:this.props.notes
+    notes:this.props.notes,
+    id:this.props.id,
+    editing:this.props.editing
   }
 
   handleChange=event=>{
@@ -44,6 +46,15 @@ export default class AddSymptoms extends Component {
       .catch(err=>console.log(err))
   }
 
+  handleEditing=()=>{
+    //
+    const updatedSymptom=this.state;
+
+    axios.put(`/api/symptoms/user/${this.props.user._id}/day/${this.state.startDate}`,{data:[this.state.id,updatedSymptom]})
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err))
+  }
+
   render() {
 
     const nameOptions=['Choose an option','Nausea','Vomiting','Diarrhea','Stomach pain',
@@ -56,7 +67,7 @@ export default class AddSymptoms extends Component {
         <TopBar title='Symptoms' icon='Symptoms'/>
 
         <div className='flex flex-column items-center'>
-          <form onSubmit={this.handleSubmit} className='flex flex-column items-center' action="POST">
+          <form onSubmit={this.state.editing? this.handleEditing : this.handleSubmit} className='flex flex-column items-center' action="POST">
 
             <label htmlFor="start-date" className="f6 mt3">Date:</label>
             <input onChange={this.handleChange} value={this.state.startDate} type="date" id="start-date" name="startDate" className="mb2"/>
@@ -65,7 +76,7 @@ export default class AddSymptoms extends Component {
             <input onChange={this.handleChange} value={this.state.startTime} type="time" id="start-date" name="startTime" className="mb2"/>
 
             <label htmlFor="name" className="f6 mt3">Name:</label>
-            <select name="name" id="name" onChange={this.handleChange} className="f6 mt1" >
+            <select name="name" id="name" onChange={this.handleChange} value={this.state.name} className="f6 mt1" >
             {nameOptions.map(option=>{
               return(
                 <option value={option} className="f6">{option}</option>
@@ -85,7 +96,7 @@ export default class AddSymptoms extends Component {
 
             <button onClick={()=>this.handleDelete()} className="f6 w4 dim ph3 pv2 mt3 dib white bg-dark-red br-pill b--dark-red">Delete</button>
 
-          <BottomNavBar/>
+          <BottomNavbar/>
 
         </div>
       </div>

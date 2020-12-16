@@ -2,15 +2,17 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import TopBar from '../shared/TopBar'
-import BottomNavBar from '../shared/BottomNavBar'
+import BottomNavbar from '../shared/BottomNavbar'
 
 export default class AddSleep extends Component {
 
   state={
-    startDate: this.props.startDate,//this should be the present day in the string format: "yyyy-mm-dd"
+    startDate: this.props.startDate ,//this should be the present day in the string format: "yyyy-mm-dd"
     startTime: this.props.startTime,//this should bte the present time in the string format:"hh:mm"
     duration:this.props.duration,
-    notes:this.props.notes
+    notes:this.props.notes,
+    id:this.props.id,
+    editing:this.props.editing
   }
 
   handleChange=event=>{
@@ -44,6 +46,15 @@ export default class AddSleep extends Component {
       .catch(err=>console.log(err))
   }
 
+  handleEditing=()=>{
+    //
+    const updatedSleep=this.state;
+
+    axios.put(`/api/sleep/user/${this.props.user._id}/day/${this.state.startDate}`,{data:[this.state.id,updatedSleep]})
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err))
+  }
+
   render() {
 
     return (
@@ -52,7 +63,7 @@ export default class AddSleep extends Component {
         <TopBar title='Sleep' icon='Sleep'/>
 
         <div className='flex flex-column items-center'>
-          <form onSubmit={this.handleSubmit} className='flex flex-column items-center' action="POST">
+          <form onSubmit={this.state.editing? this.handleEditing : this.handleSubmit} className='flex flex-column items-center' action="POST">
 
             <label htmlFor="start-date" className="f6 mt3">Date:</label>
             <input onChange={this.handleChange} value={this.state.startDate} type="date" id="start-date" name="startDate" className="mb2"/>
@@ -74,7 +85,7 @@ export default class AddSleep extends Component {
 
             <button onClick={()=>this.handleDelete()} className="f6 w4 dim ph3 pv2 mt3 dib white bg-dark-red br-pill b--dark-red">Delete</button>
 
-          <BottomNavBar/>
+          <BottomNavbar/>
 
         </div>
       </div>
