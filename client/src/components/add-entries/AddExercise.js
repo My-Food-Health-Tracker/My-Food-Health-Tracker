@@ -50,7 +50,7 @@ export default class AddExercise extends Component {
   }
 
   render() {
-
+    console.log(this.props)
     const nameOptions=['Choose an option','Aerobics','Baseball','Boxing','Climbing','Cycling','Dancing','Diving','Football',
                                 'Golf','Hiking','Hockey','Martial Arts','Rowing','Rugby','Running','Skiing','Softball',
                                 'Swimming', 'Tennis','Volleyball','Walking','Weights','Yoga','Other'];

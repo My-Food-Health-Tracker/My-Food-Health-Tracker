@@ -115,12 +115,7 @@ class App extends React.Component {
         else { return <Redirect to='/'/> }
         }}
       />
-      <Route exact path='/add/Foods'
-       render = {props => <FoodEntry user={this.state.user} {...props}/>}
-       />
-        <Route exact path='/add/Drinks'
-       render = {props => <DrinkEntry user={this.state.user} {...props}/>}
-       />
+
 
       {/* Routes in BottomNavBar  */}
       <Route exact path='/add-item' component={AddItem}/>
@@ -133,14 +128,20 @@ class App extends React.Component {
       render={() => <AddEnergy user={this.state.user}/>}
       />
       <Route exact path='/add/Exercise' 
-      render={() => <AddExercise user={this.state.user}/>}
+      render={(props) => <AddExercise user={this.state.user} {...props}/>}
       />
       <Route exact path='/add/Sleep' 
-      render={() => <AddSleep user={this.state.user}/>}
+      render={(props) => <AddSleep user={this.state.user} {...props}/>}
       />
       <Route exact path='/add/Symptoms' 
-      render={() => <AddSymptoms user={this.state.user}/>}
+      render={(props) => <AddSymptoms user={this.state.user} {...props}/>}
       />
+      <Route exact path='/add/Foods'
+       render = {props => <FoodEntry user={this.state.user} {...props}/>}
+       />
+      <Route exact path='/add/Drinks'
+       render = {props => <DrinkEntry user={this.state.user} {...props}/>}
+       />
 {/* <Route 
       exact 
       path='/add-a-day' 
