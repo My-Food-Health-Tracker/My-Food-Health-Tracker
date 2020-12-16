@@ -133,7 +133,7 @@ class App extends React.Component {
       render={() => <AddEnergy user={this.state.user}/>}
       />
       <Route exact path='/add/Exercise' 
-      render={() => <AddExercise user={this.state.user}/>}
+      render={(props) => <AddExercise user={this.state.user} {...props}/>}
       />
       <Route exact path='/add/Sleep' 
       render={() => <AddSleep user={this.state.user}/>}

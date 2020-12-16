@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Energy extends Component {
   render() {
@@ -9,7 +10,7 @@ export default class Energy extends Component {
               <div className="pa1 pa3-ns dtc-ns v-mid">
                   <h3 className="fw4 blue mt0 mb0">Your energy level is {this.props.energy}</h3>
                   <span className="pa3 pa4-ns dtc-ns v-mid">
-                <a href="#" className="center no-underline f5 tc db w-20 pv1 bg-animate bg-blue hover-bg-dark-blue white br2">Edit</a>
+                  <Link to={{pathname: '/add/Energy', props:this.props}} className="center no-underline f6 tc db w-20 pv3 bg-animate bg-blue hover-bg-dark-blue white br2" >Edit</Link>
               </span>
               </div>
             </div>
