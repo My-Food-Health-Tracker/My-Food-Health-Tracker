@@ -90,7 +90,6 @@ export default class AddDrinks extends Component {
     const payload = this.state;
     console.log(payload);
     console.log(this.state.date)
-    
     axios.post(`/api/ingredients/drinks/user/${this.props.user._id}/day/${this.state.date}`, payload)
       .then(() => {
         // set the form to it's initial state (empty input fields)

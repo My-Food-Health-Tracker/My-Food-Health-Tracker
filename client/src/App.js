@@ -14,10 +14,8 @@ import Home from './components/Home';
 import Dashboard from './components/nav-bar-options/Dashboard'
 
 // Xiaomei: components for Add Food Entry
-import InitialDiary from './components/InitialDiary';
 import FoodEntry from './components/add-entries/FoodEntry';
 import DrinkEntry from './components/add-entries/DrinkEntry';
-import AddSupplements from './components/add-entries/AddSupplements';
 
 //Hortencia:components for the BottomNavBar Links
 import Analysis from './components/nav-bar-options/Analysis'
@@ -57,42 +55,17 @@ class App extends React.Component {
        render = {props => <Home setUser={this.setUser} {...props}/>}
        />
 
-         {/* <Navbar user={this.state.user} setUser={this.setUser} /> */}
-          {/* <Route exact path='/usertest' render={props => <TestView {...props} /> }
-          ></Route>
-          <Route
-          exact
-          path='/historicaltest'
-          render={props => <TestHistorical {...props} /> }
-          ></Route>
-          <Route
-          exact
-          path='/testinput'
-          render={props => <TestInput {...props} /> }
-          ></Route> */}
-
-        {/* Test routes for add days */}
-        {/* <Route
-          exact path='/adddays'
-          render={props => <AddDays setUser={this.setUser} {...props} />}
-        />
-        <Route 
-          exact 
-          path='/add-a-day' 
-          render={() => <AddDays user={this.state.user}/>}
-          /> */}
-
-        {/* Routes for Dashboard */}
-          <Route
-          exact path='/dashboard'
-          render={props => {
-            if (this.state.user) 
-              return <Dashboard setUser={this.setUser} user={this.state.user}{...props} />
-            else
-              return <Redirect to='/'/>
-            }
+      {/* Routes for Dashboard */}
+        <Route
+        exact path='/dashboard'
+        render={props => {
+          if (this.state.user) 
+            return <Dashboard setUser={this.setUser} user={this.state.user}{...props} />
+          else
+            return <Redirect to='/'/>
           }
-        />
+        }
+      />
 
       {/* Routes for Signup and Login */}
       <Route 
@@ -105,16 +78,6 @@ class App extends React.Component {
       path='/login' 
       render = {props => <Login setUser={this.setUser} {...props}/>}
       /> 
-
-      {/* Xiaomei: Routes for Food Entry */}
-      <Route 
-      exact 
-      path='/initial-diary' 
-      render={props => {
-        if (this.state.user) return <InitialDiary setUser={this.setUser} {...props}/>
-        else { return <Redirect to='/'/> }
-        }}
-      />
 
       {/* Routes in BottomNavBar  */}
       <Route exact path='/add-item' component={AddItem}/>
@@ -141,14 +104,6 @@ class App extends React.Component {
       <Route exact path='/add/Drinks' 
       render={(props) => <DrinkEntry user={this.state.user} {...props}/>}
       />
-      <Route exact path='/add/Supplements' 
-      render={(props) => <AddSupplements user={this.state.user} {...props}/>}
-      />
-{/* <Route 
-      exact 
-      path='/add-a-day' 
-      render={() => <AddDays user={this.state.user}/>}
-      /> */}
       </div>
 )
   }

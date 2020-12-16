@@ -42,18 +42,24 @@ router.get('/:id', (req, res, next) => {
 });
 
 
-router.get(`/user/:id/day/:date/ingredients`, (req, res) => {
+router.get('/user/:id/day/:date/ingredients', (req, res) => {
     Day.findOne({$and: [{owner: req.params.id}, {date: req.params.date}]})
-    .populate('ingredients') 
+    .populate('owner')
+    .populate({
+      path: 'foods',
+      populate:{
+        path: 'ingredients',
+        model: 'Ingredient'
+      }
     .then(day => {
       res.status(200).json(day.ingredients)
     }).catch(err => {
       res.json(err);
     })
 })
+})
 
-
-// LoggedIn user want to create a food Ingredient
+// LoggedIn user want to create a single food Ingredient
 router.post('/user/:id/day/:date', (req, res) => {
   const { date, startTime, name, brand, category, servingAmount, servingSize, portion, eatenPortion } = req.body;
   // const owner = req.user._id;
@@ -142,7 +148,6 @@ router.post('/drinks/user/:id/day/:date', (req, res) => {
   const { date, startTime, name, brand, category, servingAmount, servingSize, portion, eatenPortion } = req.body;
   // const owner = req.user._id;
   // Check if the user already has a day
-  
 console.log('this is req.params.id', req.params)
  Day.findOne({$and: [{owner: req.params.id}, {date: req.params.date}]})
   .then (day => {
@@ -220,10 +225,9 @@ console.log('this is req.params.id', req.params)
 
 // add a recipe
 router.post('/recipe/user/:id/day/:date', (req, res) => {
-  const { date, startTime, name, brand, category, servingAmount, servingSize, portion, eatenPortion } = req.body;
+  const { recipeName, date, startTime, name, brand, category, servingAmount, servingSize, portion, eatenPortion } = req.body;
   // const owner = req.user._id;
   // Check if the user already has a day
-  
 console.log('this is req.params.id', req.params)
  Day.findOne({$and: [{owner: req.params.id}, {date: req.params.date}]})
   .then (day => {
@@ -241,10 +245,10 @@ console.log('this is req.params.id', req.params)
         console.log('this is the dbingredient', dbIngredient)
         Day.findByIdAndUpdate(day._id,
           { $push: {"foods": 
-            {startTime,
-            name,
-            portion,
-            eatenPortion,
+            {startTime: startTime,
+            name: recipeName,
+            portion: portion,
+            eatenPortion: eatenPortion,
             imgUrl: "",
             ingredients: dbIngredient
         }}}, {new: true}).then(dbIngredient => {
@@ -257,11 +261,11 @@ console.log('this is req.params.id', req.params)
       })
     } else {
       Ingredient.create({
-        name,
-        brand,
-        category,
-        servingAmount,
-        servingSize,
+        name: name,
+        brand: brand,
+        category: category,
+        servingAmount: servingAmount,
+        servingSize: servingSize,
         owner: req.params.id
       })
         .then((dbIngredient) => {
@@ -271,9 +275,9 @@ console.log('this is req.params.id', req.params)
             foods: [{
               startTime: startTime,
               imgUrl: "",
-              name,
-              portion,
-              eatenPortion,
+              name: recipeName,
+              portion: portion,
+              eatenPortion: eatenPortion,
                 // ingredients are obejcts
               ingredients: [dbIngredient]
             }],
@@ -324,7 +328,7 @@ router.put('/:id', (req, res, next) => {
       res.status(200).json(ingredient);
     })
     .catch(err => {
-
+      res.json(err);
     })
 });
 
@@ -333,7 +337,6 @@ router.delete('/:id', (req, res, next) => {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;
   }
-  
   Ingredient.findByIdAndDelete(req.params.id)
     .then(() => {
       res.status(200).json({ message: 'ok' })
@@ -342,8 +345,5 @@ router.delete('/:id', (req, res, next) => {
       res.json(err);
     })
 });
-
-
-
 
 module.exports = router;

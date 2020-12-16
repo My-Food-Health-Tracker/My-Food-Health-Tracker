@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 import TopBar from '../shared/TopBar';
 import AddRep from './AddRep';
 import AddIgt from './AddIgt';
-import ShowIngredientsOfDay from './ShowIngredientsOfDay';
 import SearchField from './SearchField';
 import IngredientList from './IngredientList';
+import IngreList from './IngreList';
 
 export default class FoodEntry extends Component {
   state = {
@@ -16,13 +16,11 @@ export default class FoodEntry extends Component {
     user: this.props.user,
     days: [],
     ingredients: [],
-    addedIngredientsFromRecipe: [],
-    ingredientsOfDay: [],
     date: '',
     startTime: '',
     name: '',
     brand: '',
-    category: '', servingAmout: '', servingSize: '', portion: '', eatenPortion: '',
+    category: '', servingAmount: '', servingSize: '', portion: '', eatenPortion: '',
     selectedIngredient: false,
     handleShowSingle: true,
     ingredientCount: 0,
@@ -156,30 +154,25 @@ export default class FoodEntry extends Component {
   }
 
 // Function for get an array of object and then send it back to server
-  addIngredient2Recipe = () => {
-    this.setState({
-      addedIngredientsFromRecipe: this.state.addedIngredientsFromRecipe.push({
-        name: this.state.name,
-        brand: this.state.brand,
-        category: this.state.category,
-        startTime: this.state.startTime,
-        servingAmount: this.state.servingAmount,
-        servingSize: this.state.servingSize
-      })
-    })
-    console.log('this is the ingredients after addIngredients2Recipe', this.state.addedIngredientsFromRecipe)
-  }
+
+
+  // handleAddButton = (object) => {
+  //   this.setState({
+  //     ingredientsOfDay: this.state.ingredientsOfDay.push(object)
+  //   })
+  // }
 
   
   render() {
-    if (!this.state.days) return <h1>Loading...</h1>
+    // console.log(this.state.ingredientsOfDay);
+    // if (!this.state.days) return <h1>Loading...</h1>
     // console.log('this is the user in foodentry', this.state.user)
     let inputComponent;
     if (this.state.handleShowSingle) {     
       inputComponent = <AddIgt {...this.state} handleChange={this.handleChange} handleSubmit={this.handleSingleSubmit} />;    
       } 
     else {      
-      inputComponent = <AddRep {...this.state} handleChange={this.handleChange} handleSubmit={this.handleRecipeSubmit} />;  
+      inputComponent = <AddRep {...this.state} handleChange={this.handleChange} handleSubmit={this.handleRecipeSubmit} handleAddButton={this.handleAddButton}/>;  
       } 
 
     return (
@@ -198,9 +191,6 @@ export default class FoodEntry extends Component {
       {/* show the ingredients in database */}
       <IngredientList {...this.state} query={this.state.query} setQuery={this.setQuery} handleClick={this.handleClick}/>
 
-      {/* show the ingredients */}
-      <ShowIngredientsOfDay {...this.state}/>
-
       {/* Show a SingleIngredient or Recipe */}
         <div>{inputComponent}</div>
         
@@ -210,8 +200,9 @@ export default class FoodEntry extends Component {
         <Icons icon="FoodsDetails"/>
         <span className="f6 db" style={{"marginLeft": "10px"}}>{this.state.ingredientCount} ingredients added</span>
         </Link>
+        <IngreList {...this.state} />
       {/* Bottom navbar */}
-        <BottomNavbar />
+        <BottomNavbar {...this.state} />
       </div>
     )
   }

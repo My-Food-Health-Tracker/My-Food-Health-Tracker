@@ -1,6 +1,17 @@
 import React, { Component } from 'react'
+import IngreForm from './IngreForm'
 
 export default class AddIgt extends Component {
+
+  state = {
+    showAnotherInput: false
+  }
+
+  handleAddButton = () => {
+    this.setState({
+      showAnotherInput: true
+    })
+  }
 
   render() {
     return (
@@ -25,34 +36,15 @@ export default class AddIgt extends Component {
              
                   <div className="custom-ingredient">
                           <div>
-                          <label htmlFor='name' className="f6 mt3" >Name: </label>
+                          <label htmlFor='name' className="f6 mt3" >Recipe Name: </label>
                           <input
                             type='text'
-                            id='name'
-                            name='name' 
+                            id='recipeName'
+                            name='recipeName' 
                             onChange={this.props.handleChange}
                           />
                         </div>
-                        <div style={{"display": "flex", "flexDirection": "row", "justifyContent": "center", "alignItems": "center"}}>
-                          <label htmlFor='brand' className="f6 mt3">Brand: </label>
-                          <input 
-                            type='text'
-                            id='brand'
-                            name='brand'
-                            value={this.props.brand}
-                            onChange={this.props.handleChange}
-                          />
-                        </div>
-                        <div style={{"display": "flex", "flexDirection": "row", "justifyContent": "center", "alignItems": "center"}}>
-                        <label htmlFor='category' className="db fw4 lh-copy f6">Category: </label>
-                          <input 
-                            type='text'
-                            id='category'
-                            name='category'
-                            value={this.props.category}
-                            onChange={this.props.handleChange}
-                          /> 
-                          </div>
+                        
                  </div>
                     <div style={{"display": "flex", "flexDirection": "row", "justifyContent": "center", "alignItems": "center"}}>
                         <label htmlFor='portion' className="f6 mt3">Recipe Portion: </label>
@@ -79,8 +71,24 @@ export default class AddIgt extends Component {
                     type='text'
                     id='name'
                     name='name'
-                    placeholder="chicken"
+                    placeholder="Chicken"
                     value={this.props.name}
+                    onChange={this.props.handleChange}
+                  />
+                  <input
+                    type='text'
+                    id='brand'
+                    name='brand'
+                    placeholder="Edeka"
+                    value={this.props.brand}
+                    onChange={this.props.handleChange}
+                  />
+                  <input
+                    type='text'
+                    id='category'
+                    name='category'
+                    placeholder="Foods"
+                    value={this.props.category}
                     onChange={this.props.handleChange}
                   />
                   <input
@@ -99,7 +107,11 @@ export default class AddIgt extends Component {
                     value={this.props.servingSize}
                     onChange={this.props.handleChange}
                   /> 
-                <button onSubmit={this.props.addIngredient2Recipe} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green">Add a Ingredient</button>
+
+                  {
+                    this.state.showAnotherInput && <IngreForm />
+                  }
+                <button onClick={()=> this.handleAddButton()} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green">Add another one</button>
                 <button type='submit' className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Save</button>
               </form>
         </div>
