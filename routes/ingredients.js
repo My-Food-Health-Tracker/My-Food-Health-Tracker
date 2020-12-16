@@ -72,6 +72,7 @@ console.log('this is req.params.id', req.params)
             ingredients: dbIngredient
         }}}, {new: true}).then(dbIngredient => {
           res.status(201).json(dbIngredient);
+          // res.redirect('/add/Foods')
         })
         .catch(err => {
           res.json(err);
@@ -115,6 +116,7 @@ console.log('this is req.params.id', req.params)
         })
         .then(dbIngredient => {
           res.status(201).json(dbIngredient);
+          // res.redirect('/add/Foods')
         })
         .catch(err => {
           res.json(err);

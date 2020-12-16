@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 export default class AddIgt extends Component {
+
   render() {
     return (
       <div>
           <h3 className="f6 db">Custom Ingredient:</h3>
             <div>
-                <form onSubmit={this.props.handleSingleSubmit}>
+                <form onSubmit={this.props.handleSubmit}>
                 
                   <div className="date-time">
                     <label htmlFor="date" className="f6 mt3">Date:</label>

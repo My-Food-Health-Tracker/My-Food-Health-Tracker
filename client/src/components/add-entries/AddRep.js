@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 export default class AddIgt extends Component {
+
   render() {
     return (
       <div>
@@ -98,6 +99,7 @@ export default class AddIgt extends Component {
                     value={this.props.servingSize}
                     onChange={this.props.handleChange}
                   /> 
+                <button onclick={this.props.addIngredient2Recipe} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green">Add another one</button>
                 <button type='submit' className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Save</button>
               </form>
         </div>

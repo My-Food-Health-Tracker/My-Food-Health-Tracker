@@ -13,14 +13,14 @@ export default class FoodEntry extends Component {
     user: this.props.user,
     days: [],
     ingredients: [],
+    addedIngredientsFromRecipe: [],
     date: '',
     startTime: '',
     name: '',
     brand: '',
     category: '', servingAmout: '', servingSize: '', portion: '', eatenPortion: '',
     selectedIngredient: false,
-    handleShowRecipe: false,
-    handleShowSingle: false,
+    handleShowSingle: true,
     ingredientCount: 0
   }
 
@@ -58,22 +58,15 @@ export default class FoodEntry extends Component {
     })
   }
 
-  // handleCustomIngredient = () => {
-  //   this.setState({
-  //     showCustomIngredient: !this.state.showCustomIngredient,
-  //     // showCustomIngredient: true,
-  //   })
-  // }
-
-  handleShowRecipe = () => {
+  toggleRecipe = () => {
     this.setState({
-      handleShowRecipe: !this.state.handleShowRecipe
+      handleShowSingle: false,
     })
   }
 
-  handleShowSingle = () => {
+  toggleSingle = () => {
     this.setState({
-      handleShowSingle: !this.state.handleShowSingle
+      handleShowSingle: true,
     })
   }
 
@@ -115,18 +108,70 @@ export default class FoodEntry extends Component {
       .catch(err => console.log(err))
   }
 
+  handleRecipeSubmit = event => {
+    event.preventDefault();
+    
+    // current Date as object
+    
+    const payload = this.state;
+    console.log(payload);
+    console.log(this.state.date)
+    
+    axios.post(`/api/ingredients/user/${this.props.user._id}/day/${this.state.date}`, payload)
+      .then(() => {
+        // set the form to it's initial state (empty input fields)
+        this.setState({
+          date: '',
+          startTime: '',
+          servingAmount: '',
+          servingSize: '',
+          name : '',
+          brand: '',
+          category: '',
+          portion: '',
+          eatenPortion: '',
+          ingredientCount: ++this.state.ingredientCount
+        })
+        // update the parent components state (in Projects) by calling getData()
+        // this.props.getData();
+      })
+      .catch(err => console.log(err))
+  }
+
+  addIngredient2Recipe = () => {
+    // this.setState({
+    //   addedIngredientsFromRecipe: this.state.addedIngredientsFromRecipe.push({
+    //     name: this.state.name,
+    //     brand: this.state.brand,
+    //     category: this.state.category,
+    //     startTime: this.state.startTime,
+    //     servingAmount: this.state.servingAmount,
+    //     servingSize: this.state.servingSize
+    //   })
+    // })
+    console.log('this is the ingredients after addIngredients2Recipe', this.state.addedIngredientsFromRecipe)
+  }
+
   render() {
     if (!this.state.days) return <h1>Loading...</h1>
-    console.log('this is the user in foodentry', this.state.user)
+    // console.log('this is the user in foodentry', this.state.user)
+    let inputComponent;
+    if (this.state.handleShowSingle) {     
+      inputComponent = <AddIgt {...this.state} handleChange={this.handleChange} handleSubmit={this.handleSingleSubmit} />;    
+      } 
+    else {      
+      inputComponent = <AddRep {...this.state} handleChange={this.handleChange} handleSubmit={this.handleRecipeSubmit} />;  
+      } 
+
     return (
       <div>
       {/* Top Navbar */}
         <TopBar title="Foods" icon="Foods" /> 
 
       {/* Two buttons for single ingredient and recipe */}
-        <button onClick={()=>this.handleShowSingle()} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
+        <button onClick={()=>this.toggleSingle()} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
         style={{"marginRight": "5px"}}>Single Ingredient</button>
-        <button onClick={()=>this.handleShowRecipe()} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
+        <button onClick={()=>this.toggleRecipe()} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
         style={{"marginLeft": "5px"}}>Recipe</button>
 
         {/* Search bar */}
@@ -157,11 +202,9 @@ export default class FoodEntry extends Component {
           </ul>
         </div>
 
-      {/* need help */}
-      {
-        this.state.handleShowRecipe && <AddRep {...this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/> ||
-        this.state.handleShowSingle && <AddIgt {...this.state} handleChange={this.handleChange} handleSingleSubmit={this.handleSingleSubmit}/>
-      }
+          <div>
+            {inputComponent}
+          </div>
           <Link className="link blue hover-silver dib mh3 tc" style={{
             "display": "flex", "flexDirection":"row", "justifyContent": "center", "alignItems":"center"}}>
           <Icons icon="FoodsDetails"/>
