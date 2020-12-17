@@ -8,6 +8,14 @@ const Day = require('../models/Day')
 // get all the Users
 router.get('/', (req, res, next) => {
   User.find()
+    .populate('days')
+    .populate({
+      path: 'foods',
+      populate:{
+        path: 'ingredients',
+        model: 'Ingredient'
+      }
+    })
     .then(users => {
       console.log(users)
       res.status(200).json(users);
@@ -27,7 +35,14 @@ router.get('/:id', (req, res, next) => {
   }
 
   User.findById(req.params.id)
-  .populate('days')
+    .populate('days')
+    .populate({
+      path: 'foods',
+      populate:{
+        path: 'ingredients',
+        model: 'Ingredient'
+      }
+    })
     .then(user => {
       console.log('this is the response', user)
       if (!user) {

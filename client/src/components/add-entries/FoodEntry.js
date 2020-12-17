@@ -1,28 +1,44 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import TopBar from '../shared/TopBar';
-import AddIngredient from '../view5-food-entry/AddIngredient';
 import BottomNavbar from '../shared/BottomNavbar';
-import Icons from '../Icons';
+import Icons from '../shared/Icons';
 import { Link } from 'react-router-dom';
+import AddRep from './AddRep';
+import AddIgt from './AddIgt';
+import SearchField from './SearchField';
+import IngredientList from './IngredientList';
+// import FoodsList from './FoodsList'
 
 export default class FoodEntry extends Component {
   state = {
     // this is the loggedin user from App.js
     user: this.props.user,
-    days: [],
+    date: '',
     ingredients: [],
-    name: '',
-    brand: '',
-    category: '',
+    tempStartTime: '',
+    tempIngredient: {
+      name: '',
+      brand: '',
+      category: '',
+      servingAmount: 0,
+      servingSize: '',
+    },
+    food: {
+      startTime: '',
+      name: '',
+      portion: 0,
+      eatenPortion: 0,
+      ingredients: [
+      ]
+    },
     selectedIngredient: false,
-    showCustomIngredient: false,
-    showExistIngredient: false,
+    handleShowSingle: true,
+    ingredientCount: 0,
+    query: '',
   }
 
-  // show all the ingredients in database
-
-  
+  // Get initial ingredients data
   getAllIngredients = () => {
     axios.get('/api/ingredients')
      .then(response => {
@@ -37,9 +53,26 @@ export default class FoodEntry extends Component {
   }
 
   componentDidMount = () => {
-    this.getAllIngredients()
+    this.getAllIngredients();
   }
 
+  // Functions for search bar
+  setQuery = query => {
+    this.setState({
+      query: query
+    })
+  }
+  handleSearch = event => {
+    const filteredIngredients = this.state.ingredients.filter(ingredient => 
+      ingredient.name.toLowerCase().includes(event.target.value.toLowerCase())
+    );
+    this.setState({
+      query: event.target.value,
+      ingredients: filteredIngredients
+    })
+  }
+
+  // Function for fill out the ingredient form
   handleClick = event => {
     const key = event.target.getAttribute('data-key')
     console.log(key);
@@ -47,87 +80,225 @@ export default class FoodEntry extends Component {
     const clickedIngredient = this.state.ingredients.filter(ingredient => {
       return ingredient._id === key;
     });
-    console.log(clickedIngredient[0])
+    const newTempIngredient = this.state.tempIngredient;
+    newTempIngredient.name = clickedIngredient[0].name;
+    newTempIngredient.brand = clickedIngredient[0].brand;
+    newTempIngredient.category = clickedIngredient[0].category;
     this.setState ({
-      name: clickedIngredient[0].name,
-      brand: clickedIngredient[0].brand,
-      category: clickedIngredient[0].category
+      tempIngredient: newTempIngredient
     })
-
+    console.log(this.state.tempIngredient);
   }
 
-  handleCustomIngredient = () => {
+// Functions for toggle Recipe
+  toggleRecipe = () => {
     this.setState({
-      showCustomIngredient: !this.state.showCustomIngredient,
-      // showCustomIngredient: true,
+      handleShowSingle: false,
+      ingredientCount: 0
+    })
+  }
+  toggleSingle = () => {
+    this.setState({
+      handleShowSingle: true,
+      ingredientCount: 0
     })
   }
 
+  // Functions for submit form
+  handleChange = event => {
+    const name = event.target.name;
+    const value = event.target.value;
+    if(name==='date') {
+      this.setState({
+        date: value
+      })} else if(name==='startTime') {
+      this.setState({
+        tempStartTime: value
+      })
+    } else if(name==='recipeName') {
+      const newFood = this.state.food;
+      newFood.name = value;
+      this.setState({
+        food: newFood
+      })
+      console.log(this.state.food);
+    } else if(name==='eatenPortion') {
+      const newFood = this.state.food;
+      newFood.eatenPortion = value;
+      this.setState({
+        food: newFood
+      })
+    } else if(name==='portion') {
+      const newFood = this.state.food;
+      newFood.portion = value;
+      this.setState({
+        food: newFood
+      })
+    } else {
+      const newIngredient = this.state.tempIngredient;
+      newIngredient[name] = value;
+      this.setState({
+        tempIngredient: newIngredient
+      });
+    };
+  }
+
+  handleSingleSubmit = event => {
+    event.preventDefault();
+    const newFood = this.state.food;
+    newFood.portion = 1;
+    newFood.eatenPortion = 1;
+    newFood.ingredients = [this.state.tempIngredient];
+    newFood.name = newFood.ingredients[0].name;
+    newFood.startTime = this.state.tempStartTime;
+    this.setState({
+      food: newFood
+    })
+    const payload = {
+      user: this.state.user,
+      date: this.state.date,
+      food: this.state.food
+    };
+    console.log(payload);
+    axios.post(`/api/ingredients/user/${this.props.user._id}/day/${this.state.date}`, payload)
+      .then(() => {
+        // set the form to it's initial state (empty input fields)
+        this.setState({
+          date: '',
+          food: {
+            startTime: '',
+            name: '',
+            portion: 0,
+            eatenPortion: 0,
+            ingredients: [{
+              name: '',
+              brand: '',
+              category: '',
+              servingAmount: 0,
+              servingSize: '',
+            }]},
+          tempIngredient: {
+            name: '',
+            brand: '',
+            category: '',
+            servingAmount: 0,
+            servingSize: '',
+          },
+          tempStartTime: '',
+          ingredientCount: ++this.state.ingredientCount
+        })
+        // update the parent components state (in Projects) by calling getData()
+        // this.props.getData();
+      })
+      .catch(err => console.log(err))
+  }
+
+  handleAddButton = () => {
+    const addedIngredients = this.state.food.ingredients;
+    addedIngredients.push({
+      name: this.state.tempIngredient.name,
+      brand: this.state.tempIngredient.brand,
+      category: this.state.tempIngredient.category,
+      servingAmount: this.state.tempIngredient.servingAmount,
+      servingSize: this.state.tempIngredient.servingSize,
+    })
+    this.setState({
+      ingredientCount: ++this.state.ingredientCount,
+      tempIngredient: {
+        name: '',
+        brand: '',
+        category: '',
+        servingAmount: 0,
+        servingSize: '',
+      }
+    })
+    console.log(this.state.food);
+  }
+
+  handleRecipeSubmit = event => {
+    event.preventDefault();
+    const newFood = this.state.food;
+    newFood.startTime = this.state.tempStartTime;
+    this.setState({
+      food: newFood
+    })
+    const payload = {
+      user: this.state.user,
+      date: this.state.date,
+      food: this.state.food
+    };
+    console.log(payload);
+    axios.post(`/api/ingredients/user/${this.props.user._id}/day/${this.state.date}`, payload)
+      .then(() => {
+        // set the form to it's initial state (empty input fields)
+        this.setState({
+          date: '',
+          food: {
+            startTime: '',
+            name: '',
+            portion: 0,
+            eatenPortion: 0,
+            ingredients: []},
+          tempIngredient: {
+            name: '',
+            brand: '',
+            category: '',
+            servingAmount: 0,
+            servingSize: '',
+          },
+          tempStartTime: '',
+          ingredientCount: 0
+        })
+        // update the parent components state (in Projects) by calling getData()
+        // this.props.getData();
+      })
+      .catch(err => console.log(err))
+  }
+
+// Function for get an array of object and then send it back to server
+
+// Function to get the user day history
+    getAllDaysFromUser = () => {
+      axios.get(`/api/days/user/${this.state.user._id}`)
+      .then(response => {
+          console.log(response.data)
+          this.setState({
+            days: response.data
+          })
+      })
+    }
+  
+  
   render() {
-    
-    if (!this.state.days) return <h1>Loading...</h1>
-    console.log('this is the user in foodentry', this.state.user)
+    let inputComponent;
+    if (this.state.handleShowSingle) {     
+      inputComponent = <AddIgt {...this.state} handleChange={this.handleChange} handleSubmit={this.handleSingleSubmit} />;    
+      } 
+    else {      
+      inputComponent = <AddRep {...this.state} handleChange={this.handleChange} handleSubmit={this.handleRecipeSubmit} handleAddButton={this.handleAddButton}/>;  
+      } 
+      console.log(this.props.location.state)
     return (
       <div>
+        <TopBar title="Foods" icon="Foods" /> 
+
+        <button onClick={()=>this.toggleSingle()} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
+        style={{"marginRight": "5px"}}>Single Ingredient</button>
+        <button onClick={()=>this.toggleRecipe()} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
+        style={{"marginLeft": "5px"}}>Recipe</button>
+
+        <SearchField {...this.state} query={this.state.query} setQuery={this.setQuery} />
+        <IngredientList ingredients={this.state.ingredients} query={this.state.query} setQuery={this.setQuery} handleClick={this.handleClick}/>
+        <div>{inputComponent}</div>
+
+        <Link to='/foods-list' className="link blue hover-silver dib mh3 tc" style={{
+          "display": "flex", "flexDirection":"row", "justifyContent": "center", "alignItems":"center"}}>
+        <Icons icon="FoodsDetails"/>
+        <span className="f6 db" style={{"marginLeft": "10px"}}>{this.state.ingredientCount} ingredients added</span>
+        </Link>
+
+        <BottomNavbar {...this.state} />
       
-        <TopBar icon="Foods" title="Foods"/> 
-
-      {/* Two buttons for single ingredient and recipe */}
-        <button className="f6 link dim br-pill ba ph3 pv2 mb2 mv1 dib dark-blue">
-          Single Ingredient
-        </button>
-        <button className="f6 link dim br-pill ba ph3 pv2 mb2 mv1 dib dark-blue">
-          Recipe
-        </button>
-      
-      {/* Search bar */}
-        <form>
-          <input 
-            type="search"
-            name="search"
-            placeholder="Search for..."
-          />
-        </form>
-
-        {/* show the ingredients in database */}
-        <div classname="f4 bold center mw5" >
-          <ul className="list pl0 ml0 center mw5 ba b--light-silver br3" style={{"height":"200px", "width": "60%", "overflow": "hidden", "overflowY": "scroll"}} >
-          {
-            this.state.ingredients.map(ingredient => {
-              return (
-                
-                <li onClick={this.handleClick} key={ingredient._id} data-key={ingredient._id} className="ph3 pv2 bb b--light-silver f6 db">
-                  {ingredient.name}, {ingredient.brand} <button>+</button>
-                  {/* <Icons icon="AddButton-database"/> */}
-                </li>
-              )
-            })
-          }
-          </ul>
-        </div>
-        
-        {/* clickable button for "Didn't find your ingredient?" should show a form*/}
-        
-        <div onClick={this.handleCustomIngredient} className="link blue hover-silver dib mh3 tc" style={{
-            "display": "flex", "flexDirection":"row", "justifyContent": "center", "alignItems":"center"}}>
-          <Icons icon="AddButton"/>
-          <span className="f6 db" style={{"marginLeft": "10px"}}>Didn't find your ingredient? </span>
-        </div>
-
-          <div>
-          {
-          this.state.showCustomIngredient &&
-           
-              <div>
-              <h3 className="f6 db">Custom Ingredient:</h3>
-
-              <AddIngredient user={this.state.user} {...this.state} handleClick={this.handleClick}/>
-          </div>
-          }
-          </div>
-
-        {/* Bottom navbar */}
-        <BottomNavbar />
       </div>
     )
   }

@@ -8,16 +8,16 @@ import {Route, Redirect} from 'react-router-dom';
 // import TestInput from './components/testviews/TestInput';
 
 //final views component
-import Navbar from './components/Navbar';
 import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
 import Home from './components/Home';
 import Dashboard from './components/nav-bar-options/Dashboard'
+import FoodsList from './components/add-entries/FoodsList'
 
 // Xiaomei: components for Add Food Entry
-import InitialDiary from './components/InitialDiary'
 import FoodEntry from './components/add-entries/FoodEntry';
 import DrinkEntry from './components/add-entries/DrinkEntry';
+
 //Hortencia:components for the BottomNavBar Links
 import Analysis from './components/nav-bar-options/Analysis'
 import AddFrequent from './components/nav-bar-options/AddFrequent'
@@ -29,9 +29,6 @@ import AddEnergy from './components/add-entries/AddEnergy'
 import AddExercise from './components/add-entries/AddExercise'
 import AddSleep from './components/add-entries/AddSleep'
 import AddSymptoms from './components/add-entries/AddSymptoms'
-
-
-import EditEntryTest from './components/testviews/EditEntryTest'
 
 
 
@@ -58,42 +55,17 @@ class App extends React.Component {
        render = {props => <Home setUser={this.setUser} {...props}/>}
        />
 
-         {/* <Navbar user={this.state.user} setUser={this.setUser} /> */}
-          {/* <Route exact path='/usertest' render={props => <TestView {...props} /> }
-          ></Route>
-          <Route
-          exact
-          path='/historicaltest'
-          render={props => <TestHistorical {...props} /> }
-          ></Route>
-          <Route
-          exact
-          path='/testinput'
-          render={props => <TestInput {...props} /> }
-          ></Route> */}
-
-        {/* Test routes for add days */}
-        {/* <Route
-          exact path='/adddays'
-          render={props => <AddDays setUser={this.setUser} {...props} />}
-        />
-        <Route 
-          exact 
-          path='/add-a-day' 
-          render={() => <AddDays user={this.state.user}/>}
-          /> */}
-
-        {/* Routes for Dashboard */}
-          <Route
-          exact path='/dashboard'
-          render={props => {
-            if (this.state.user) 
-              return <Dashboard setUser={this.setUser} user={this.state.user}{...props} />
-            else
-              return <Redirect to='/'/>
-            }
+      {/* Routes for Dashboard */}
+        <Route
+        exact path='/dashboard'
+        render={props => {
+          if (this.state.user) 
+            return <Dashboard setUser={this.setUser} user={this.state.user}{...props} />
+          else
+            return <Redirect to='/'/>
           }
-        />
+        }
+      />
 
       {/* Routes for Signup and Login */}
       <Route 
@@ -107,23 +79,16 @@ class App extends React.Component {
       render = {props => <Login setUser={this.setUser} {...props}/>}
       /> 
 
-      {/* Routes in BottomNavbar  */}
-      {/* Xiaomei: Routes for Food Entry */}
-      <Route 
-      exact 
-      path='/initial-diary' 
-      render={props => {
-        if (this.state.user) return <InitialDiary setUser={this.setUser} {...props}/>
-        else { return <Redirect to='/'/> }
-        }}
-      />
-
-
       {/* Routes in BottomNavBar  */}
       <Route exact path='/add-item' component={AddItem}/>
       <Route exact path='/analysis' render={(props) => <Analysis user={this.state.user} {...props}/>}/>
       <Route exact path='/add-frequent' component={AddFrequent}/>
-      <Route exact path='/more' component={More}/>
+      <Route exact path='/more' render={(props) => <More setUser={this.setUser} {...props}/>}/>
+      
+      {/* Routes for food list */}
+      <Route exact path='/foods-list' 
+      render={(props) => <FoodsList user={this.state.user} {...props}/>}
+      />
 
       {/* Routes to add entries */}
       <Route exact path='/add/Energy' 
@@ -138,34 +103,12 @@ class App extends React.Component {
       <Route exact path='/add/Symptoms' 
       render={(props) => <AddSymptoms user={this.state.user} {...props}/>}
       />
-
-
-
-
-
-      {/* Route to test editing of entries. Erase later*/}
-      <Route exact path='/edit-entry-test' 
-      render={() => <EditEntryTest user={this.state.user}/>}/>
-
-
-
-
-
-
-
-
-
-      <Route exact path='/add/Foods'
-       render = {props => <FoodEntry user={this.state.user} {...props}/>}
-       />
-      <Route exact path='/add/Drinks'
-       render = {props => <DrinkEntry user={this.state.user} {...props}/>}
-       />
-{/* <Route 
-      exact 
-      path='/add-a-day' 
-      render={() => <AddDays user={this.state.user}/>}
-      /> */}
+      <Route exact path='/add/Foods' 
+      render={(props) => <FoodEntry user={this.state.user} {...props}/>}
+      />
+      <Route exact path='/add/Drinks' 
+      render={(props) => <DrinkEntry user={this.state.user} {...props}/>}
+      />
       </div>
 )
   }
