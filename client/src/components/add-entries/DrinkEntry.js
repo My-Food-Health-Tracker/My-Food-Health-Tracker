@@ -15,16 +15,18 @@ export default class AddDrinks extends Component {
     days: [],
     ingredients: [],
     ingredientsOfDay: [],
-    name: '',
-    brand: '',
-    category: '',
-    date: '',
-    startTime: '',
-    servingAmount: '',
-    servingSize: '',
+    name: this.props.location.state.drinks.ingredients[0].name,
+    brand: this.props.location.state.drinks.ingredients[0].brand,
+    category: this.props.location.state.drinks.ingredients[0].category,
+    date: this.props.location.state.day ||new Date().toISOString().split('T')[0],
+    startTime: this.props.location.state.drinks.ingredients[0].startTime ||new Date().toISOString().split('T')[1].slice(0,5),
+    servingAmount: this.props.location.state.drinks.ingredients[0].servingAmount,
+    servingSize: this.props.location.state.drinks.ingredients[0].servingSize,
     selectedIngredient: false,
     ingredientCount: 0,
     query: '',
+    id:this.props.location.state?.drinks._id,
+    editing:this.props.location.state?.editing,
   }
 
   // Get initial ingredients data
@@ -109,6 +111,23 @@ export default class AddDrinks extends Component {
       .catch(err => console.log(err))
   }
 
+  handleDelete = event => {
+    event?.preventDefault();
+    // const date = event.target.name;
+    // const foodId = event.target.value;
+    axios.put(`/api/ingredients/drinks/user/${this.state.user._id}/day/${this.state.date}/${this.state.id}/delete`)
+    .then(res => {
+      console.log(res);
+      this.props.history.push("/dashboard")
+    })
+    .catch(err=>console.log(err))
+  }
+  
+  handleEditing = event => {
+    event?.preventDefault();
+    axios.put( `/api/ingredients/drinks/user/${this.state.user._id}/day/${this.state.date}/${this.state.id}/edit`)
+  }
+
   render() {
     
     if (!this.state.ingredients) return <h1>Loading...</h1>
@@ -118,15 +137,26 @@ export default class AddDrinks extends Component {
       <div>
       {/* Top Navbar */}
       <TopBar title='Drinks' icon='Drinks'/>
+      <form onSubmit={this.handleSubmit}>
+        <div className="date-time">
+              <label htmlFor="date" className="f6 mt3">Date:</label>
+              <input type="date" id="date"
+                    name="date" value={this.state.date}
+                onChange={this.handleChange}
+              />
+              <label htmlFor="startTime" className="f6 mt3">Time:</label>
 
-      {/* Two buttons for single ingredient and recipe */}
-        <button className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
-        style={{"marginRight": "5px"}}>Add a Drink</button>
+              <input type="time" id="startTime"
+                  name="startTime" value={this.state.startTime}
+                onChange={this.handleChange}
+              />
+            </div>
+        </form>
     
       <SearchField {...this.state} query={this.state.query} setQuery={this.setQuery} />
       <IngredientList {...this.state} query={this.state.query} setQuery={this.setQuery} handleClick={this.handleClick}/>
 
-      <AddIngDrink {...this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+      <AddIngDrink {...this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit} handleClick={this.handleClick} handleEditing={this.handleEditing} handleDelete={this.handleDelete}/>
       <Link className="link blue hover-silver dib mh3 tc" style={{
         "display": "flex", "flexDirection":"row", "justifyContent": "center", "alignItems":"center"}}>
       <Icons icon="FoodsDetails"/>
