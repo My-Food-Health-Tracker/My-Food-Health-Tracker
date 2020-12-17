@@ -12,6 +12,7 @@ import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
 import Home from './components/Home';
 import Dashboard from './components/nav-bar-options/Dashboard'
+import FoodsList from './components/add-entries/FoodsList'
 
 // Xiaomei: components for Add Food Entry
 import FoodEntry from './components/add-entries/FoodEntry';
@@ -84,6 +85,11 @@ class App extends React.Component {
       <Route exact path='/analysis' render={(props) => <Analysis user={this.state.user} {...props}/>}/>
       <Route exact path='/add-frequent' component={AddFrequent}/>
       <Route exact path='/more' render={(props) => <More setUser={this.setUser} {...props}/>}/>
+      
+      {/* Routes for food list */}
+      <Route exact path='/foods-list' 
+      render={(props) => <FoodsList user={this.state.user} {...props}/>}
+      />
 
       {/* Routes to add entries */}
       <Route exact path='/add/Energy' 

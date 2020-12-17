@@ -1,17 +1,7 @@
 import React, { Component } from 'react'
 import IngreForm from './IngreForm'
 
-export default class AddIgt extends Component {
-
-  state = {
-    showAnotherInput: false
-  }
-
-  handleAddButton = () => {
-    this.setState({
-      showAnotherInput: true
-    })
-  }
+export default class AddRep extends Component {
 
   render() {
     return (
@@ -53,7 +43,7 @@ export default class AddIgt extends Component {
                           id='portion'
                           name='portion'
                           min='0'
-                          value={this.props.portion}
+                          value={this.props.food.portion}
                           onChange={this.props.handleChange}
                         />
                         <label htmlFor='eatenPortion' className="db fw4 lh-copy f6">Your Portion: </label>
@@ -61,7 +51,7 @@ export default class AddIgt extends Component {
                           type='text'
                           id='eatenPortion'
                           name='eatenPortion'
-                          value={this.props.eatenPortion}
+                          value={this.props.food.eatenPortion}
                           onChange={this.props.handleChange}
                         />
                   </div>
@@ -72,7 +62,7 @@ export default class AddIgt extends Component {
                     id='name'
                     name='name'
                     placeholder="Chicken"
-                    value={this.props.name}
+                    value={this.props.tempIngredient.name}
                     onChange={this.props.handleChange}
                   />
                   <input
@@ -80,7 +70,7 @@ export default class AddIgt extends Component {
                     id='brand'
                     name='brand'
                     placeholder="Edeka"
-                    value={this.props.brand}
+                    value={this.props.tempIngredient.brand}
                     onChange={this.props.handleChange}
                   />
                   <input
@@ -88,7 +78,7 @@ export default class AddIgt extends Component {
                     id='category'
                     name='category'
                     placeholder="Foods"
-                    value={this.props.category}
+                    value={this.props.tempIngredient.category}
                     onChange={this.props.handleChange}
                   />
                   <input
@@ -96,7 +86,7 @@ export default class AddIgt extends Component {
                     id='servingAmount'
                     name='servingAmount'
                     placeholder="500"
-                    value={this.props.servingAmount}
+                    value={this.props.tempIngredient.servingAmount}
                     onChange={this.props.handleChange}
                   />
                   <input
@@ -104,16 +94,13 @@ export default class AddIgt extends Component {
                     id='servingSize'
                     name='servingSize'
                     placeholder="g"
-                    value={this.props.servingSize}
+                    value={this.props.tempIngredient.servingSize}
                     onChange={this.props.handleChange}
                   /> 
-
-                  {
-                    this.state.showAnotherInput && <IngreForm />
-                  }
-                <button onClick={()=> this.handleAddButton()} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green">Add another one</button>
+                
                 <button type='submit' className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Save</button>
               </form>
+              <button onClick={this.props.handleAddButton} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green">Add asd ingredient to the recipe</button>
         </div>
 </div>
     )

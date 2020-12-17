@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class AddIgt extends Component {
+export default class AddIngDrink extends Component {
 
   render() {
     return (
@@ -29,7 +29,7 @@ export default class AddIgt extends Component {
                           <input
                             type='text'
                             id='name'
-                            name='name' value={this.props.tempIngredient.name}
+                            name='name' value={this.props.name}
                             onChange={this.props.handleChange}
                           />
                         </div>
@@ -39,7 +39,7 @@ export default class AddIgt extends Component {
                             type='text'
                             id='brand'
                             name='brand'
-                            value={this.props.tempIngredient.brand}
+                            value={this.props.brand}
                             onChange={this.props.handleChange}
                           />
                         </div>
@@ -49,7 +49,7 @@ export default class AddIgt extends Component {
                             type='text'
                             id='category'
                             name='category'
-                            value={this.props.tempIngredient.category}
+                            value={this.props.category}
                             onChange={this.props.handleChange}
                           /> 
                           </div>
@@ -62,7 +62,7 @@ export default class AddIgt extends Component {
                           id='servingAmount'
                           name='servingAmount'
                           min='0'
-                          value={this.props.tempIngredient.servingAmount}
+                          value={this.props.servingAmount}
                           onChange={this.props.handleChange}
                         />
                         <label htmlFor='servingSize' className="db fw4 lh-copy f6">Size: </label>
@@ -70,7 +70,7 @@ export default class AddIgt extends Component {
                           type='text'
                           id='servingSize'
                           name='servingSize'
-                          value={this.props.tempIngredient.servingSize}
+                          value={this.props.servingSize}
                           onChange={this.props.handleChange}
                         />
                   </div>

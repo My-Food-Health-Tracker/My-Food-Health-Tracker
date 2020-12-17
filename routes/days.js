@@ -25,12 +25,34 @@ router.get('/', (req, res, next) => {
     })
 });
 
+// Get the days from one user
+router.get('/user/:id',(req,res,next)=>{
+  console.log('this is the user id', req.params.id)
+  console.log('this is the req',req.body)
+  Day.find({owner: req.params.id})
+    .populate('owner')
+    .populate({
+      path: 'foods',
+      populate:{
+        path: 'ingredients',
+        model: 'Ingredient'
+      }
+    })
+    .then(day=>{
+      console.log('this is the day',day)
+      res.json(day)
+      }
+    )
+    .catch(err => console.log(err))
+})
+
+
 //View all the entries of a specific day of a user
 router.get('/user/:id/day/:date/',(req,res,next)=>{
   console.log('this is the user id', req.params.id)
   console.log('this is the req',req.body)
   Day.findOne({$and:[{owner: req.params.id},{date: req.params.date}]})
-    .populate('owner')
+    // .populate('owner')
     .populate({
       path: 'foods',
       populate:{
@@ -101,14 +123,14 @@ router.get('/:id', (req, res, next) => {
   }
 
   Day.findById(req.params.id)
-      .populate('owner')
-      .populate({
-        path: 'foods',
-        populate:{
-          path: 'ingredients',
-          model: 'Ingredient'
-        }
-      })
+    .populate('owner')
+    .populate({
+      path: 'foods',
+      populate:{
+        path: 'ingredients',
+        model: 'Ingredient'
+      }
+    })
     .then(day => {
       if (!day) {
         console.log('no Day');

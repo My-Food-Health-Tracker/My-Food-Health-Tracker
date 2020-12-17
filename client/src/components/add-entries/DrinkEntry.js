@@ -6,7 +6,7 @@ import Icons from '../shared/Icons';
 import { Link } from 'react-router-dom';
 import SearchField from './SearchField';
 import IngredientList from './IngredientList'
-import AddIgt from './AddIgt'
+import AddIngDrink from './AddIngDrink';
 
 export default class AddDrinks extends Component {
   state = {
@@ -113,6 +113,7 @@ export default class AddDrinks extends Component {
     
     if (!this.state.ingredients) return <h1>Loading...</h1>
     console.log('this is the user in foodentry', this.state.user)
+    console.log(this.props.location)
     return (
       <div>
       {/* Top Navbar */}
@@ -121,13 +122,11 @@ export default class AddDrinks extends Component {
       {/* Two buttons for single ingredient and recipe */}
         <button className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
         style={{"marginRight": "5px"}}>Add a Drink</button>
-      
-      {/* Search bar */}
+    
       <SearchField {...this.state} query={this.state.query} setQuery={this.setQuery} />
-      {/* show the ingredients in database */}
       <IngredientList {...this.state} query={this.state.query} setQuery={this.setQuery} handleClick={this.handleClick}/>
-      {/* Form */}
-      <AddIgt {...this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+
+      <AddIngDrink {...this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
       <Link className="link blue hover-silver dib mh3 tc" style={{
         "display": "flex", "flexDirection":"row", "justifyContent": "center", "alignItems":"center"}}>
       <Icons icon="FoodsDetails"/>
