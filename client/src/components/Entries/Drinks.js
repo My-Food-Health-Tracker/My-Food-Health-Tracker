@@ -1,19 +1,27 @@
-
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
+import Icons from '../shared/Icons'
 
 export default class Drinks extends Component {
   render() {
     return (
-      <article className="mw6 center br3 ba b--light-blue bg-white mb2" style={{height: 'auto'}}>
+      <article style={{height: 'auto'}}>
         {this.props.drinks.map(drink => (
-          <div className="dt-ns dt--fixed-ns w-100">
-          <div className="pa1 pa3-ns dtc-ns v-mid">
-                  <h2 className="fw4 blue mt0 mb0">You registered {drink.name}</h2>
-                  <span className="pa3 pa4-ns dtc-ns v-mid">
-                <a href="#" className="center no-underline f6 tc db w-20 pv3 bg-animate bg-blue hover-bg-dark-blue white br2">Edit</a>
-              </span>
-              </div>
+          <div className="flex justify-around items-center mw6 center br3 ba b--light-blue bg-white blue mb2">
+            <div className="flex justify-center items-center mv2">
+                <div className='ba br-100 pa2 items-center mv2 gray'>
+                  <Icons icon="Drinks"/>
+                </div>
+                <div className="tl ml2 w4">
+                  <p className="pv0 f4 b gray mb1 mt0">Drink:</p>
+                  <p className="f6 gray mv0 i">{drink.name}</p>
+                </div>
+            </div>
+              
+            <Link to={{pathname: '/add/Drinks', state:{ drinks: drink, editing: true, day:this.props.day}}} className="link blue hover-silver dib mh3 tc" >
+              <Icons icon="Edit"/>
+            </Link>
+              
           </div>
         ))}
       </article>

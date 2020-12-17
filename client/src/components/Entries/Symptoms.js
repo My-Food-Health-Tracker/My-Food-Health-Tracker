@@ -24,7 +24,7 @@ export default class Symptoms extends Component {
               </div>
               <div className="tl ml2 w4">
                 <p className="pv0 f4 b gray mb1 mt0">Symptom:</p>
-                <p className="f6 gray mv0 ">{symptom.name}</p>
+                <p className="f6 gray mv0 i">{symptom.name}</p>
                 <p className=" f6 gray mv0">Intensity: {symptom.intensity}</p>
               </div>
             </div>

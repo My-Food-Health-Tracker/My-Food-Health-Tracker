@@ -84,7 +84,7 @@ export default class Dashboard extends Component {
           <Calendar setDate={this.setDate}/>
         <div className="mt10">
           {/* <h1 className="fw4 blue">Daily entries</h1> */}
-          <section className="ph4 ph4-ns pv4">
+          <section className="ph4 ph4-ns pt4 pb5">
           {!this.state.data ? (<p className="f1"> No entries for this day!</p>) : (<div>
             {!this.state.energy ? (<p></p>) : (<Energy energy={this.state.energy.energyLevel} user={this.state.user} day={this.state.day}/>)}
             {this.state.symptoms.length === 0 ? (<p></p>) : (<Symptoms symptoms={this.state.symptoms} user={this.state.user} day={this.state.day}/>)}

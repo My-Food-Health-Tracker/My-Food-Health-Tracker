@@ -1,7 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {logout} from '../services/auth'
-import Icons from './Icons';
 import TopBar from './shared/TopBar'
 
 
@@ -17,8 +16,8 @@ export default function Home(props) {
     <div>
       <TopBar icon='health-icon' title='My Health Diary'/>
       <div className="flex flex-column justify-center items-center pv6">
-          <Link className="f8 link dim br-pill ba bw1 ph5 pv2 mb4 dib dark-blue" to="/signup">Signup</Link>
-          <Link className="f8 link dim br-pill ba bw1 ph5 pv2 mb2 dib dark-blue" to="/login">Login</Link>
+          <Link className="f5 link dim br-pill ba bw2 ph3 pv2 mb3 dib dark-blue w4" to="/signup">Signup</Link>
+          <Link className="f5 link dim br-pill ba bw2 ph3 pv2 mb2 dib dark-blue w4" to="/login">Login</Link>
       </div>
     </div>
   )

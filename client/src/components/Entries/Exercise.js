@@ -26,7 +26,7 @@ export default class Excercise extends Component {
               </div>
               <div className="tl ml2 w4">
                 <p className="pv0 f4 b gray mb1 mt0">Exercise</p> 
-                <p className="f6 gray mv0">{exercise.name}</p>
+                <p className="f6 gray mv0 i">{exercise.name}</p>
                 <p className=" f6 gray mv0">Intensity: {exercise.intensityLevel}</p>
               </div>
             </div>
