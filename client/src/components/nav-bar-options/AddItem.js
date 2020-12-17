@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import BottomNavbar from '../shared/BottomNavbar'
 import EntryList from '../shared/EntryList'
+import Calendar from '../shared/Calendar'
 
 export default class AddItem extends Component {
   render() {
@@ -8,12 +9,16 @@ export default class AddItem extends Component {
     const outcomeArr=['Symptoms','Energy']
 
     return (
-      <div className='flex flex-column justify-center items-center'>
-        <div className='ba pa3 w-100'>calendarTopBar goes here</div>
-        <div className='flex justify-center'>
-          <EntryList title="Events" entries={eventArr}/>
-          <EntryList title="Outcomes" entries={outcomeArr}/>
+      <div className='flex flex-column justify-center items-center '>
+        <div className='ba w-100'>
+          <Calendar/>
         </div>
+
+          <div className='flex justify-center pv5'>
+            <EntryList title="Events" entries={eventArr}/>
+            <EntryList title="Outcomes" entries={outcomeArr}/>
+          </div>
+
         <BottomNavbar/>
       </div>
     )
