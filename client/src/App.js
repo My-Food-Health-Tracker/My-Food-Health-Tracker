@@ -32,7 +32,6 @@ import AddSymptoms from './components/add-entries/AddSymptoms'
 
 
 
-
 class App extends React.Component {
 
   state = {
@@ -93,16 +92,16 @@ class App extends React.Component {
 
       {/* Routes to add entries */}
       <Route exact path='/add/Energy' 
-      render={() => <AddEnergy user={this.state.user}/>}
+      render={(props) => <AddEnergy user={this.state.user} {...props}/>}
       />
       <Route exact path='/add/Exercise' 
-      render={() => <AddExercise user={this.state.user}/>}
+      render={(props) => <AddExercise user={this.state.user} {...props}/>}
       />
       <Route exact path='/add/Sleep' 
-      render={() => <AddSleep user={this.state.user}/>}
+      render={(props) => <AddSleep user={this.state.user} {...props}/>}
       />
       <Route exact path='/add/Symptoms' 
-      render={() => <AddSymptoms user={this.state.user}/>}
+      render={(props) => <AddSymptoms user={this.state.user} {...props}/>}
       />
       <Route exact path='/add/Foods' 
       render={(props) => <FoodEntry user={this.state.user} {...props}/>}

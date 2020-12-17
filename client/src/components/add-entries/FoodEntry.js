@@ -1,14 +1,14 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import TopBar from '../shared/TopBar';
 import BottomNavbar from '../shared/BottomNavbar';
 import Icons from '../shared/Icons';
 import { Link } from 'react-router-dom';
-import TopBar from '../shared/TopBar';
 import AddRep from './AddRep';
 import AddIgt from './AddIgt';
 import SearchField from './SearchField';
 import IngredientList from './IngredientList';
-import FoodsList from './FoodsList'
+// import FoodsList from './FoodsList'
 
 export default class FoodEntry extends Component {
   state = {
@@ -298,6 +298,7 @@ export default class FoodEntry extends Component {
         </Link>
 
         <BottomNavbar {...this.state} />
+      
       </div>
     )
   }

@@ -37,16 +37,14 @@ export default class Calendar extends Component {
 
   render() {
     return (
-      <div>
-          {/* <nav className="pa3 pa4-ns center">
-          <div className="tc pb3">
-          <a className="link dim gray f6 f5-ns dib mr3" onClick={this.handleLeftClick}> {"<"} </a>
-          <form className="link dim gray f6 f5-ns dib mr3">
-            <input type="date" name="date" id="date" value={this.state.day} placeholder={this.state.day} onChange={this.handleChange}/>
+      <div className="mb5">
+        <nav className="fixed top-0 w-100 pa3 pa4-ns tc flex justify-center items-center bg-blue shadow-1">
+          <a className="link dim gray f5 f5-ns dib mh2 white b" onClick={this.handleLeftClick}> {"<"} </a>
+          <form className="link tc dim gray f6 f5-ns dib mh2">
+            <input className="tr dark-gray" type="date" name="date" id="date" value={this.state.day} placeholder={this.state.day} onChange={this.handleChange}/>
           </form>
-          <a className="link dim gray f6 f5-ns dib mr3" onClick={this.handleRightClick}> {">"} </a>
-          </div>
-        </nav> */}
+          <a className="link tc dim gray f5 f5-ns dib mh2 white b" onClick={this.handleRightClick}> {">"} </a>
+        </nav>
       </div>
     )
   }

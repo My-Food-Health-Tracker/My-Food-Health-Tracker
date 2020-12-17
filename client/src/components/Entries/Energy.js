@@ -1,17 +1,25 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import Icons from '../shared/Icons'
 
 export default class Energy extends Component {
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
-        <article className="mw6 center br3 ba b--light-blue bg-white">
-            <div className="dt-ns dt--fixed-ns w-100">
-              <div className="pa3 pa3-ns dtc-ns v-mid">
-                  <h2 className="fw4 blue mt0 mb0">Your energy level is {this.props.energy}</h2>
+        <article className="" style={{height: 'auto'}}>
+            <div className="flex justify-around items-center mw6 center br3 ba b--light-blue bg-white blue mb2">
+              <div className="flex justify-center items-center mv2">
+                <div className='ba br-100 pa2 items-center mv2 gray'>
+                  <Icons icon="Energy3"/>
+                </div>
+                <div className="tl ml2 w4">
+                  <p className="pv0 f4 b gray mb1 mt0">Energy:</p>
+                  <p className="f6 gray mv0 ">Energy level: {this.props.energy}</p>
+                </div>
               </div>
-              <div className="pa3 pa4-ns dtc-ns v-mid">
-                <a href="#" className="center no-underline f6 tc db w-40 pv3 bg-animate bg-blue hover-bg-dark-blue white br2">Edit entry</a>
-              </div>
+              <Link to={{pathname: '/add/Energy', props:this.props}} className="link blue hover-silver dib mh3 tc" >
+                <Icons icon="Edit"/>
+              </Link>
             </div>
           </article>    
     )
