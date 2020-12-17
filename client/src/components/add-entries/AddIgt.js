@@ -3,12 +3,12 @@ import React, { Component } from 'react'
 export default class AddIgt extends Component {
 
   render() {
-    console.log('this is the props from add ingredients form', this.props)
+    
     return (
       <div>
           <h3 className="f6 db">Custom Ingredient:</h3>
             <div>
-                <form onSubmit={this.props.editing? this.props.handleEditing : this.props.handleSubmit}>
+                <form onSubmit={this.props.handleSubmit}>
              
                   <div className="custom-ingredient">
                           <div>
@@ -62,10 +62,10 @@ export default class AddIgt extends Component {
                         />
                   </div>
                 
-                <button type='submit' className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Save</button>
+                  <button type='submit' className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Save</button>
               </form>
 
-              <button onClick={this.props.handleDelete} className="f6 w4 dim ph3 pv2 mt3 dib white bg-dark-red br-pill b--dark-red">Delete</button>
+              
 
         </div>
 </div>

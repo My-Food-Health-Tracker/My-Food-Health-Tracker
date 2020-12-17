@@ -15,13 +15,13 @@ export default class AddDrinks extends Component {
     days: [],
     ingredients: [],
     ingredientsOfDay: [],
-    name: this.props.location.state.drinks.ingredients[0].name,
-    brand: this.props.location.state.drinks.ingredients[0].brand,
-    category: this.props.location.state.drinks.ingredients[0].category,
-    date: this.props.location.state.day ||new Date().toISOString().split('T')[0],
-    startTime: this.props.location.state.drinks.ingredients[0].startTime ||new Date().toISOString().split('T')[1].slice(0,5),
-    servingAmount: this.props.location.state.drinks.ingredients[0].servingAmount,
-    servingSize: this.props.location.state.drinks.ingredients[0].servingSize,
+    name: "",
+    brand: "",
+    category: "",
+    date: "",
+    startTime: "",
+    servingAmount: "",
+    servingSize: "",
     selectedIngredient: false,
     ingredientCount: 0,
     query: '',
@@ -88,7 +88,7 @@ export default class AddDrinks extends Component {
   };
 
   handleSubmit = event => {
-    event.preventDefault();
+    event?.preventDefault();
     const payload = this.state;
     console.log(payload);
     console.log(this.state.date)
