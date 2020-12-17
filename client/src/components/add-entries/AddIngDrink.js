@@ -7,22 +7,8 @@ export default class AddIngDrink extends Component {
       <div>
           <h3 className="f6 db">Custom Ingredient:</h3>
             <div>
-                <form onSubmit={this.props.handleSubmit}>
+                <form onSubmit={this.props.editing? this.props.handleEditing : this.props.handleSubmit}>
                 
-                  <div className="date-time">
-                    <label htmlFor="date" className="f6 mt3">Date:</label>
-                    <input type="date" id="date"
-                          name="date" 
-                      onChange={this.props.handleChange}
-                    />
-                    <label htmlFor="startTime" className="f6 mt3">Time:</label>
-
-                    <input type="time" id="startTime"
-                        name="startTime" 
-                      onChange={this.props.handleChange}
-                    />
-                  </div>
-             
                   <div className="custom-ingredient">
                           <div>
                           <label htmlFor='name'  className="f6 mt3" >Name: </label>
@@ -77,6 +63,7 @@ export default class AddIngDrink extends Component {
                 
                 <button type='submit' className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Save</button>
               </form>
+              <button onClick={this.props.handleDelete} className="f6 w4 dim ph3 pv2 mt3 dib white bg-dark-red br-pill b--dark-red">Delete</button>
         </div>
 </div>
     )

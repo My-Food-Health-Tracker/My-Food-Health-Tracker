@@ -14,21 +14,21 @@ export default class FoodEntry extends Component {
   state = {
     // this is the loggedin user from App.js
     user: this.props.user,
-    date: '',
+    date: this.props.location.state?.day ||new Date().toISOString().split('T')[0],
     ingredients: [],
-    tempStartTime: '',
+    tempStartTime: this.props.location.state.foods.startTime,
     tempIngredient: {
-      name: '',
-      brand: '',
-      category: '',
-      servingAmount: 0,
-      servingSize: '',
+      name: this.props.location.state.foods.ingredients[0].name,
+      brand: this.props.location.state.foods.ingredients[0].brand,
+      category: this.props.location.state.foods.ingredients[0].category,
+      servingAmount: this.props.location.state.foods.ingredients[0].servingAmount,
+      servingSize: this.props.location.state.foods.ingredients[0].servingSize
     },
     food: {
       startTime: '',
       name: '',
-      portion: 0,
-      eatenPortion: 0,
+      portion: '',
+      eatenPortion: '',
       ingredients: [
       ]
     },
@@ -36,6 +36,16 @@ export default class FoodEntry extends Component {
     handleShowSingle: true,
     ingredientCount: 0,
     query: '',
+    id:this.props.location.state?.foods._id,
+    editing:this.props.location.state?.editing,
+
+    // startDate: this.props.location.state?.day ||new Date().toISOString().split('T')[0],//this should be the present day in the string format: "yyyy-mm-dd"
+    // startTime: this.props.location.state?.symptoms.startTime ||new Date().toISOString().split('T')[1].slice(0,5),//this should bte the present time in the string format:"hh:mm"
+    // name:this.props.location.state?.symptoms.name,
+    // intensity:this.props.location.state?.symptoms.intensity,
+    // notes:this.props.location.state?.symptoms.notes,
+    // id:this.props.location.state?.symptoms._id,
+    // editing:this.props.location.state?.editing
   }
 
   // Get initial ingredients data
@@ -162,7 +172,6 @@ export default class FoodEntry extends Component {
     console.log(payload);
     axios.post(`/api/ingredients/user/${this.props.user._id}/day/${this.state.date}`, payload)
       .then(() => {
-        // set the form to it's initial state (empty input fields)
         this.setState({
           date: '',
           food: {
@@ -187,6 +196,7 @@ export default class FoodEntry extends Component {
           tempStartTime: '',
           ingredientCount: ++this.state.ingredientCount
         })
+        this.props.history.push("/dashboard")
         // update the parent components state (in Projects) by calling getData()
         // this.props.getData();
       })
@@ -249,6 +259,7 @@ export default class FoodEntry extends Component {
           tempStartTime: '',
           ingredientCount: 0
         })
+        this.props.history.push("/dashboard")
         // update the parent components state (in Projects) by calling getData()
         // this.props.getData();
       })
@@ -267,21 +278,69 @@ export default class FoodEntry extends Component {
           })
       })
     }
-  
+
+// delete
+    handleDelete = event => {
+      event?.preventDefault();
+      // const date = event.target.name;
+      // const foodId = event.target.value;
+      axios.put(`/api/ingredients/user/${this.state.user._id}/day/${this.state.date}/${this.state.id}/delete`)
+      .then(res => {
+        console.log(res);
+        this.props.history.push("/dashboard")
+      })
+      .catch(err=>console.log(err))
+    }
+    
+    handleEditing = event => {
+      event?.preventDefault();
+      console.log('this is props', this.props);
+      const newFood = this.state.food;
+      newFood.startTime = this.state.tempStartTime;
+      this.setState({
+        food: newFood
+      })
+      const payload = {
+        user: this.state.user,
+        date: this.state.date,
+        food: this.state.food
+      };
+      axios.put(`/api/ingredients/user/${this.state.user._id}/day/${this.state.date}/${this.state.id}/edit`, 
+      payload)
+      .then(res => {
+        console.log('hallo');
+        this.props.history.push("/dashboard")
+      })
+      .catch(err=>console.log(err))
+    }
   
   render() {
     let inputComponent;
     if (this.state.handleShowSingle) {     
-      inputComponent = <AddIgt {...this.state} handleChange={this.handleChange} handleSubmit={this.handleSingleSubmit} />;    
+      inputComponent = <AddIgt {...this.state} handleChange={this.handleChange} handleSubmit={this.handleSingleSubmit} handleDelete={this.handleDelete} handleEditing={this.handleEditing}/>;    
       } 
     else {      
-      inputComponent = <AddRep {...this.state} handleChange={this.handleChange} handleSubmit={this.handleRecipeSubmit} handleAddButton={this.handleAddButton}/>;  
+      inputComponent = <AddRep {...this.state} handleChange={this.handleChange} handleSubmit={this.handleRecipeSubmit} handleAddButton={this.handleAddButton} handleDelete={this.handleDelete} handleEditing={this.handleEditing}/>;  
       } 
       console.log(this.props.location.state)
     return (
       <div>
         <TopBar title="Foods" icon="Foods" /> 
+        <form onSubmit={this.handleSingleSubmit} onSubmit={this.handleRecipeSubmit}>
+        <div className="date-time">
+              <label htmlFor="date" className="f6 mt3">Date:</label>
+              <input type="date" id="date"
+                    name="date" value={this.state.date}
+                onChange={this.handleChange}
+              />
+              <label htmlFor="startTime" className="f6 mt3">Time:</label>
 
+              <input type="time" id="startTime"
+                  name="startTime" value={this.state.tempStartTime}
+                onChange={this.handleChange}
+              />
+            </div>
+        </form>
         <button onClick={()=>this.toggleSingle()} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
         style={{"marginRight": "5px"}}>Single Ingredient</button>
         <button onClick={()=>this.toggleRecipe()} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
