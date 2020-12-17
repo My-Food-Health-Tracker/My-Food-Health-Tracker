@@ -24,24 +24,38 @@ export default class IngreList extends Component {
     this.getAllDays();
   }
 
+  handleDelete = event => {
+    const date = event.target.name;
+    const foodId = event.target.value;
+    axios.put(`/api/ingredients/user/${this.props.user._id}/day/${date}/${foodId}/delete`)
+    .then(this.getAllDays())
+
+  }
   render() {
     
-   console.log(this.state.allDays)
     const filteredDays = this.state.allDays.filter(mydays => 
       mydays.owner._id === this.state.user._id
     )
-    console.log("so schaut ein tag aus");
-    console.log(filteredDays[0])
-    
+    console.log(filteredDays);
     return (
       <div className="pa3 pa5-ns">
-      <h1>You foods comsumptions in last </h1>
+      <h1>You foods comsumptions during the last days </h1>
       <ul className="list pl0 measure center">
       {
         filteredDays.map(day => {
           return (
             <li key={day.foods._id} key-data={day.foods._id} class="lh-copy pv3 ba bl-0 bt-0 br-0 b--dotted b--black-30">
-             {day.foods.name} {day.foods.startTime} 
+            {day.date}
+            <ul>
+              {day.foods.map(food => {
+                return (
+                  <li>{food.name} 
+                  <button>Edit</button>
+                  <button name={day.date} value={food._id} onClick={this.handleDelete}>Delete</button>
+                  </li>
+                )
+              })}
+            </ul>
             </li>
           )
         })

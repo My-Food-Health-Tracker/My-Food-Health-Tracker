@@ -162,7 +162,6 @@ export default class FoodEntry extends Component {
     console.log(payload);
     axios.post(`/api/ingredients/user/${this.props.user._id}/day/${this.state.date}`, payload)
       .then(() => {
-        // set the form to it's initial state (empty input fields)
         this.setState({
           date: '',
           food: {
@@ -187,6 +186,7 @@ export default class FoodEntry extends Component {
           tempStartTime: '',
           ingredientCount: ++this.state.ingredientCount
         })
+        this.props.history.push("/dashboard")
         // update the parent components state (in Projects) by calling getData()
         // this.props.getData();
       })
@@ -249,6 +249,7 @@ export default class FoodEntry extends Component {
           tempStartTime: '',
           ingredientCount: 0
         })
+        this.props.history.push("/dashboard")
         // update the parent components state (in Projects) by calling getData()
         // this.props.getData();
       })
