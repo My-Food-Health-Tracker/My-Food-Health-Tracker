@@ -88,7 +88,7 @@ export default class Dashboard extends Component {
             {!this.state.energy ? (<p>No energy entries today</p>) : (<Energy energy={this.state.energy.energyLevel} user={this.state.user} day={this.state.day}/>)}
             {this.state.symptoms.length === 0 ? (<p>No symptoms entries today</p>) : (<Symptoms symptoms={this.state.symptoms} user={this.state.user} day={this.state.day}/>)}
             {this.state.foods.length === 0 ? (<p>No food entries today</p>) : (<Foods foods={this.state.foods} user={this.state.user} day={this.state.day}/>)}
-            {this.state.drinks.length === 0 ? (<p>Nodrinks entries today</p>) : (<Drinks foods={this.state.drinks} user={this.state.user} day={this.state.day}/>)}
+            {this.state.drinks.length === 0 ? (<p>Nodrinks entries today</p>) : (<Drinks drinks={this.state.drinks} user={this.state.user} day={this.state.day}/>)}
             {this.state.exercises.length === 0 ? (<p>No exercise entries today</p>) : (<Exercise exercises={this.state.exercises} user={this.state.user} day={this.state.day}/>)}
             {this.state.sleep.length === 0 ? (<p>No sleep entries today</p>) : (<Sleep sleep={this.state.sleep} user={this.state.user} day={this.state.day}/>)}
             </div>)}
