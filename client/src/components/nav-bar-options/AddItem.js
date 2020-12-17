@@ -5,7 +5,7 @@ import Calendar from '../shared/Calendar'
 
 export default class AddItem extends Component {
   render() {
-    const eventArr=['Drinks','Foods','Sleep','Exercise']
+    const eventArr=['Drinks','Foods', 'Sleep','Exercise']
     const outcomeArr=['Symptoms','Energy']
 
     return (

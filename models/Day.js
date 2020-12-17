@@ -23,10 +23,11 @@ const daySchema = new Schema({
     name: String,
     imgUrl: String,
     brand: String,
+    category: String,
     servingAmount: Number,
     servingSize: String,
       // here not sure
-    ingredients: []
+    ingredients: [{ type: Schema.Types.ObjectId, ref: 'Ingredient' }]
   }],
 
   supplements : [{

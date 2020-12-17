@@ -595,8 +595,4 @@ case 'FoodsDetails':
     default:
       // code block
   }
-
-
-
-  
 }
