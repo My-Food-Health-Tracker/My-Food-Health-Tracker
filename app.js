@@ -16,7 +16,7 @@ const passport = require('passport');
 require('./configs/passport');
 
 mongoose
-  .connect(rocess.env.MONGODB_URI || 'mongodb://localhost/food-health', {
+  .connect(process.env.MONGODB_URI || 'mongodb://localhost/food-health', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
