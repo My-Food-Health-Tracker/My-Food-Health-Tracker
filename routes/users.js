@@ -27,6 +27,7 @@ router.get('/:id', (req, res, next) => {
   }
 
   User.findById(req.params.id)
+  .populate('days')
     .then(user => {
       console.log('this is the response', user)
       if (!user) {
