@@ -7,10 +7,12 @@ import BottomNavbar from '../shared/BottomNavbar'
 export default class AddSleep extends Component {
 
   state={
-    startDate: this.props.startDate,//this should be the present day in the string format: "yyyy-mm-dd"
-    startTime: this.props.startTime,//this should bte the present time in the string format:"hh:mm"
-    duration:this.props.duration,
-    notes:this.props.notes
+    startDate: this.props.location.state?.day ||new Date().toISOString().split('T')[0],//this should be the present day in the string format: "yyyy-mm-dd"
+    startTime: this.props.location.state?.sleep.startTime,//this should bte the present time in the string format:"hh:mm"
+    duration:this.props.location.state?.sleep.duration,
+    notes:this.props.location.state?.sleep.notes,
+    id:this.props.location.state?.sleep._id,
+    editing:this.props.location.state?.editing
   }
 
   handleChange=event=>{
@@ -30,18 +32,40 @@ export default class AddSleep extends Component {
     const sleepEntry=this.state;
 
     axios.post(`/api/sleep/user/${this.props.user._id}/day/${this.state.startDate}`,sleepEntry)
-      .then(res=>console.log(res))
+      .then(res=>{
+        console.log(res);
+        this.props.history.push("/dashboard")
+      })
       .catch(err=>console.log(err))
 
   }
 
-  handleDelete=()=>{
+  handleDelete=event=>{
+
+    event.preventDefault();
 
     const sleepToDelete=this.state;
 
     axios.delete(`/api/sleep/user/${this.props.user._id}/day/${this.state.startDate}`,{data:sleepToDelete})
-      .then(res=>console.log(res))
+      .then(res=>{
+        console.log(res);
+        this.props.history.push("/dashboard")
+      })
       .catch(err=>console.log(err))
+  }
+
+  handleEditing=event=>{
+
+    event.preventDefault();
+
+    const updatedSleep=this.state;
+
+    axios.put(`/api/sleep/user/${this.props.user._id}/day/${this.state.startDate}`,{data:[this.state.id,updatedSleep]})
+    .then(res=>{
+      console.log(res);
+      this.props.history.push("/dashboard")
+    })
+    .catch(err=>console.log(err))
   }
 
   render() {
@@ -52,7 +76,7 @@ export default class AddSleep extends Component {
         <TopBar title='Sleep' icon='Sleep'/>
 
         <div className='flex flex-column items-center'>
-          <form onSubmit={this.handleSubmit} className='flex flex-column items-center' action="POST">
+          <form onSubmit={this.state.editing? this.handleEditing : this.handleSubmit} className='flex flex-column items-center' action="POST">
 
             <label htmlFor="start-date" className="f6 mt3">Date:</label>
             <input onChange={this.handleChange} value={this.state.startDate} type="date" id="start-date" name="startDate" className="mb2"/>

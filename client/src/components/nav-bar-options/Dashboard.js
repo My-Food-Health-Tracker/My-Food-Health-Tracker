@@ -29,6 +29,7 @@ export default class Dashboard extends Component {
       })
       await this.getData()   
   }
+
   getData = () => {
     console.log('getting data from api')
     axios.get(`/api/days/user/${this.props.user._id}/day/${this.state.day}`)
@@ -77,20 +78,20 @@ export default class Dashboard extends Component {
 
   render() {
     // console.log(this.state.data)
-    console.log(this.state.excercises)
+    // console.log(this.state.excercises)
     return (
       <div>
           <Calendar setDate={this.setDate}/>
-        <div>
-          <h1 className="fw4 blue mt0 mb0">Daily entries</h1>
-          <section className="ph4 ph4-ns pv3">
-          {!this.state.data ? (<p>No entries today</p>) : (<div>
-            {!this.state.energy ? (<p>No energy entries today</p>) : (<Energy energy={this.state.energy.energyLevel} user={this.state.user} day={this.state.day}/>)}
-            {this.state.symptoms.length === 0 ? (<p>No symptoms entries today</p>) : (<Symptoms symptoms={this.state.symptoms} user={this.state.user} day={this.state.day}/>)}
-            {this.state.foods.length === 0 ? (<p>No food entries today</p>) : (<Foods foods={this.state.foods} user={this.state.user} day={this.state.day}/>)}
-            {this.state.drinks.length === 0 ? (<p>Nodrinks entries today</p>) : (<Drinks drinks={this.state.drinks} user={this.state.user} day={this.state.day}/>)}
-            {this.state.exercises.length === 0 ? (<p>No exercise entries today</p>) : (<Exercise exercises={this.state.exercises} user={this.state.user} day={this.state.day}/>)}
-            {this.state.sleep.length === 0 ? (<p>No sleep entries today</p>) : (<Sleep sleep={this.state.sleep} user={this.state.user} day={this.state.day}/>)}
+        <div className="mt10">
+          {/* <h1 className="fw4 blue">Daily entries</h1> */}
+          <section className="ph4 ph4-ns pt4 pb5">
+          {!this.state.data ? (<p className="f1"> No entries for this day!</p>) : (<div>
+            {!this.state.energy ? (<p></p>) : (<Energy energy={this.state.energy.energyLevel} user={this.state.user} day={this.state.day}/>)}
+            {this.state.symptoms.length === 0 ? (<p></p>) : (<Symptoms symptoms={this.state.symptoms} user={this.state.user} day={this.state.day}/>)}
+            {this.state.foods.length === 0 ? (<p></p>) : (<Foods foods={this.state.foods} user={this.state.user} day={this.state.day}/>)}
+            {this.state.drinks.length === 0 ? (<p></p>) : (<Drinks drinks={this.state.drinks} user={this.state.user} day={this.state.day}/>)}
+            {this.state.exercises.length === 0 ? (<p></p>) : (<Exercise exercises={this.state.exercises} user={this.state.user} day={this.state.day}/>)}
+            {this.state.sleep.length === 0 ? (<p></p>) : (<Sleep sleep={this.state.sleep} user={this.state.user} day={this.state.day}/>)}
             </div>)}
           </section>
         </div>

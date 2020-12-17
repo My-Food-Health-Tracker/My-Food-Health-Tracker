@@ -30,7 +30,8 @@ import AddExercise from './components/add-entries/AddExercise'
 import AddSleep from './components/add-entries/AddSleep'
 import AddSymptoms from './components/add-entries/AddSymptoms'
 
-// import AddDays from './components/testviews/AddDays'
+
+import EditEntryTest from './components/testviews/EditEntryTest'
 
 
 
@@ -106,6 +107,7 @@ class App extends React.Component {
       render = {props => <Login setUser={this.setUser} {...props}/>}
       /> 
 
+      {/* Routes in BottomNavbar  */}
       {/* Xiaomei: Routes for Food Entry */}
       <Route 
       exact 
@@ -125,7 +127,7 @@ class App extends React.Component {
 
       {/* Routes to add entries */}
       <Route exact path='/add/Energy' 
-      render={() => <AddEnergy user={this.state.user}/>}
+      render={(props) => <AddEnergy user={this.state.user} {...props}/>}
       />
       <Route exact path='/add/Exercise' 
       render={(props) => <AddExercise user={this.state.user} {...props}/>}
@@ -136,6 +138,23 @@ class App extends React.Component {
       <Route exact path='/add/Symptoms' 
       render={(props) => <AddSymptoms user={this.state.user} {...props}/>}
       />
+
+
+
+
+
+      {/* Route to test editing of entries. Erase later*/}
+      <Route exact path='/edit-entry-test' 
+      render={() => <EditEntryTest user={this.state.user}/>}/>
+
+
+
+
+
+
+
+
+
       <Route exact path='/add/Foods'
        render = {props => <FoodEntry user={this.state.user} {...props}/>}
        />

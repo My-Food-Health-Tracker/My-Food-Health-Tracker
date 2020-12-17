@@ -6,11 +6,13 @@ import axios from 'axios'
 export default class AddExercise extends Component {
 
   state={
-    startDate: this.props.startDate,//this should be the present day in the string format: "yyyy-mm-dd"
-    startTime: this.props.startTime,//this should bte the present time in the string format:"hh:mm"
-    name:this.props.name,
-    intensityLevel:this.props.intensityLevel,
-    duration:this.props.duration,
+    startDate: this.props.location.state?.day ||new Date().toISOString().split('T')[0],//this should be the present day in the string format: "yyyy-mm-dd"
+    startTime: this.props.location.state?.exercises.startTime,//this should bte the present time in the string format:"hh:mm"
+    name:this.props.location.state?.exercises.name,
+    intensityLevel:this.props.location.state?.exercises.intensityLevel,
+    duration:this.props.location.state?.exercises.duration,
+    id:this.props.location.state?.exercises._id,//normally undefined. Just defined when this component is used in the dashboard
+    editing:this.props.location.state?.editing //true when this component is used in the dashboard
     // saveToFrequent:false
   }
 
@@ -31,22 +33,46 @@ export default class AddExercise extends Component {
     const exerciseEntry=this.state;
 
     axios.post(`/api/exercise/user/${this.props.user._id}/day/${this.state.startDate}`,exerciseEntry)
-      .then(res=>console.log('the exercise was added to the day',res))
-      .catch(err=>console.log('the exercise was not added to the day',err))
-
+      .then(res=>{
+        console.log(res);
+        this.props.history.push("/dashboard")
+      })
+      .catch(err=>console.log(err))
+    
+    console.log(exerciseEntry)
     // if(this.state.saveToFrequent){
     //   //add logic to save to frequent entries
     // }
 
   }
 
-  handleDelete=()=>{
+  handleDelete=event=>{
+
+    event.preventDefault();
 
     const exerciseToDelete=this.state;
 
     axios.delete(`/api/exercise/user/${this.props.user._id}/day/${this.state.startDate}`,{data:exerciseToDelete})
-      .then(res=>console.log('the exercise was deleted from the day',res))
-      .catch(err=>console.log('the exercise was not deleted from the day',err))
+      .then(res=>{
+        console.log(res);
+        this.props.history.push("/dashboard")
+        })
+      .catch(err=>console.log(err))
+  }
+
+
+  handleEditing=event=>{
+
+    event.preventDefault();
+    
+    const updatedExercise=this.state;
+
+    axios.put(`/api/exercise/user/${this.props.user._id}/day/${this.state.startDate}`,{data:[this.state.id,updatedExercise]})
+    .then(res=>{
+      // console.log('handling editing');
+      this.props.history.push("/dashboard")
+      })
+    .catch(err=>console.log(err))
   }
 
   render() {
@@ -61,7 +87,7 @@ export default class AddExercise extends Component {
         <TopBar title='Exercise' icon='Exercise'/>
 
         <div className='flex flex-column items-center'>
-          <form onSubmit={this.handleSubmit} className='flex flex-column items-center' action="POST">
+          <form onSubmit={this.state.editing? this.handleEditing : this.handleSubmit} className='flex flex-column items-center' action="POST">
 
             <label htmlFor="start-date" className="f6 mt3">Date:</label>
             <input onChange={this.handleChange} value={this.state.startDate} type="date" id="start-date" name="startDate" className="mb2"/>
@@ -70,7 +96,7 @@ export default class AddExercise extends Component {
             <input onChange={this.handleChange} value={this.state.startTime} type="time" id="start-date" name="startTime" className="mb2"/>
 
             <label htmlFor="name" className="f6 mt3">Name:</label>
-            <select name="name" id="name" onChange={this.handleChange} className="f6 mt1" >
+            <select name="name" id="name" onChange={this.handleChange} value={this.state.name} className="f6 mt1" >
             {nameOptions.map(option=>{
               return(
                 <option value={option} className="f6">{option}</option>

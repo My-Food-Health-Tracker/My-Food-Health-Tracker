@@ -2,16 +2,18 @@ const express = require('express');
 const router = express.Router();
 
 const Day = require('../models/Day');
+const User= require('../models/User');
 
 
 //add energy level to a day (create day if that day doesn't exists)
 router.post('/user/:id/day/:date',(req,res,next)=>{
   Day.findOne({$and:[{owner: req.params.id},{date: req.params.date}]})
     .then(day=>{
+      const energyEntry={startTime:req.body.startTime, energyLevel:req.body.energyLevel}
       if(day!==null){
-        Day.findByIdAndUpdate(day._id,{energy:{startTime:req.body.startTime, energyLevel:req.body.energyLevel}},{new:true})
+        Day.findByIdAndUpdate(day._id,{energy:energyEntry},{new:true})
           .then(updatedDay=>{
-            console.log('day updated with:',{startTime:req.body.startTime, energyLevel:req.body.energyLevel});
+            console.log('day updated with:',energyEntry);
             res.status(204).json(updatedDay);
           })
           .catch(err=>{
@@ -29,13 +31,16 @@ router.post('/user/:id/day/:date',(req,res,next)=>{
           exercises: [],
           sleep: [],
           symptoms:[],
-          energy:{startTime:req.body.startTime, energyLevel:req.body.energyLevel},
+          energy:energyEntry,
           owner:req.params.id
         }
         Day.create(newDay)
           .then(dbDay=>{
-            console.log('day created:',newDay)
-            res.status(201).json(dbDay)
+            console.log('day created:',newDay);
+            User.findByIdAndUpdate(req.params.id,{$push:{days:dbDay._id}})
+              .then(user=>{
+                res.status(201).json(dbDay)
+              })
           })
           .catch(err=>{
             console.log(err)
@@ -46,6 +51,34 @@ router.post('/user/:id/day/:date',(req,res,next)=>{
     .catch(err=>{
       res.json(err);
     })
+})
+
+//edit an existing energy
+router.put('/user/:id/day/:date',(req,res,next)=>{
+  Day.findOne({$and:[{owner: req.params.id},{date: req.params.date}]})
+  .then(day=>{
+    if(day!==null){
+      
+      const updatedEnergy={
+        startTime:req.body.data.startTime,
+        energyLevel:req.body.data.energyLevel
+      }
+      // console.log('udated energy',updatedEnergy)
+
+        Day.findByIdAndUpdate(day._id,{energy:updatedEnergy},{new:true})
+          .then(updatedDay=>{
+            console.log('the exercise was updated',updatedDay);
+            res.status(201).json(updatedDay);
+          })
+          .catch(err=>res.json(err))
+      }
+      else{
+        console.log('this day does not exists');
+      }
+    }).catch(err=>{
+      res.json('there was a problem finding the day',err);
+    })
+
 })
 
 //delete energy level to a day

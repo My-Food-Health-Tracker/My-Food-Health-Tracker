@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import TopNav from '../view5-food-entry/TopNav';
+import TopBar from '../shared/TopBar';
 import AddIngredient from '../view5-food-entry/AddIngredient';
 import BottomNavbar from '../shared/BottomNavbar';
 import Icons from '../Icons';
@@ -69,14 +69,16 @@ export default class FoodEntry extends Component {
     console.log('this is the user in foodentry', this.state.user)
     return (
       <div>
-      {/* Top Navbar */}
-        <TopNav /> 
+      
+        <TopBar icon="Foods" title="Foods"/> 
 
       {/* Two buttons for single ingredient and recipe */}
-        <button className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
-        style={{"marginRight": "5px"}}>Single Ingredient</button>
-        <button className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue" 
-        style={{"marginLeft": "5px"}}>Recipe</button>
+        <button className="f6 link dim br-pill ba ph3 pv2 mb2 mv1 dib dark-blue">
+          Single Ingredient
+        </button>
+        <button className="f6 link dim br-pill ba ph3 pv2 mb2 mv1 dib dark-blue">
+          Recipe
+        </button>
       
       {/* Search bar */}
         <form>
@@ -84,9 +86,6 @@ export default class FoodEntry extends Component {
             type="search"
             name="search"
             placeholder="Search for..."
-            // value={}
-            // onClick={}
-            // onChange={}
           />
         </form>
 
