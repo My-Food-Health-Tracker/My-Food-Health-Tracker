@@ -17,6 +17,7 @@ router.get('/', (req, res, next) => {
       }
     })
     .then(users => {
+      console.log(users)
       res.status(200).json(users);
     })
     .catch(err => {
@@ -43,6 +44,7 @@ router.get('/:id', (req, res, next) => {
       }
     })
     .then(user => {
+      console.log('this is the response', user)
       if (!user) {
         console.log('no User');
         res.status(404).json(user);
