@@ -16,7 +16,8 @@ export default function RealData(props) {
       fetchData()
 
       }, [userData]);
-
+      
+      
 
     const fetchData = async () => {
           const result = await axios(`/api/users/${user}`);
@@ -25,7 +26,7 @@ export default function RealData(props) {
           createTimeSeriesData(userData)
     }
     
-    let colors={}
+    let colors = [,,"#666","#b00"]
 
     const createTimeSeriesData = (userData) => {
       //select the last 4 days
@@ -39,7 +40,7 @@ export default function RealData(props) {
         let symptomData = {"name": "symptom", "data": []};
       
         //iterate over each day
-        let foodData = {"name": "food", "data": []};
+        let foodData = {"name": foodCheck, "data": []};
         
         userData.map(day => {
         
