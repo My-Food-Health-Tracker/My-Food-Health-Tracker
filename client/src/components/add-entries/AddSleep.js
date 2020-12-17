@@ -27,7 +27,7 @@ export default class AddSleep extends Component {
 
   handleSubmit=event=>{
 
-    event.preventDefault();
+    event?.preventDefault();
     
     const sleepEntry=this.state;
 
@@ -42,7 +42,7 @@ export default class AddSleep extends Component {
 
   handleDelete=event=>{
 
-    event.preventDefault();
+    event?.preventDefault();
 
     const sleepToDelete=this.state;
 
@@ -56,7 +56,7 @@ export default class AddSleep extends Component {
 
   handleEditing=event=>{
 
-    event.preventDefault();
+    event?.preventDefault();
 
     const updatedSleep=this.state;
 

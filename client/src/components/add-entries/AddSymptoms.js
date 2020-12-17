@@ -27,7 +27,7 @@ export default class AddSymptoms extends Component {
 
   handleSubmit=event=>{
 
-    event.preventDefault();
+    event?.preventDefault();
     
     const symptomEntry=this.state;
 
@@ -42,7 +42,7 @@ export default class AddSymptoms extends Component {
 
   handleDelete=event=>{
 
-    event.preventDefault();
+    event?.preventDefault();
 
     const symptomToDelete=this.state;
 
@@ -56,7 +56,7 @@ export default class AddSymptoms extends Component {
 
   handleEditing=event=>{
     
-    event.preventDefault();
+    event?.preventDefault();
 
     const updatedSymptom=this.state;
 
