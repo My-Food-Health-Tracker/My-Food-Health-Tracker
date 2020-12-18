@@ -107,9 +107,9 @@ class App extends React.Component {
       <Route exact path='/add/Foods' 
       render={(props) => <FoodEntry user={this.state.user} {...props}/>}
       />
-      {/* <Route exact path='/add/Drinks' 
+      <Route exact path='/add/Drinks' 
       render={(props) => <DrinkEntry user={this.state.user} {...props}/>}
-      /> */}
+      />
 
       {/* Routes to edit food */}
       <Route exact path='/edit/Foods' 
