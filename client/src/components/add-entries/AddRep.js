@@ -46,7 +46,7 @@ export default class AddRep extends Component {
                     type='text'
                     id='name'
                     name='name'
-                    placeholder="Chicken"
+                    placeholder="e.g. Chicken"
                     value={this.props.tempIngredient.name}
                     onChange={this.props.handleChange}
                   />
@@ -54,7 +54,7 @@ export default class AddRep extends Component {
                     type='text'
                     id='brand'
                     name='brand'
-                    placeholder="Edeka"
+                    placeholder="e.g. Edeka"
                     value={this.props.tempIngredient.brand}
                     onChange={this.props.handleChange}
                   />
@@ -62,7 +62,7 @@ export default class AddRep extends Component {
                     type='text'
                     id='category'
                     name='category'
-                    placeholder="Foods"
+                    placeholder="e.g. Foods"
                     value={this.props.tempIngredient.category}
                     onChange={this.props.handleChange}
                   />
@@ -70,7 +70,7 @@ export default class AddRep extends Component {
                     type='number'
                     id='servingAmount'
                     name='servingAmount'
-                    placeholder="500"
+                    placeholder="e.g. 2"
                     value={this.props.tempIngredient.servingAmount}
                     onChange={this.props.handleChange}
                   />
@@ -78,15 +78,14 @@ export default class AddRep extends Component {
                     type='text'
                     id='servingSize'
                     name='servingSize'
-                    placeholder="g"
+                    placeholder="e.g. Kg"
                     value={this.props.tempIngredient.servingSize}
                     onChange={this.props.handleChange}
                   /> 
                 
-                <button type='submit' className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Save</button>
+                <button type='submit' className="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-blue">Save</button>
               </form>
-              <button onClick={this.props.handleAddButton} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-green">Add asd ingredient to the recipe</button>
-              <button onClick={this.props.handleDelete} className="f6 w4 dim ph3 pv2 mt3 dib white bg-dark-red br-pill b--dark-red">Delete</button>
+              <button onClick={this.props.handleAddButton} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Add ingredient to the recipe</button>
         </div>
 </div>
     )

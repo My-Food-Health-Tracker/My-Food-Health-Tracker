@@ -3,12 +3,12 @@ import React, { Component } from 'react'
 export default class AddIgt extends Component {
 
   render() {
-    console.log('this is the props from add ingredients form', this.props)
+    
     return (
       <div>
           <h3 className="f6 db">Custom Ingredient:</h3>
             <div>
-                <form onSubmit={this.props.editing? this.props.handleEditing : this.props.handleSubmit}>
+                <form onSubmit={this.props.handleSubmit}>
              
                   <div className="custom-ingredient">
                           <div>
@@ -16,6 +16,7 @@ export default class AddIgt extends Component {
                           <input
                             type='text'
                             id='name'
+                            placeholder="e.g. Apple"
                             name='name' value={this.props.tempIngredient.name}
                             onChange={this.props.handleChange}
                           />
@@ -26,6 +27,7 @@ export default class AddIgt extends Component {
                             type='text'
                             id='brand'
                             name='brand'
+                            placeholder="e.g. Edeka"
                             value={this.props.tempIngredient.brand}
                             onChange={this.props.handleChange}
                           />
@@ -36,6 +38,7 @@ export default class AddIgt extends Component {
                             type='text'
                             id='category'
                             name='category'
+                            placeholder="e.g. Foods"
                             value={this.props.tempIngredient.category}
                             onChange={this.props.handleChange}
                           /> 
@@ -48,6 +51,7 @@ export default class AddIgt extends Component {
                           type='number'
                           id='servingAmount'
                           name='servingAmount'
+                          placeholder="e.g. 3"
                           min='0'
                           value={this.props.tempIngredient.servingAmount}
                           onChange={this.props.handleChange}
@@ -57,15 +61,16 @@ export default class AddIgt extends Component {
                           type='text'
                           id='servingSize'
                           name='servingSize'
+                          placeholder="e.g. piece"
                           value={this.props.tempIngredient.servingSize}
                           onChange={this.props.handleChange}
                         />
                   </div>
                 
-                <button type='submit' className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Save</button>
+                  <button type='submit' class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-blue">Save</button>
               </form>
 
-              <button onClick={this.props.handleDelete} className="f6 w4 dim ph3 pv2 mt3 dib white bg-dark-red br-pill b--dark-red">Delete</button>
+              
 
         </div>
 </div>

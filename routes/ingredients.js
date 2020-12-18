@@ -387,40 +387,42 @@ router.put('/drinks/user/:userId/day/:date/:foodId/delete', (req, res, next) => 
 
 // edit a food 
 
-// edit
-
 router.put('/user/:userId/day/:date/:foodId/edit', (req, res) => {
-
-  console.log('this is the request body data ingredinets', req.body.food)
-
- Day.findOne({$and: [{owner: req.params.id}, {date: req.params.date}]})
-  .then (day => {
-    const filteredFood = day.food.filter(food => food._id == req.params.foodId)
-    console.log('this is filteredfood', filteredFood)
-      Ingredient.create(ingredients)
-      .then(dbIngredients => {
-        console.log('these are the ingredients', dbIngredients)
-        Day.findByIdAndUpdate(day._id,
-          {"foods": 
-            {startTime: food.startTime,
-            name: food.name,
-            portion: food.portion,
-            eatenPortion: food.eatenPortion,
-            imgUrl: "",
-            ingredients: dbIngredients
-        }}, {new: true}).then(dbIngredients => {
-          console.log(dbIngredients);
+  const food = req.body.food;
+ 
+  const ingredients = req.body.food.ingredients.map(ing => {
+    return {
+      name: ing.name,
+      brand: ing.brand,
+      category: ing.category,
+      servingAmount: ing.servingAmount,
+      servingSize: ing.servingSize,
+      owner: req.params.id
+    }
+  });
+  Ingredient.create(ingredients)
+    .then(dbIngredients => {
+      console.log('these are the ingredients', dbIngredients)
+      Day.findOne({$and: [{owner: req.params.userId}, {date: req.params.date}]})
+        .then(dbday => {
+          console.log("db index", dbday.foods.map(f => f._id));
+          
+          const newFoods = dbday.foods;
+          console.log("food id", req.params.foodId);
+          const changedIdx = newFoods.findIndex(food => food._id == req.params.foodId);
+          console.log("gefundener Index", changedIdx);
+          newFoods[changedIdx].ingredients = dbIngredients.map(ing => ing._id);
+          Day.findByIdAndUpdate(dbday._id, {foods: newFoods}, {new: true})
+          .then(dbIngredients => {
           res.status(201).json(dbIngredients);
-          // res.redirect('/add/Foods')
+          res.redirect('/add/Foods')
+          })
+          .catch(err => {
+            res.json(err);
+          })
         })
-        .catch(err => {
-          res.json(err);
         })
-      })
-      console.log(day)
+      
   })
-})
-
-
 
 module.exports = router;

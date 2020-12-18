@@ -16,13 +16,13 @@ export default class FoodEntry extends Component {
     user: this.props.user,
     date: this.props.location.state?.day ||new Date().toISOString().split('T')[0],
     ingredients: [],
-    tempStartTime: this.props.location.state.foods.startTime,
+    tempStartTime: "",
     tempIngredient: {
-      name: this.props.location.state.foods.ingredients[0].name,
-      brand: this.props.location.state.foods.ingredients[0].brand,
-      category: this.props.location.state.foods.ingredients[0].category,
-      servingAmount: this.props.location.state.foods.ingredients[0].servingAmount,
-      servingSize: this.props.location.state.foods.ingredients[0].servingSize
+      name: "",
+      brand: "",
+      category: "",
+      servingAmount: "",
+      servingSize: ""
     },
     food: {
       startTime: '',
@@ -35,9 +35,7 @@ export default class FoodEntry extends Component {
     selectedIngredient: false,
     handleShowSingle: true,
     ingredientCount: 0,
-    query: '',
-    id:this.props.location.state?.foods._id,
-    editing:this.props.location.state?.editing,
+    query: ''
 
     // startDate: this.props.location.state?.day ||new Date().toISOString().split('T')[0],//this should be the present day in the string format: "yyyy-mm-dd"
     // startTime: this.props.location.state?.symptoms.startTime ||new Date().toISOString().split('T')[1].slice(0,5),//this should bte the present time in the string format:"hh:mm"
@@ -350,7 +348,7 @@ export default class FoodEntry extends Component {
         <IngredientList ingredients={this.state.ingredients} query={this.state.query} setQuery={this.setQuery} handleClick={this.handleClick}/>
         <div>{inputComponent}</div>
 
-        <Link to='/foods-list' className="link blue hover-silver dib mh3 tc" style={{
+        <Link className="link blue hover-silver dib mh3 tc" style={{
           "display": "flex", "flexDirection":"row", "justifyContent": "center", "alignItems":"center"}}>
         <Icons icon="FoodsDetails"/>
         <span className="f6 db" style={{"marginLeft": "10px"}}>{this.state.ingredientCount} ingredients added</span>
