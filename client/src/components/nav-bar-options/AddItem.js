@@ -10,7 +10,7 @@ export default class AddItem extends Component {
 
     return (
       <div className='flex flex-column justify-center items-center '>
-        <div className='ba w-100'>
+        <div className='w-100'>
           <Calendar/>
         </div>
 

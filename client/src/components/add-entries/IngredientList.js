@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Icons from '../shared/Icons';
 
 export default class IngredientList extends Component {
 

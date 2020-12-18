@@ -21,7 +21,7 @@ export default class Excercise extends Component {
         {this.props.exercises.map(exercise => (
           <div key={exercise._id} className="flex justify-around items-center mw6 center br3 ba b--light-blue bg-white blue mb2">
             <div className="flex justify-around items-center mv2">
-              <div className='ba br-100 pa2 items-center mv2 gray'>
+              <div className='ba br-100 pa3 items-center mv2 gray'>
                 <Icons icon="Exercise3"/>
               </div>
               <div className="tl ml2 w4">

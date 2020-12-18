@@ -99,6 +99,7 @@ export default class AddDrinks extends Component {
           category: '',
           ingredientCount: ++this.state.ingredientCount
         })
+        this.props.history.push("/dashboard")
         // update the parent components state (in Projects) by calling getData()
         // this.props.getData();
       })
