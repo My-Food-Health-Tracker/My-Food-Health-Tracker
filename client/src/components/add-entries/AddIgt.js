@@ -16,6 +16,7 @@ export default class AddIgt extends Component {
                           <input
                             type='text'
                             id='name'
+                            placeholder="e.g. Apple"
                             name='name' value={this.props.tempIngredient.name}
                             onChange={this.props.handleChange}
                           />
@@ -26,6 +27,7 @@ export default class AddIgt extends Component {
                             type='text'
                             id='brand'
                             name='brand'
+                            placeholder="e.g. Edeka"
                             value={this.props.tempIngredient.brand}
                             onChange={this.props.handleChange}
                           />
@@ -36,6 +38,7 @@ export default class AddIgt extends Component {
                             type='text'
                             id='category'
                             name='category'
+                            placeholder="e.g. Foods"
                             value={this.props.tempIngredient.category}
                             onChange={this.props.handleChange}
                           /> 
@@ -48,6 +51,7 @@ export default class AddIgt extends Component {
                           type='number'
                           id='servingAmount'
                           name='servingAmount'
+                          placeholder="e.g. 3"
                           min='0'
                           value={this.props.tempIngredient.servingAmount}
                           onChange={this.props.handleChange}
@@ -57,12 +61,13 @@ export default class AddIgt extends Component {
                           type='text'
                           id='servingSize'
                           name='servingSize'
+                          placeholder="e.g. piece"
                           value={this.props.tempIngredient.servingSize}
                           onChange={this.props.handleChange}
                         />
                   </div>
                 
-                  <button type='submit' className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Save</button>
+                  <button type='submit' class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-blue">Save</button>
               </form>
 
               

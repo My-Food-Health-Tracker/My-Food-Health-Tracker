@@ -348,7 +348,7 @@ export default class FoodEntry extends Component {
         <IngredientList ingredients={this.state.ingredients} query={this.state.query} setQuery={this.setQuery} handleClick={this.handleClick}/>
         <div>{inputComponent}</div>
 
-        <Link to='/foods-list' className="link blue hover-silver dib mh3 tc" style={{
+        <Link className="link blue hover-silver dib mh3 tc" style={{
           "display": "flex", "flexDirection":"row", "justifyContent": "center", "alignItems":"center"}}>
         <Icons icon="FoodsDetails"/>
         <span className="f6 db" style={{"marginLeft": "10px"}}>{this.state.ingredientCount} ingredients added</span>

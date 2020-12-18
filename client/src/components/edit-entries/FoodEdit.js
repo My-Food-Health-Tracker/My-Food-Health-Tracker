@@ -267,13 +267,13 @@ export default class FoodEdit extends Component {
       if(this.state.edit === true){
         editInterface = (
           <div>
-            <AddIgt {...this.state} handleChange={this.handleChange} handleSubmit={this.handleSingleSubmit}/>;    
+            <AddIgt {...this.state} handleChange={this.handleChange} handleSubmit={this.handleSingleSubmit}/>    
           </div>
         )
       } else {
         editInterface = (
           <div>
-            <h1>Please click on the buttons next to the ingredients to modify them! </h1>
+            
           </div>
         )
       }
@@ -281,40 +281,58 @@ export default class FoodEdit extends Component {
       if(this.state.add === true){
         addInterface = (
           <div>
-            <AddIgt {...this.state} handleChange={this.handleChange} handleSubmit={this.handleAddSubmit}/>;    
+            <AddIgt {...this.state} handleChange={this.handleChange} handleSubmit={this.handleAddSubmit}/> 
           </div>
         )
       } else {
         addInterface = (
           <div>
-            <h1>Please click on the add button to add an ingredient to the recipe! </h1>
+            
           </div>
         )
       }
       return (
-        <div classname="f4 bold center mw5" >
-          <ul className="list pl0 ml0 center mw5 ba b--light-silver br3" style={{"height":"200px", "width": "60%", "overflow": "hidden", "overflowY": "scroll"}} >
+        <div>
+        <TopBar icon="Foods" title="Your Foods"/>
+        <div className="mw6 center" >
+         <article class="dt w-100 bb b--black-05 pb2 mt2" href="#0">
+         
+          {/* <ul className="list pl0 ml0 center mw5 ba b--light-silver br3" style={{"height":"200px", "width": "60%", "overflow": "hidden", "overflowY": "scroll"}} > */}
           {
             this.state.food.ingredients.map((ingredient, index) => {
               return (
-                <div>
-                <li className="ph3 pv2 bb b--light-silver f6 db">
-                  {ingredient.name}, {ingredient.brand} 
-                  <button onClick={this.handleDeleteIngredient} value={index}>Delete</button>
-                  <button onClick={this.handleEdit} value={index}>Edit</button>
-                  {/* <Icons icon="AddButton-database"/> */}
-                </li>
+                <div style={{"display":"flex", "flexDirection": "row", "justifyContent":"space-around", "alignItems": "center", "margin": "20px"}}>
+               
+                <div class="dtc w2 w3-ns v-mid">
+                <Icons icon="Foods"/>
                 </div>
+
+                <div class="dtc v-mid pl3">
+                  <h1 class="f6 f5-ns fw6 lh-title black mv0">{ingredient.name} </h1>
+                  <h2 class="f6 fw4 mt0 mb0 black-60">@ {ingredient.brand}</h2>
+                </div>
+
+                <div class="dtc v-mid">
+                  <form class="w-100 tr">
+                  <button onClick={this.handleEdit} value={index} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Edit</button>
+                  <button onClick={this.handleDeleteIngredient} value={index}  className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Delete</button>
+                </form>
+              </div>
+               </div>
               )
             })
           }
-          </ul>
-          <button onClick={this.handleDeleteFood} value={this.state.food._id}>Delete entire recipe</button>
-          <button onClick={this.handleRecipeSubmit} value={this.state.food._id}>Save</button>
-          <button onClick={this.handleAdd}>Add new ingredient</button>
+          </article>
+          {/* </ul> */}
+          <button onClick={this.handleDeleteFood} value={this.state.food._id} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Delete entire recipe</button>
+          <button onClick={this.handleAdd} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Add new ingredient</button>
+          <button onClick={this.handleRecipeSubmit} value={this.state.food._id} className="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-blue">Save</button>
           {editInterface}
           {addInterface}
+        </div>
+        <BottomNavbar />
         </div>
       )
     }
 }
+

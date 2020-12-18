@@ -5,7 +5,7 @@ import TopBar from '../shared/TopBar'
 
 export default class AddFrequent extends Component {
   render() {
-    const frequentArr=['Drinks','Foods','Exercise']
+    const frequentArr=['Symptoms','Foods','Exercise', 'Sleep', 'Energy']
 
     return (
       <div className='flex flex-column justify-center items-center'>
