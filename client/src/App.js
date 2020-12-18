@@ -17,7 +17,7 @@ import FoodsList from './components/add-entries/FoodsList'
 // Xiaomei: components for Add Food Entry
 import FoodEntry from './components/add-entries/FoodEntry';
 import DrinkEntry from './components/add-entries/DrinkEntry';
-import FoodEdit from './components/edit-entries/editFood';
+import FoodEdit from './components/edit-entries/FoodEdit';
 
 //Hortencia:components for the BottomNavBar Links
 import Analysis from './components/nav-bar-options/Analysis'
@@ -107,9 +107,9 @@ class App extends React.Component {
       <Route exact path='/add/Foods' 
       render={(props) => <FoodEntry user={this.state.user} {...props}/>}
       />
-      <Route exact path='/add/Drinks' 
+      {/* <Route exact path='/add/Drinks' 
       render={(props) => <DrinkEntry user={this.state.user} {...props}/>}
-      />
+      /> */}
 
       {/* Routes to edit food */}
       <Route exact path='/edit/Foods' 

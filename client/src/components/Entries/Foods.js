@@ -29,7 +29,7 @@ export default class Foods extends Component {
                 <p className="f6 gray mv0 ">{food.ingredients.map(ingredient => (<p key={ingredient}>{ingredient.name}</p>))}</p>
               </div>
             </div>
-                <Link to={{pathname: '/edit/Foods', state:{ food: food, editing: true, day:this.props.day}}} className="link blue hover-silver dib mh3 tc" >
+                <Link to={{pathname: '/edit/Foods', state:{food: food, editing: true, day:this.props.day}}} className="link blue hover-silver dib mh3 tc" >
                   <Icons icon="Edit"/>
                 </Link>
           </div>

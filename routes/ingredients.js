@@ -387,8 +387,6 @@ router.put('/drinks/user/:userId/day/:date/:foodId/delete', (req, res, next) => 
 
 // edit a food 
 
-// edit
-
 router.put('/user/:userId/day/:date/:foodId/edit', (req, res) => {
   const food = req.body.food;
  

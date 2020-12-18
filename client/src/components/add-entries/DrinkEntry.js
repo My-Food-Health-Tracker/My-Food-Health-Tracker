@@ -15,13 +15,13 @@ export default class AddDrinks extends Component {
     days: [],
     ingredients: [],
     ingredientsOfDay: [],
-    name: "",
-    brand: "",
-    category: "",
-    date: "",
-    startTime: "",
-    servingAmount: "",
-    servingSize: "",
+    name: this.props.location.state?.drinks.name,
+    brand: this.props.location.state?.drinks.brand,
+    category: this.props.location.state?.drinks.category,
+    date: this.props.location.state?.day ||new Date().toISOString().split('T')[0],
+    startTime: this.props.location.state?.drinks.ingredients[0].startTime,
+    servingAmount: this.props.location.state?.drinks.ingredients[0].servingAmount,
+    servingSize: this.props.location.state?.drinks.ingredients[0].servingSize,
     selectedIngredient: false,
     ingredientCount: 0,
     query: '',
@@ -123,10 +123,10 @@ export default class AddDrinks extends Component {
     .catch(err=>console.log(err))
   }
   
-  handleEditing = event => {
-    event?.preventDefault();
-    axios.put( `/api/ingredients/drinks/user/${this.state.user._id}/day/${this.state.date}/${this.state.id}/edit`)
-  }
+  // handleEditing = event => {
+  //   event?.preventDefault();
+  //   axios.put( `/api/ingredients/drinks/user/${this.state.user._id}/day/${this.state.date}/${this.state.id}/edit`)
+  // }
 
   render() {
     
