@@ -25,7 +25,7 @@ export default class AddEnergy extends Component {
 
   handleSubmit=event=>{
 
-    event.preventDefault();
+    event?.preventDefault();
     
     const energyEntry=this.state;
 
@@ -40,7 +40,7 @@ export default class AddEnergy extends Component {
 
   handleDelete=event=>{
 
-    event.preventDefault();
+    event?.preventDefault();
 
     axios.delete(`/api/energy/user/${this.props.user._id}/day/${this.state.startDate}`)
       .then(res=>{
@@ -52,7 +52,7 @@ export default class AddEnergy extends Component {
 
   handleEditing=event=>{
 
-    event.preventDefault();
+    event?.preventDefault();
 
     const updatedEnergy=this.state;
 

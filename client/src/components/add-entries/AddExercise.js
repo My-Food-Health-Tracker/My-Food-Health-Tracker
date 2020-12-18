@@ -28,7 +28,7 @@ export default class AddExercise extends Component {
 
   handleSubmit=event=>{
 
-    event.preventDefault();
+    event?.preventDefault();
     
     const exerciseEntry=this.state;
 
@@ -48,7 +48,7 @@ export default class AddExercise extends Component {
 
   handleDelete=event=>{
 
-    event.preventDefault();
+    event?.preventDefault();
 
     const exerciseToDelete=this.state;
 
@@ -63,7 +63,7 @@ export default class AddExercise extends Component {
 
   handleEditing=event=>{
 
-    event.preventDefault();
+    event?.preventDefault();
     
     const updatedExercise=this.state;
 
