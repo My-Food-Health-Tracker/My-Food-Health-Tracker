@@ -18,7 +18,7 @@ export default class Sleep extends Component {
         {this.props.sleep.map(sleep => (
           <div className="flex justify-around items-center mw6 center br3 ba b--light-blue bg-white blue mb2">
             <div className="flex justify-center items-center mv2">
-              <div className='ba br-100 pa2 items-center mv2 gray'>
+              <div className='ba br-100 pa3 items-center mv2 gray'>
                 <Icons icon="Sleep3"/>
               </div>
               <div className="tl ml2 w4">

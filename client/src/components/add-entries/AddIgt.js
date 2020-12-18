@@ -12,8 +12,8 @@ export default class AddIgt extends Component {
              
                   <div className="custom-ingredient">
                           <div>
-                          <label htmlFor='name'  className="f6 mt3" >Name: </label>
-                          <input
+                          <label htmlFor='name'  className="f6 w3 dib" >Name: </label>
+                          <input className="f6 pa1 mr3 ml1 w4 mv1"
                             type='text'
                             id='name'
                             placeholder="e.g. Apple"
@@ -22,8 +22,8 @@ export default class AddIgt extends Component {
                           />
                         </div>
                         <div style={{"display": "flex", "flexDirection": "row", "justifyContent": "center", "alignItems": "center"}}>
-                          <label htmlFor='brand' className="f6 mt3">Brand: </label>
-                          <input 
+                          <label htmlFor='brand' className="f6 w3 dib">Brand: </label>
+                          <input className="f6 pa1 mr3 ml1 w4 mv1"
                             type='text'
                             id='brand'
                             name='brand'
@@ -33,8 +33,8 @@ export default class AddIgt extends Component {
                           />
                         </div>
                         <div style={{"display": "flex", "flexDirection": "row", "justifyContent": "center", "alignItems": "center"}}>
-                        <label htmlFor='category' className="db fw4 lh-copy f6">Category: </label>
-                          <input 
+                        <label htmlFor='category' className="f6 w3 dib">Category: </label>
+                          <input className="f6 pa1 mr3 ml1 w4 mv1"
                             type='text'
                             id='category'
                             name='category'
@@ -45,9 +45,9 @@ export default class AddIgt extends Component {
                           </div>
                  </div>
 
-                    <div style={{"display": "flex", "flexDirection": "row", "justifyContent": "center", "alignItems": "center"}}>
-                        <label htmlFor='servingAmount' className="f6 mt3">Amount: </label>
-                        <input 
+                    <div >
+                        <label htmlFor='servingAmount' className="f6 w3 dib">Amount: </label>
+                        <input className="f6 pa1 mr3 ml1 w4 mv1"
                           type='number'
                           id='servingAmount'
                           name='servingAmount'
@@ -56,8 +56,10 @@ export default class AddIgt extends Component {
                           value={this.props.tempIngredient.servingAmount}
                           onChange={this.props.handleChange}
                         />
-                        <label htmlFor='servingSize' className="db fw4 lh-copy f6">Size: </label>
-                        <input 
+                        </div>
+                        <div>
+                        <label htmlFor='servingSize'  className="f6 w3 dib">Size: </label>
+                        <input className="f6 pa1 mr3 ml1 w4 mv1"
                           type='text'
                           id='servingSize'
                           name='servingSize'
@@ -67,7 +69,7 @@ export default class AddIgt extends Component {
                         />
                   </div>
                 
-                  <button type='submit' class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-blue">Save</button>
+                  <button type='submit' class="f6 link dim br-pill ph3 pv2 mb2 dib white bg-dark-blue ma2">Save</button>
               </form>
 
               

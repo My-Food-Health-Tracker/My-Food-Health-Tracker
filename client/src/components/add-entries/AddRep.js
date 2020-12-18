@@ -11,8 +11,8 @@ export default class AddRep extends Component {
              
                   <div className="custom-ingredient">
                           <div>
-                          <label htmlFor='name' className="f6 mt3" >Recipe Name: </label>
-                          <input
+                          <label htmlFor='name' className="f6 w3 dib" >Recipe Name: </label>
+                          <input className="f6 pa1 mr3 ml1 w4 mv1"
                             type='text'
                             id='recipeName'
                             name='recipeName' 
@@ -21,9 +21,9 @@ export default class AddRep extends Component {
                         </div>
                         
                  </div>
-                    <div style={{"display": "flex", "flexDirection": "row", "justifyContent": "center", "alignItems": "center"}}>
-                        <label htmlFor='portion' className="f6 mt3">Recipe Portion: </label>
-                        <input 
+                    <div>
+                        <label htmlFor='portion' className="f6 w3 dib">Recipe Portion: </label>
+                        <input className="f6 pa1 mr3 ml1 w4 mv1"
                           type='number'
                           id='portion'
                           name='portion'
@@ -31,8 +31,10 @@ export default class AddRep extends Component {
                           value={this.props.food.portion}
                           onChange={this.props.handleChange}
                         />
-                        <label htmlFor='eatenPortion' className="db fw4 lh-copy f6">Your Portion: </label>
-                        <input 
+                      </div>
+                      <div>
+                        <label htmlFor='eatenPortion' className="f6 w3 dib">Your Portion: </label>
+                        <input className="f6 pa1 mr3 ml1 w4 mv1"
                           type='text'
                           id='eatenPortion'
                           name='eatenPortion'
@@ -42,7 +44,8 @@ export default class AddRep extends Component {
                   </div>
                 
                   {/* Single Ingredients form */}
-                 <input
+                  
+                 <input className="f6 pa1 mr3 ml1 w4 mv1"
                     type='text'
                     id='name'
                     name='name'
@@ -50,7 +53,7 @@ export default class AddRep extends Component {
                     value={this.props.tempIngredient.name}
                     onChange={this.props.handleChange}
                   />
-                  <input
+                  <input className="f6 pa1 mr3 ml1 w4 mv1"
                     type='text'
                     id='brand'
                     name='brand'
@@ -58,7 +61,7 @@ export default class AddRep extends Component {
                     value={this.props.tempIngredient.brand}
                     onChange={this.props.handleChange}
                   />
-                  <input
+                  <input className="f6 pa1 mr3 ml1 w4 mv1"
                     type='text'
                     id='category'
                     name='category'
@@ -66,7 +69,7 @@ export default class AddRep extends Component {
                     value={this.props.tempIngredient.category}
                     onChange={this.props.handleChange}
                   />
-                  <input
+                  <input className="f6 pa1 mr3 ml1 w4 mv1"
                     type='number'
                     id='servingAmount'
                     name='servingAmount'
@@ -74,7 +77,7 @@ export default class AddRep extends Component {
                     value={this.props.tempIngredient.servingAmount}
                     onChange={this.props.handleChange}
                   />
-                  <input
+                  <input className="f6 pa1 mr3 ml1 w4 mv1"
                     type='text'
                     id='servingSize'
                     name='servingSize'

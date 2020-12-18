@@ -314,8 +314,8 @@ export default class FoodEdit extends Component {
 
                 <div class="dtc v-mid">
                   <form class="w-100 tr">
-                  <button onClick={this.handleEdit} value={index} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Edit</button>
-                  <button onClick={this.handleDeleteIngredient} value={index}  className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue">Delete</button>
+                  <button onClick={this.handleEdit} value={index} className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue ma2">Edit</button>
+                  <button onClick={this.handleDeleteIngredient} value={index}  className="f6 link dim br-pill ba ph3 pv2 mb2 dib dark-blue ma2">Delete</button>
                 </form>
               </div>
                </div>

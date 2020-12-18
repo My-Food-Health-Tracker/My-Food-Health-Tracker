@@ -18,7 +18,10 @@ export default function More(props) {
   return (
     <div>
       <TopBar icon="more" title="More"/>
-      <Link to='/' onClick={() => handleLogout(props)}><Icons icon="logout"/>Logout</Link>
+      <Link to='/' onClick={() => handleLogout(props)}>
+      <div className="blue pt5"><Icons icon="logout"/></div>
+      <p className="f6 w4 dim ph3 pv2 mt3 dib white bg-dark-blue br-pill b--dark-blue">Logout</p>
+      </Link>
       <BottomNavbar />
     </div>
   )
